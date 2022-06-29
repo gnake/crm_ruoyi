@@ -24,21 +24,20 @@ CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_INFO`
     `ORG_ID`                bigint comment '潜在客户',
     `CUST_VISIT_AGAIN_TIME` datetime comment '计划拜访时间',
     PRIMARY KEY (`CUST_ID`)
-) DEFAULT CHARSET = utf8mb4 comment '';
+) DEFAULT CHARSET = utf8mb4 comment '客户管理表';
 
 #分组跟客户关联表
 DROP TABLE IF EXISTS `crm_customer_grp_rel`;
-CREATE TABLE `crm_customer_grp_rel`
+CREATE TABLE IF NOT EXISTS `crm_customer_grp_rel`
 (
     `GRP_ID`  char(36) NOT NULL,
     `CUST_ID` char(36) NOT NULL,
     PRIMARY KEY (`GRP_ID`, `CUST_ID`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+) DEFAULT CHARSET = utf8 comment '分组跟客户关联表';
 
 #客户分组表
 DROP TABLE IF EXISTS `crm_customer_group`;
-CREATE TABLE `crm_customer_group`
+CREATE TABLE IF NOT EXISTS `crm_customer_group`
 (
     `GRP_ID`     char(36) NOT NULL comment '分组ID',
     `GRP_SUP_ID` char(36)     DEFAULT NULL comment '上级ID',
@@ -48,7 +47,6 @@ CREATE TABLE `crm_customer_group`
     `GRP_STATE`  varchar(32)  DEFAULT NULL comment '状态',
     `GRP_DESC`   varchar(256) DEFAULT NULL comment '描述',
     PRIMARY KEY (`GRP_ID`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4;
+) DEFAULT CHARSET = utf8mb4 comment '客户分组表';
 
 
