@@ -22,7 +22,7 @@ create table if not exists CRM_ORG_INFO
     CUST_ID              bigint     comment '客户管理(CRM_CUSTOMER_INFO)',
     ORG_SOURCES          varchar(32)   comment '来源渠道',
     ORG_SALESMAN         char(36)     comment '跟进人员',
-    ORG_CLASSIFY         varchar(20)     comment '分类',
+    ORG_CLASSIFY         int(1)     comment '分类',
 )DEFAULT CHARSET = utf8mb4 comment '潜在客户';
 
 -- auto-generated definition
