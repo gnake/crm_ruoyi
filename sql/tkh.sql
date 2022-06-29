@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS `SYS_CODETYPE`;
-create table if not exists SYS_CODETYPE
+CREATE TABLE  IF NOT EXISTS SYS_CODETYPE
 (
     TYPE_ID      bigint not null primary key comment '主键',
     TYPE_IDENT   varchar(32) comment '类型标识',
@@ -12,7 +12,7 @@ create table if not exists SYS_CODETYPE
     DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `SYS_CODELIST`;
-create table if not exists SYS_CODELIST
+CREATE TABLE IF NOT EXISTS SYS_CODELIST
 (
     CODE_ID    bigint not null primary key comment '主键',
     TYPE_ID    bigint comment '编码标识,关联SYS_CODETYPE',
