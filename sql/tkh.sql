@@ -9,7 +9,6 @@ create table if not exists SYS_CODETYPE
     IS_EFFECTIVE int(1) comment '是否失效',
     IS_EXTEND    int(1) comment '是否SQL扩展'
     ) COMMENT '编码类型'
-    ENGINE = InnoDB
     DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `SYS_CODELIST`;
@@ -20,5 +19,4 @@ create table if not exists SYS_CODELIST
     CODE_VALUE varchar(36) comment '编码值',
     CODE_SORT  int(11) comment '编码排序'
     ) COMMENT '编码管理'
-    ENGINE = InnoDB
     DEFAULT CHARSET = utf8mb4;
