@@ -1,6 +1,6 @@
 -- auto-generated definition
-drop table if exists crm_org_info;
-create table crm_org_info
+drop table if exists CRM_ORG_INFO;
+create table if not exists CRM_ORG_INFO
 (
     ORG_ID               bigint     not null
         primary key comment '主键',
@@ -25,8 +25,8 @@ create table crm_org_info
 )comment '潜在客户';
 
 -- auto-generated definition
-drop table if exists crm_visit;
-create table crm_visit
+drop table if exists CRM_VISIT;
+create table if not exists CRM_VISIT
 (
     VISIT_ID            bigint       not null
         primary key comment '主键',
