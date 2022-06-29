@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS TASK_CYCLE
     TC_ID       BIGINT NOT NULL COMMENT '主键',
     TC_BEGIN    VARCHAR(32) COMMENT '起始日期',
     TC_END      VARCHAR(32) COMMENT '结束日期',
-    TC_FID      CHAR(36) COMMENT '父节点',
     PRIMARY KEY (TC_ID)
 ) DEFAULT CHARSET = utf8mb4 COMMENT '任务周期定义';
 
@@ -13,14 +12,17 @@ CREATE TABLE IF NOT EXISTS TASK_CYCLE
 DROP TABLE IF EXISTS TASK_REVIEW;
 CREATE TABLE IF NOT EXISTS TASK_REVIEW
 (
-    TASK_REVIEW_ID              BIGINT NOT NULL COMMENT '主键',
-    TC_ID                       BIGINT NOT NULL COMMENT '周期主键，关联任务周期定义表',
-    SALE_ID                     CHAR(36) COMMENT '销售人员',
-    TASK_REVIEW_STATE           VARCHAR(32) COMMENT '总结状态',
-    TASK_REVIEW_DESC            TEXT COMMENT '总结说明',
-    TASK_REVIEW_VISITS_TOTAL    INT COMMENT '拜访总数',
-    TASK_REVIEW_STRANGE         INT COMMENT '陌生拜访总数',
-    TASK_REVIEW_NEW_INTENCUST   INT COMMENT '新增意向用户',
+    TASK_REVIEW_ID                  BIGINT NOT NULL COMMENT '主键',
+    TC_ID                           BIGINT NOT NULL COMMENT '周期主键，关联任务周期定义表',
+    SALE_ID                         CHAR(36) COMMENT '销售人员',
+    TASK_REVIEW_STATE               VARCHAR(32) COMMENT '总结状态',
+    TASK_REVIEW_DESC                TEXT COMMENT '总结说明',
+    TASK_REVIEW_VISITS_TOTAL        INT COMMENT '拜访总数',
+    TASK_REVIEW_STRANGE             INT COMMENT '陌生拜访总数',
+    TASK_REVIEW_RETURNVISIT         INT COMMENT '回访拜访记录',
+    TASK_REVIEW_NEW_INTENCUST       INT COMMENT '新增意向用户',
+    TASK_REVIEW_RETURNVISIT_HIST    INT COMMENT '回访历史客户',
+    TASK_REVIEW_LOSS                INT COMMENT '流失客户'
     PRIMARY KEY (TASK_REVIEW_ID)
 ) DEFAULT CHARSET = utf8mb4 COMMENT '表格任务计划&总的列清单';
 
