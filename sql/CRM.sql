@@ -260,5 +260,3 @@ CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_GROUP`
     `GRP_DESC`   varchar(256) DEFAULT NULL comment '描述',
     PRIMARY KEY (`GRP_ID`)
 ) DEFAULT CHARSET = utf8mb4 comment '客户分组表';
-
-
