@@ -64,7 +64,7 @@ create table IF NOT EXISTS VISIT
     VISIT_FILL_ID          char(36) comment '填写人',
     VISIT_FILL_TIME        datetime comment '填写时间',
     VISIT_CONFIRM_ID       char(36) comment '确认人',
-    VISIT_CONFIRM_TIME     datetime comment '确认时间',
+    VISIT_CONFIRM_TIME     datetime comment '确认时间'
     ) DEFAULT CHARSET = utf8mb4 comment '拜访记录表';
 
 #商机管理
