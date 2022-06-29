@@ -32,7 +32,7 @@ create table if not exists CRM_VISIT
     VISIT_ID            bigint       not null
         primary key comment '主键',
     VISIT_TYPE            varchar(32)     comment '拜访类型',
-    VISIT_CUST_ID         bigint        comment 'TODO//客户ID-是否是外键，关联哪个表',
+    VISIT_CUST_ID         bigint        comment '客户ID-是否是外键，关联哪个表',
     VISIT_RECEPTION_NAME  char(36)        comment '接待人姓名',
     VISIT_RECEPTION_SEX   varchar(32)     comment '接待人性别',
     VISIT_RECEPTION_JOB   varchar(32)    comment '接待人职位',
