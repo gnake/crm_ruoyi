@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_INFO`
 DROP TABLE IF EXISTS `crm_customer_grp_rel`;
 CREATE TABLE IF NOT EXISTS `crm_customer_grp_rel`
 (
-    `GRP_ID`  bigint NOT NULL,
-    `CUST_ID` bigint NOT NULL,
+    `GRP_ID`  bigint,
+    `CUST_ID` bigint,
     PRIMARY KEY (`GRP_ID`, `CUST_ID`)
 ) DEFAULT CHARSET = utf8 comment '分组跟客户关联表';
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `crm_customer_grp_rel`
 DROP TABLE IF EXISTS `crm_customer_group`;
 CREATE TABLE IF NOT EXISTS `crm_customer_group`
 (
-    `GRP_ID`     bigint NOT NULL comment '分组ID',
+    `GRP_ID`     bigint comment '分组ID',
     `GRP_SUP_ID` bigint     DEFAULT NULL comment '上级ID',
     `GRP_CODE`   varchar(32)  DEFAULT NULL comment '编码',
     `GRP_NAME`   varchar(32)  DEFAULT NULL comment '名称',
