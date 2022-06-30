@@ -9,8 +9,8 @@ create table IF NOT EXISTS MY_TASKS
     SALE_ID           bigint comment '销售人员',
     TASK_FOLLOW_STATE varchar(32) comment '跟进状态',
     TASK_CLASS        varchar(32) comment '任务类别',
-    TASK_CREATE_TIME  datatime comment '创建任务时间',
-    TASK_FINISH_TIME  datatime comment '任务完成时间',
+    TASK_CREATE_TIME  datetime comment '创建任务时间',
+    TASK_FINISH_TIME  datetime comment '任务完成时间',
     TASK_CUST_STATE   varchar(32) comment '客户状态'
     ) DEFAULT CHARSET = utf8mb4 comment '我的任务细项表';
 
@@ -36,8 +36,8 @@ DROP TABLE IF EXISTS TASK_CYCLE;
 create table IF NOT EXISTS TASK_CYCLE
 (
     TC_ID    bigint primary key,
-    TC_BEGIN datatime comment '起始日期',
-    TC_END   datatime comment '结束日期'
+    TC_BEGIN datetime comment '起始日期',
+    TC_END   datetime comment '结束日期'
     ) DEFAULT CHARSET = utf8mb4 comment '任务周期定义表';
 
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS opp_info (
     `OPP_DES` varchar(256) comment '商机说明',
     `OPP_CONCERN_PRODUCT` varchar(256) comment '关注产品',
     `OPP_EXPECT_INVEST` decimal(10,2) comment '预期投入',
-    `OPP_START_TIME` datatime comment '启动时间',
+    `OPP_START_TIME` datetime comment '启动时间',
     `OPP_STATE` varchar(32) comment '状态',
     `CLUE_SALESMAN` char(36) comment '销售人员',
     `OPP_CREATER` char(36) comment '创建人',
