@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `SYS_CODETYPE`;
+DROP TABLE IF EXISTS `CRM_SYS_CODETYPE`;
 CREATE TABLE  IF NOT EXISTS SYS_CODETYPE
 (
-    TYPE_ID      bigint not null primary key comment '主键',
+    TYPE_ID      bigint primary key comment '主键',
     TYPE_IDENT   varchar(32) comment '类型标识',
     TYPE_NAME    varchar(32) comment '类型名称',
     TYPE_GROUP   varchar(32) comment '类型分组',
@@ -11,10 +11,10 @@ CREATE TABLE  IF NOT EXISTS SYS_CODETYPE
     ) COMMENT '编码类型'
     DEFAULT CHARSET = utf8mb4;
 
-DROP TABLE IF EXISTS `SYS_CODELIST`;
+DROP TABLE IF EXISTS `CRM_SYS_CODELIST`;
 CREATE TABLE IF NOT EXISTS SYS_CODELIST
 (
-    CODE_ID    bigint not null primary key comment '主键',
+    CODE_ID    bigint primary key comment '主键',
     TYPE_ID    bigint comment '编码标识,关联SYS_CODETYPE',
     CODE_VALUE varchar(36) comment '编码值',
     CODE_SORT  int(11) comment '编码排序'
