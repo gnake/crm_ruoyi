@@ -40,6 +40,7 @@ create table IF NOT EXISTS TASK_CYCLE
     TC_END   datatime comment '结束日期'
     ) DEFAULT CHARSET = utf8mb4 comment '任务周期定义表';
 
+
 #拜访记录
 DROP TABLE IF EXISTS VISIT;
 create table IF NOT EXISTS VISIT
