@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_INFO`
 ) DEFAULT CHARSET = utf8mb4 comment '客户管理表';
 
 #分组跟客户关联表
-DROP TABLE IF EXISTS `crm_customer_grp_rel`;
-CREATE TABLE IF NOT EXISTS `crm_customer_grp_rel`
+DROP TABLE IF EXISTS `CRM_CUSTOMER_GRP_REL`;
+CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_GRP_REL`
 (
     `GRP_ID`  bigint,
     `CUST_ID` bigint,
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `crm_customer_grp_rel`
 ) DEFAULT CHARSET = utf8 comment '分组跟客户关联表';
 
 #客户分组表
-DROP TABLE IF EXISTS `crm_customer_group`;
-CREATE TABLE IF NOT EXISTS `crm_customer_group`
+DROP TABLE IF EXISTS `CRM_CUSTOMER_GROUP`;
+CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_GROUP`
 (
     `GRP_ID`     bigint comment '分组ID',
     `GRP_SUP_ID` bigint     DEFAULT NULL comment '上级ID',
