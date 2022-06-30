@@ -1,29 +1,28 @@
 drop database if exists  CRM;
-
-create database if not exists CRM;
+create database if not exists CRM  DEFAULT CHARSET = utf8mb4;
 
 use CRM;
 
 DROP TABLE IF EXISTS CRM_MY_TASKS;
 create table IF NOT EXISTS CRM_MY_TASKS
 (
-    TASK_ID           bigint not null primary key,
-    ORG_ID            bigint not null comment '潜在客户(ORG_INFO) 关联',
-    CUST_ID           bigint not null comment '客户管理(CUSTOMER_INFO) 关联',
-    TASK_REVIEW_ID    bigint not null comment '任务计划&总结(TASK_REVIEW) 关联',
+    TASK_ID           bigint  primary key,
+    ORG_ID            bigint  comment '潜在客户(ORG_INFO) 关联',
+    CUST_ID           bigint  comment '客户管理(CUSTOMER_INFO) 关联',
+    TASK_REVIEW_ID    bigint  comment '任务计划&总结(TASK_REVIEW) 关联',
     SALE_ID           bigint comment '销售人员',
     TASK_FOLLOW_STATE varchar(32) comment '跟进状态',
     TASK_CLASS        varchar(32) comment '任务类别',
-    TASK_CREATE_TIME  varchar(32) comment '创建任务时间',
-    TASK_FINISH_TIME  varchar(32) comment '任务完成时间',
+    TASK_CREATE_TIME  datetime comment '创建任务时间',
+    TASK_FINISH_TIME  datetime comment '任务完成时间',
     TASK_CUST_STATE   varchar(32) comment '客户状态'
 ) DEFAULT CHARSET = utf8mb4 comment '我的任务细项表';
 
 DROP TABLE IF EXISTS CRM_TASK_REVIEW;
 CREATE TABLE IF NOT EXISTS CRM_TASK_REVIEW
 (
-    `TASK_REVIEW_ID`               bigint not null primary key,
-    `TC_ID`                        bigint not null comment '任务周期定义(TASK_CYCLE) 关联',
+    `TASK_REVIEW_ID`               bigint  primary key,
+    `TC_ID`                        bigint  comment '任务周期定义(TASK_CYCLE) 关联',
     `SALE_ID`                      char(36) comment '销售人员',
     `TASK_REVIEW_STATE`            varchar(32) comment '总结状态',
     `TASK_REVIEW_DESC`             text comment '总结说明',
@@ -38,9 +37,9 @@ CREATE TABLE IF NOT EXISTS CRM_TASK_REVIEW
 DROP TABLE IF EXISTS CRM_TASK_CYCLE;
 create table IF NOT EXISTS CRM_TASK_CYCLE
 (
-    TC_ID    bigint      not null primary key,
-    TC_BEGIN varchar(32) null comment '起始日期',
-    TC_END   varchar(32) null comment '结束日期'
+    TC_ID    bigint       primary key,
+    TC_BEGIN datetime  comment '起始日期',
+    TC_END   datetime  comment '结束日期'
 ) DEFAULT CHARSET = utf8mb4 comment '任务周期定义表';
 
 DROP TABLE IF EXISTS CRM_OPP_INFO;
@@ -54,7 +53,7 @@ CREATE TABLE IF NOT EXISTS CRM_OPP_INFO
     `OPP_DES`             varchar(256) comment '商机说明',
     `OPP_CONCERN_PRODUCT` varchar(256) comment '关注产品',
     `OPP_EXPECT_INVEST`   decimal(10, 2) comment '预期投入',
-    `OPP_START_TIME`      varchar(32) comment '启动时间',
+    `OPP_START_TIME`      datetime comment '启动时间',
     `OPP_STATE`           varchar(32) comment '状态',
     `CLUE_SALESMAN`       char(36) comment '销售人员',
     `OPP_CREATER`         char(36) comment '创建人',
@@ -64,8 +63,8 @@ CREATE TABLE IF NOT EXISTS CRM_OPP_INFO
 DROP TABLE IF EXISTS CRM_ORDER_ENTRY;
 CREATE TABLE IF NOT EXISTS CRM_ORDER_ENTRY
 (
-    ENTRY_ID            BIGINT NOT NULL COMMENT '主键',
-    ORDER_ID            BIGINT NOT NULL COMMENT '订单标识，关联订单管理表',
+    ENTRY_ID            BIGINT  COMMENT '主键',
+    ORDER_ID            BIGINT  COMMENT '订单标识，关联订单管理表',
     ENTRY_ORDER_PRODUCT VARCHAR(32) COMMENT '预订产品',
     ENTRY_PRODUCT_MODEL VARCHAR(32) COMMENT '产品型号',
     ENTRY_NUMBER        DECIMAL(6, 0) COMMENT '数量',
@@ -78,17 +77,17 @@ CREATE TABLE IF NOT EXISTS CRM_ORDER_ENTRY
 DROP TABLE IF EXISTS CRM_ORDER_INFO;
 CREATE TABLE IF NOT EXISTS CRM_ORDER_INFO
 (
-    ORDER_ID             BIGINT(36) NOT NULL COMMENT '主键',
-    OPP_ID               CHAR(36) COMMENT '商机名称',
+    ORDER_ID             bigint  COMMENT '主键',
+    OPP_ID               bigint COMMENT '商机名称',
     ORDER_CHIEF          VARCHAR(32) COMMENT '负责人',
     ORDER_DELIVERY_COST  DECIMAL(10, 2) COMMENT '交付费用',
     ORDER_COST           DECIMAL(10, 2) COMMENT '订单费用',
     ORDER_DES            VARCHAR(200) COMMENT '订单说明',
     ORDER_STATE          VARCHAR(32) COMMENT '状态',
     ORDER_CREATER        CHAR(36) COMMENT '创建人',
-    ORDER_CREATE_TIME    VARCHAR(32) COMMENT '创建时间',
+    ORDER_CREATE_TIME    datetime COMMENT '创建时间',
     ORDER_CONFIRM_PERSON CHAR(36) COMMENT '确认人',
-    ORDER_CONFIRM_TIME   VARCHAR(32) COMMENT '确认时间',
+    ORDER_CONFIRM_TIME   datetime COMMENT '确认时间',
     CLUE_SALESMAN        CHAR(36) COMMENT '销售人员',
     PRIMARY KEY (ORDER_ID)
 ) DEFAULT CHARSET = utf8mb4 COMMENT '订单管理表';
@@ -96,11 +95,11 @@ CREATE TABLE IF NOT EXISTS CRM_ORDER_INFO
 DROP TABLE IF EXISTS CRM_SECURITY_USER;
 CREATE TABLE IF NOT EXISTS CRM_SECURITY_USER
 (
-    USER_ID       BIGINT NOT NULL COMMENT '用户ID',
+    USER_ID       BIGINT  COMMENT '用户ID',
     USER_NAME     VARCHAR(32) COMMENT '姓名',
     USER_CODE     VARCHAR(32) COMMENT '用户编码',
     USER_PWD      VARCHAR(32) COMMENT '密码',
-    USER_SEX      VARCHAR(1) COMMENT '性别',
+    USER_SEX      int(1) COMMENT '性别',
     USER_DESC     VARCHAR(128) COMMENT '描述',
     USER_STATE    VARCHAR(32) COMMENT '状态',
     USER_MAIL     VARCHAR(64) COMMENT '邮箱',
@@ -114,7 +113,7 @@ CREATE TABLE IF NOT EXISTS CRM_SECURITY_USER
 DROP TABLE IF EXISTS `CRM_SECURITY_GROUP`;
 CREATE TABLE IF NOT EXISTS `CRM_SECURITY_GROUP`
 (
-    `GRP_ID`    bigint primary key not null comment '组织ID',
+    `GRP_ID`    bigint primary key  comment '组织ID',
     `GRP_CODE`  varchar(32) comment '组织编码',
     `GRP_NAME`  varchar(32) comment '组织名',
     `GRP_PID`   bigint comment '组织父ID',
@@ -131,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `CRM_SYS_LOG`
     `SYS_ID`      bigint primary key comment '主键',
     `OPER_TIME`   timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '操作时间',
     `IP_ADDTRESS` varchar(32) comment '所在地址',
-    `USER_ID`     varchar(32) comment '用户表示',
+    `USER_ID`     bigint comment '用户表示',
     `USER_NAME`   varchar(32) comment '用户名称',
     `FUNC_NAME`   varchar(64) comment '功能名称',
     `ACTION_TYPE` varchar(32) comment '操作类型'
@@ -140,20 +139,20 @@ CREATE TABLE IF NOT EXISTS `CRM_SYS_LOG`
 DROP TABLE IF EXISTS `SYS_CODETYPE`;
 CREATE TABLE IF NOT EXISTS SYS_CODETYPE
 (
-    TYPE_ID      bigint not null primary key comment '主键',
+    TYPE_ID      bigint  primary key comment '主键',
     TYPE_IDENT   varchar(32) comment '类型标识',
     TYPE_NAME    varchar(32) comment '类型名称',
     TYPE_GROUP   varchar(32) comment '类型分组',
-    IS_EDITABLE  int(1) comment '是否可编辑',
-    IS_EFFECTIVE int(1) comment '是否失效',
-    IS_EXTEND    int(1) comment '是否SQL扩展'
+    IS_EDITABLE  int(1) comment '是否可编辑 0:不可编辑，1:可编辑',
+    IS_EFFECTIVE int(1) comment '是否失效 0:无效，1:有效',
+    IS_EXTEND    int(1) comment '是否SQL扩展 0:不可扩展，1:可扩展'
 ) COMMENT '编码类型'
     DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS `SYS_CODELIST`;
 CREATE TABLE IF NOT EXISTS SYS_CODELIST
 (
-    CODE_ID    bigint not null primary key comment '主键',
+    CODE_ID    bigint  primary key comment '主键',
     TYPE_ID    bigint comment '编码标识,关联SYS_CODETYPE',
     CODE_VALUE varchar(36) comment '编码值',
     CODE_SORT  int(11) comment '编码排序'
@@ -176,10 +175,10 @@ create table if not exists CRM_ORG_INFO
     ORG_ADDRESS          varchar(256) comment '地址',
     ORG_WEBSITE          varchar(128) comment '公司网站',
     ORG_CREATER          char(36) comment '创建人',
-    ORG_CREATE_TIME      varchar(32) comment '创建时间',
-    ORG_UPDATE_TIME      varchar(32) comment '更新时间',
+    ORG_CREATE_TIME      datetime comment '创建时间',
+    ORG_UPDATE_TIME      datetime comment '更新时间',
     ORG_CLASSIFICATION   varchar(32) comment '公司分类',
-    ORG_VISIT_AGAIN_TIME varchar(32) comment '计划拜访时间',
+    ORG_VISIT_AGAIN_TIME datetime comment '计划拜访时间',
     CUST_ID              bigint comment '客户管理(CRM_CUSTOMER_INFO)',
     ORG_SOURCES          varchar(32) comment '来源渠道',
     ORG_SALESMAN         char(36) comment '跟进人员',
@@ -243,20 +242,20 @@ CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_INFO`
 DROP TABLE IF EXISTS `CRM_CUSTOMER_GRP_REL`;
 CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_GRP_REL`
 (
-    `GRP_ID`  bigint NOT NULL,
-    `CUST_ID` bigint NOT NULL,
+    `GRP_ID`  bigint ,
+    `CUST_ID` bigint ,
     PRIMARY KEY (`GRP_ID`, `CUST_ID`)
 ) DEFAULT CHARSET = utf8 comment '分组跟客户关联表';
 
 DROP TABLE IF EXISTS `CRM_CUSTOMER_GROUP`;
 CREATE TABLE IF NOT EXISTS `CRM_CUSTOMER_GROUP`
 (
-    `GRP_ID`     bigint NOT NULL comment '分组ID',
-    `GRP_SUP_ID` bigint       DEFAULT NULL comment '上级ID',
-    `GRP_CODE`   varchar(32)  DEFAULT NULL comment '编码',
-    `GRP_NAME`   varchar(32)  DEFAULT NULL comment '名称',
-    `GRP_SORT`   int(11)      DEFAULT NULL comment '排序',
-    `GRP_STATE`  varchar(32)  DEFAULT NULL comment '状态',
-    `GRP_DESC`   varchar(256) DEFAULT NULL comment '描述',
+    `GRP_ID`     bigint  comment '分组ID',
+    `GRP_SUP_ID` bigint        comment '上级ID',
+    `GRP_CODE`   varchar(32)   comment '编码',
+    `GRP_NAME`   varchar(32)   comment '名称',
+    `GRP_SORT`   int(11)       comment '排序',
+    `GRP_STATE`  varchar(32)   comment '状态',
+    `GRP_DESC`   varchar(256)  comment '描述',
     PRIMARY KEY (`GRP_ID`)
 ) DEFAULT CHARSET = utf8mb4 comment '客户分组表';
