@@ -68,6 +68,7 @@ create table IF NOT EXISTS VISIT
     VISIT_CONFIRM_TIME     datetime comment '确认时间'
     ) DEFAULT CHARSET = utf8mb4 comment '拜访记录表';
 
+
 #商机管理
 DROP TABLE IF EXISTS opp_info;
 CREATE TABLE IF NOT EXISTS opp_info (
