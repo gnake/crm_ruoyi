@@ -1,4 +1,4 @@
--- auto-generated definition
+#潜在客户表
 drop table if exists CRM_ORG_INFO;
 create table if not exists CRM_ORG_INFO
 (
@@ -25,7 +25,7 @@ create table if not exists CRM_ORG_INFO
     ORG_CLASSIFY         int(1)     comment '分类',
 )DEFAULT CHARSET = utf8mb4 comment '潜在客户';
 
--- auto-generated definition
+#拜访记录表
 drop table if exists CRM_VISIT;
 create table if not exists CRM_VISIT
 (
