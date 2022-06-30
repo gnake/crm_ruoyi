@@ -45,7 +45,7 @@ create table IF NOT EXISTS TASK_CYCLE
 DROP TABLE IF EXISTS VISIT;
 create table IF NOT EXISTS VISIT
 (
-    VISIT_ID               bigint not null primary key,
+    VISIT_ID               bigint primary key,
     VISIT_TYPE             varchar(32) comment '拜访类型',
     VISIT_CUST_ID          char(36) comment '客户ID',
     VISIT_RECEPTION_NAME   varchar(32) comment '接待人姓名',
@@ -71,8 +71,8 @@ create table IF NOT EXISTS VISIT
 #商机管理
 DROP TABLE IF EXISTS opp_info;
 CREATE TABLE IF NOT EXISTS opp_info (
-                                        `OPP_ID` bigint not null primary key,
-                                        `OPP_NAME` varchar(32) comment '商机名称',
+    `OPP_ID` bigint primary key,
+    `OPP_NAME` varchar(32) comment '商机名称',
     `CLUE_ID` char(36) comment '线索标识',
     `CUST_ID` char(36) comment '客户标识',
     `CONT_ID` char(36) comment '联系人标识',
