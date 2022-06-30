@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS TASK_REVIEW;
 CREATE TABLE IF NOT EXISTS TASK_REVIEW
 (
     TASK_REVIEW_ID                  BIGINT  COMMENT '主键',
-    TC_ID                           BIGINT NOT NULL COMMENT '周期主键，关联任务周期定义表',
+    TC_ID                           BIGINT COMMENT '周期主键，关联任务周期定义表',
     SALE_ID                         CHAR(36) COMMENT '销售人员',
     TASK_REVIEW_STATE               VARCHAR(32) COMMENT '总结状态',
     TASK_REVIEW_DESC                TEXT COMMENT '总结说明',
@@ -31,9 +31,9 @@ DROP TABLE IF EXISTS MY_TASKS;
 CREATE TABLE IF NOT EXISTS MY_TASKS
 (
     TASK_ID             BIGINT COMMENT '任务主键',
-    ORG_ID              BIGINT NOT NULL COMMENT '潜在客户主键，关联潜在客户表',
-    CUST_ID             BIGINT NOT NULL COMMENT '客户主键，客户管理的列清单',
-    TASK_REVIEW_ID      BIGINT NOT NULL COMMENT '任务计划主键，关联任务计划&总的列清单',
+    ORG_ID              BIGINT COMMENT '潜在客户主键，关联潜在客户表',
+    CUST_ID             BIGINT COMMENT '客户主键，客户管理的列清单',
+    TASK_REVIEW_ID      BIGINT COMMENT '任务计划主键，关联任务计划&总的列清单',
     SALE_ID             CHAR(36) COMMENT '销售人员',
     TASK_FOLLOW_STATE   VARCHAR(32) COMMENT '跟进状态',
     TASK_TYPE           VARCHAR(32) COMMENT '任务类别',
@@ -86,7 +86,7 @@ DROP TABLE IF EXISTS ORDER_ENTRY;
 CREATE TABLE IF NOT EXISTS ORDER_ENTRY
 (
     ENTRY_ID            BIGINT COMMENT '主键',
-    ORDER_ID            BIGINT NOT NULL COMMENT '订单标识，关联订单管理表',
+    ORDER_ID            BIGINT COMMENT '订单标识，关联订单管理表',
     ENTRY_ORDER_PRODUCT VARCHAR(32) COMMENT '预订产品',
     ENTRY_PRODUCT_MODEL VARCHAR(32) COMMENT '产品型号',
     ENTRY_NUMBER        DECIMAL(6,0) COMMENT '数量',
