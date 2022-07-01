@@ -1,10 +1,8 @@
-
 #潜在客户表
 drop table if exists CRM_ORG_INFO;
 create table if not exists CRM_ORG_INFO
 (
-    ORG_ID               bigint
-        primary key comment '主键',
+    ORG_ID               bigint primary key comment '主键',
     ORG_NAME             varchar(32)   comment '组织名称',
     ORG_TYPE             varchar(32)  comment '组织性质',
     ORG_INTRODUCTION     text          comment '简要介绍',
@@ -30,8 +28,7 @@ create table if not exists CRM_ORG_INFO
 drop table if exists CRM_VISIT;
 create table if not exists CRM_VISIT
 (
-    VISIT_ID            bigint
-        primary key comment '主键',
+    VISIT_ID            bigint primary key comment '主键',
     VISIT_TYPE            varchar(32)     comment '拜访类型',
     VISIT_CUST_ID         bigint        comment 'TODO客户ID-是否是外键，关联哪个表',
     VISIT_RECEPTION_NAME  char(36)        comment '接待人姓名',
