@@ -5,23 +5,24 @@ import com.lzjtugrp2.service.SysLogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class SysLogController {
+    @Resource
     private SysLogService sysLogService;
     @GetMapping("/showLog")
     public String show(Model model) {
         return "sysLogPage";
     }
-    //查出日志信息
-    @GetMapping("/examineSysLogs")
-    public String examineSysLogs(Model model) {
-        List<SysLog> sysLogs = sysLogService.examineSysLogs();
+    //
+    @GetMapping("/selectAllSysLoGPageQuery")
+    public String selectAllSysLoGPageQuery(Model model) {
+        List<SysLog> sysLogs = sysLogService.selectAllSysLoGPageQuery();
         System.out.println("sysLogs = " + sysLogs);
         model.addAttribute("sysLogs",sysLogs);
         return "sysLogPage";
