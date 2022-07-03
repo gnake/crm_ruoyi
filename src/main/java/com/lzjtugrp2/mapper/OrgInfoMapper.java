@@ -1,6 +1,7 @@
 package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.OrgInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author gsh

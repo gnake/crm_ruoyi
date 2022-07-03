@@ -23,16 +23,16 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from crm_sys_codetype
+        from CRM_SYS_CODETYPE
         where  TYPE_ID = #{typeId,jdbcType=BIGINT} 
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from crm_sys_codetype
+        delete from CRM_SYS_CODETYPE
         where  TYPE_ID = #{typeId,jdbcType=BIGINT} 
     </delete>
     <insert id="insert" keyColumn="TYPE_ID" keyProperty="typeId" parameterType="com.lzjtugrp2.domain.SysCodetype" useGeneratedKeys="true">
-        insert into crm_sys_codetype
+        insert into CRM_SYS_CODETYPE
         ( TYPE_ID,TYPE_IDENT,TYPE_NAME
         ,TYPE_GROUP,IS_EDITABLE,IS_EFFECTIVE
         ,IS_EXTEND)
@@ -41,7 +41,7 @@
         ,#{isExtend,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" keyColumn="TYPE_ID" keyProperty="typeId" parameterType="com.lzjtugrp2.domain.SysCodetype" useGeneratedKeys="true">
-        insert into crm_sys_codetype
+        insert into CRM_SYS_CODETYPE
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="typeId != null">TYPE_ID,</if>
                 <if test="typeIdent != null">TYPE_IDENT,</if>
@@ -62,7 +62,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.SysCodetype">
-        update crm_sys_codetype
+        update CRM_SYS_CODETYPE
         <set>
                 <if test="typeIdent != null">
                     TYPE_IDENT = #{typeIdent,jdbcType=VARCHAR},
@@ -86,7 +86,7 @@
         where   TYPE_ID = #{typeId,jdbcType=BIGINT} 
     </update>
     <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.SysCodetype">
-        update crm_sys_codetype
+        update CRM_SYS_CODETYPE
         set 
             TYPE_IDENT =  #{typeIdent,jdbcType=VARCHAR},
             TYPE_NAME =  #{typeName,jdbcType=VARCHAR},

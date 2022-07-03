@@ -5,71 +5,78 @@
 <mapper namespace="com.lzjtugrp2.mapper.SysCodelistMapper">
 
     <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.SysCodelist">
-            <id property="codeId" column="CODE_ID" jdbcType="BIGINT"/>
-            <result property="typeId" column="TYPE_ID" jdbcType="BIGINT"/>
-            <result property="codeValue" column="CODE_VALUE" jdbcType="VARCHAR"/>
-            <result property="codeSort" column="CODE_SORT" jdbcType="INTEGER"/>
+        <id property="codeId" column="CODE_ID" jdbcType="BIGINT"/>
+        <result property="typeId" column="TYPE_ID" jdbcType="BIGINT"/>
+        <result property="codeValue" column="CODE_VALUE" jdbcType="VARCHAR"/>
+        <result property="codeSort" column="CODE_SORT" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         CODE_ID,TYPE_ID,CODE_VALUE,
-        CODE_SORT
+          CODE_SORT
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
-        from crm_sys_codelist
-        where  CODE_ID = #{codeId,jdbcType=BIGINT} 
+        <include refid="Base_Column_List"/>
+        from CRM_SYS_CODELIST
+        where CODE_ID = #{codeId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAll" resultType="com.lzjtugrp2.domain.SysCodelist">
+        select * from CRM_SYS_CODELIST
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from crm_sys_codelist
+        delete from CRM_SYS_CODELIST
         where  CODE_ID = #{codeId,jdbcType=BIGINT} 
     </delete>
-    <insert id="insert" keyColumn="CODE_ID" keyProperty="codeId" parameterType="com.lzjtugrp2.domain.SysCodelist" useGeneratedKeys="true">
-        insert into crm_sys_codelist
+    <insert id="insert" keyColumn="CODE_ID" keyProperty="codeId" parameterType="com.lzjtugrp2.domain.SysCodelist"
+            useGeneratedKeys="true">
+        insert into CRM_SYS_CODELIST
         ( CODE_ID,TYPE_ID,CODE_VALUE
         ,CODE_SORT)
         values (#{codeId,jdbcType=BIGINT},#{typeId,jdbcType=BIGINT},#{codeValue,jdbcType=VARCHAR}
         ,#{codeSort,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="CODE_ID" keyProperty="codeId" parameterType="com.lzjtugrp2.domain.SysCodelist" useGeneratedKeys="true">
-        insert into crm_sys_codelist
+    <insert id="insertSelective" keyColumn="CODE_ID" keyProperty="codeId"
+            parameterType="com.lzjtugrp2.domain.SysCodelist" useGeneratedKeys="true">
+        insert into CRM_SYS_CODELIST
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="codeId != null">CODE_ID,</if>
-                <if test="typeId != null">TYPE_ID,</if>
-                <if test="codeValue != null">CODE_VALUE,</if>
-                <if test="codeSort != null">CODE_SORT,</if>
+            <if test="codeId != null">CODE_ID,</if>
+            <if test="typeId != null">TYPE_ID,</if>
+            <if test="codeValue != null">CODE_VALUE,</if>
+            <if test="codeSort != null">CODE_SORT,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="codeId != null">#{codeId,jdbcType=BIGINT},</if>
-                <if test="typeId != null">#{typeId,jdbcType=BIGINT},</if>
-                <if test="codeValue != null">#{codeValue,jdbcType=VARCHAR},</if>
-                <if test="codeSort != null">#{codeSort,jdbcType=INTEGER},</if>
+            <if test="codeId != null">#{codeId,jdbcType=BIGINT},</if>
+            <if test="typeId != null">#{typeId,jdbcType=BIGINT},</if>
+            <if test="codeValue != null">#{codeValue,jdbcType=VARCHAR},</if>
+            <if test="codeSort != null">#{codeSort,jdbcType=INTEGER},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.SysCodelist">
-        update crm_sys_codelist
+        update CRM_SYS_CODELIST
         <set>
-                <if test="typeId != null">
-                    TYPE_ID = #{typeId,jdbcType=BIGINT},
-                </if>
-                <if test="codeValue != null">
-                    CODE_VALUE = #{codeValue,jdbcType=VARCHAR},
-                </if>
-                <if test="codeSort != null">
-                    CODE_SORT = #{codeSort,jdbcType=INTEGER},
-                </if>
+            <if test="typeId != null">
+                TYPE_ID = #{typeId,jdbcType=BIGINT},
+            </if>
+            <if test="codeValue != null">
+                CODE_VALUE = #{codeValue,jdbcType=VARCHAR},
+            </if>
+            <if test="codeSort != null">
+                CODE_SORT = #{codeSort,jdbcType=INTEGER},
+            </if>
         </set>
-        where   CODE_ID = #{codeId,jdbcType=BIGINT} 
+        where CODE_ID = #{codeId,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.SysCodelist">
-        update crm_sys_codelist
+        update CRM_SYS_CODELIST
         set 
             TYPE_ID =  #{typeId,jdbcType=BIGINT},
             CODE_VALUE =  #{codeValue,jdbcType=VARCHAR},
             CODE_SORT =  #{codeSort,jdbcType=INTEGER}
         where   CODE_ID = #{codeId,jdbcType=BIGINT} 
     </update>
+
 </mapper>

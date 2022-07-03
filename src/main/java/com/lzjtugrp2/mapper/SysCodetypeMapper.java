@@ -1,6 +1,7 @@
 package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.SysCodetype;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author gsh
@@ -8,6 +9,7 @@ import com.lzjtugrp2.domain.SysCodetype;
 * @createDate 2022-07-02 09:09:08
 * @Entity com.lzjtuGrp2.domain.SysCodetype
 */
+@Mapper
 public interface SysCodetypeMapper {
 
     int deleteByPrimaryKey(Long id);
