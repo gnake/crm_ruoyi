@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzjtuGrp2.mapper.SysLogMapper">
+<mapper namespace="com.lzjtugrp2.mapper.SysLogMapper">
 
     <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.SysLog">
             <id property="sysId" column="SYS_ID" jdbcType="BIGINT"/>
@@ -97,7 +97,7 @@
         where   SYS_ID = #{sysId,jdbcType=BIGINT} 
     </update>
 
-    <select id="examineSysLogs" resultMap="BaseResultMap">
+    <select id="selectAllSysLoGPageQuery" resultMap="BaseResultMap">
         select *
         from crm_sys_log
     </select>
@@ -106,8 +106,7 @@
         select *
         from crm_sys_log
         <where>
-            <if test="startOperTime!=null"> OPER_TIME >= #{startOperTime,jdbctype=TIMESTAMP} </if>
-            <if test="endOperTime!=null"> and OPER_TIME <= #{endOperTime,jdbcType=TIMESTAMP} </if>
+            <if test="startOperTime!=null || endOperTime!=null"> OPER_TIME between #{startOperTime,jdbcType=TIMESTAMP} and #{endOperTime,jdbcType=TIMESTAMP}</if>
             <if test="ipAddtress!=null"> and IP_ADDTRESS like #{ipAddtress,jdbcType=VARCHAR} </if>
             <if test="userId!=null"> and USER_ID like #{userId,jdbcType=BIGINT} </if>
             <if test="funcName!=null"> and FUNC_NAME like #{funcName,jdbcType=VARCHAR} </if>

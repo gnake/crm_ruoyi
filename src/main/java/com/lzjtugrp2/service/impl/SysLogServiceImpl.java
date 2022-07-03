@@ -13,8 +13,8 @@ public class SysLogServiceImpl implements SysLogService {
     private SysLogMapper sysLogMapper;
 
     @Override
-    public List<SysLog> examineSysLogs() {
-        return sysLogMapper.examineSysLogs();
+    public List<SysLog> selectAllSysLoGPageQuery() {
+        return sysLogMapper.selectAllSysLoGPageQuery();
     }
 
     @Override

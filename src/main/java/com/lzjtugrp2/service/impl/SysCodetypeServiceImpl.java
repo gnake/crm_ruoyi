@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysCodetypeServiceImpl implements SysCodetypeService {
     private SysCodetypeMapper sysCodetypeMapper;
+
     @Override
     public int deleteByPrimaryKey(Long id) {
         return sysCodetypeMapper.deleteByPrimaryKey(id);
