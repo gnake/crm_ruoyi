@@ -25,7 +25,7 @@ public interface SysLogMapper {
 
     int updateByPrimaryKey(SysLog record);
 
-    List<SysLog> examineSysLogs();
+    List<SysLog> selectAllSysLoGPageQuery();
 
     List<SysLog> getSysLogsByMultipleConditions(Date startOperTime, Date endOperTime, String ipAddtress, Long userId, String funcName, String actionType);
 }
