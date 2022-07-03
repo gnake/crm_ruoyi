@@ -3,7 +3,9 @@ package com.lzjtugrp2.service.impl;
 import com.lzjtugrp2.domain.SysCodetype;
 import com.lzjtugrp2.mapper.SysCodetypeMapper;
 import com.lzjtugrp2.service.SysCodetypeService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SysCodetypeServiceImpl implements SysCodetypeService {
     private SysCodetypeMapper sysCodetypeMapper;
     @Override
