@@ -10,13 +10,13 @@ import com.lzjtugrp2.domain.CustomerInfo;
 */
 public interface CustomerInfoMapper {
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(long id);
 
     int insert(CustomerInfo record);
 
     int insertSelective(CustomerInfo record);
 
-    CustomerInfo selectByPrimaryKey(Long id);
+    CustomerInfo selectByPrimaryKey(long id);
 
     int updateByPrimaryKeySelective(CustomerInfo record);
 
