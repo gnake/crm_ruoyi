@@ -17,22 +17,22 @@ public class TaskCycleController {
         return "taskCycle";
     }
     //编辑
-    @GetMapping
+//    @GetMapping
     public String update(){
         return "taskCycle";
     }
     //复制
-    @GetMapping
+//    @GetMapping
     public String copy(){
         return "taskCycle";
     }
     //查看
-    @GetMapping
+//    @GetMapping
     public String select(){
         return "taskCycle";
     }
     //删除
-    @GetMapping
+//    @GetMapping
     public String delete(){
         return "taskCycle";
     }
