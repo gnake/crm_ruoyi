@@ -14,7 +14,7 @@ public class SysCodeTypeController {
 
     @RequestMapping("toCodetypeListView")
     public String toCodetypeListView(){
-        return "codeList";
+        return "codetypeList";
     }
 
 }
