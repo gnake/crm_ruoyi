@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzjtuGrp2.mapper.CustomerInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.CustomerInfo">
+            <id property="custId" column="CUST_ID" jdbcType="BIGINT"/>
+            <result property="custName" column="CUST_NAME" jdbcType="VARCHAR"/>
+            <result property="custIndustry" column="CUST_INDUSTRY" jdbcType="VARCHAR"/>
+            <result property="custProvince" column="CUST_PROVINCE" jdbcType="VARCHAR"/>
+            <result property="custCity" column="CUST_CITY" jdbcType="VARCHAR"/>
+            <result property="custAddress" column="CUST_ADDRESS" jdbcType="VARCHAR"/>
+            <result property="custScale" column="CUST_SCALE" jdbcType="VARCHAR"/>
+            <result property="custNature" column="CUST_NATURE" jdbcType="VARCHAR"/>
+            <result property="custIntroduce" column="CUST_INTRODUCE" jdbcType="VARCHAR"/>
+            <result property="custState" column="CUST_STATE" jdbcType="VARCHAR"/>
+            <result property="custCreateId" column="CUST_CREATE_ID" jdbcType="BIGINT"/>
+            <result property="custCreateTime" column="CUST_CREATE_TIME" jdbcType="TIMESTAMP"/>
+            <result property="custSubmitId" column="CUST_SUBMIT_ID" jdbcType="BIGINT"/>
+            <result property="custSubmitTime" column="CUST_SUBMIT_TIME" jdbcType="TIMESTAMP"/>
+            <result property="custConfirmId" column="CUST_CONFIRM_ID" jdbcType="BIGINT"/>
+            <result property="custConfirmTime" column="CUST_CONFIRM_TIME" jdbcType="TIMESTAMP"/>
+            <result property="custProgressState" column="CUST_PROGRESS_STATE" jdbcType="VARCHAR"/>
+            <result property="custLevel" column="CUST_LEVEL" jdbcType="VARCHAR"/>
+            <result property="custCompanyWeb" column="CUST_COMPANY_WEB" jdbcType="VARCHAR"/>
+            <result property="orgId" column="ORG_ID" jdbcType="BIGINT"/>
+            <result property="custVisitAgainTime" column="CUST_VISIT_AGAIN_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        CUST_ID,CUST_NAME,CUST_INDUSTRY,
+        CUST_PROVINCE,CUST_CITY,CUST_ADDRESS,
+        CUST_SCALE,CUST_NATURE,CUST_INTRODUCE,
+        CUST_STATE,CUST_CREATE_ID,CUST_CREATE_TIME,
+        CUST_SUBMIT_ID,CUST_SUBMIT_TIME,CUST_CONFIRM_ID,
+        CUST_CONFIRM_TIME,CUST_PROGRESS_STATE,CUST_LEVEL,
+        CUST_COMPANY_WEB,ORG_ID,CUST_VISIT_AGAIN_TIME
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from crm_customer_info
+        where  CUST_ID = #{custId,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from crm_customer_info
+        where  CUST_ID = #{custId,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="CUST_ID" keyProperty="custId" parameterType="com.lzjtugrp2.domain.CustomerInfo" useGeneratedKeys="true">
+        insert into crm_customer_info
+        ( CUST_ID,CUST_NAME,CUST_INDUSTRY
+        ,CUST_PROVINCE,CUST_CITY,CUST_ADDRESS
+        ,CUST_SCALE,CUST_NATURE,CUST_INTRODUCE
+        ,CUST_STATE,CUST_CREATE_ID,CUST_CREATE_TIME
+        ,CUST_SUBMIT_ID,CUST_SUBMIT_TIME,CUST_CONFIRM_ID
+        ,CUST_CONFIRM_TIME,CUST_PROGRESS_STATE,CUST_LEVEL
+        ,CUST_COMPANY_WEB,ORG_ID,CUST_VISIT_AGAIN_TIME
+        )
+        values (#{custId,jdbcType=BIGINT},#{custName,jdbcType=VARCHAR},#{custIndustry,jdbcType=VARCHAR}
+        ,#{custProvince,jdbcType=VARCHAR},#{custCity,jdbcType=VARCHAR},#{custAddress,jdbcType=VARCHAR}
+        ,#{custScale,jdbcType=VARCHAR},#{custNature,jdbcType=VARCHAR},#{custIntroduce,jdbcType=VARCHAR}
+        ,#{custState,jdbcType=VARCHAR},#{custCreateId,jdbcType=BIGINT},#{custCreateTime,jdbcType=TIMESTAMP}
+        ,#{custSubmitId,jdbcType=BIGINT},#{custSubmitTime,jdbcType=TIMESTAMP},#{custConfirmId,jdbcType=BIGINT}
+        ,#{custConfirmTime,jdbcType=TIMESTAMP},#{custProgressState,jdbcType=VARCHAR},#{custLevel,jdbcType=VARCHAR}
+        ,#{custCompanyWeb,jdbcType=VARCHAR},#{orgId,jdbcType=BIGINT},#{custVisitAgainTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="CUST_ID" keyProperty="custId" parameterType="com.lzjtugrp2.domain.CustomerInfo" useGeneratedKeys="true">
+        insert into crm_customer_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="custId != null">CUST_ID,</if>
+                <if test="custName != null">CUST_NAME,</if>
+                <if test="custIndustry != null">CUST_INDUSTRY,</if>
+                <if test="custProvince != null">CUST_PROVINCE,</if>
+                <if test="custCity != null">CUST_CITY,</if>
+                <if test="custAddress != null">CUST_ADDRESS,</if>
+                <if test="custScale != null">CUST_SCALE,</if>
+                <if test="custNature != null">CUST_NATURE,</if>
+                <if test="custIntroduce != null">CUST_INTRODUCE,</if>
+                <if test="custState != null">CUST_STATE,</if>
+                <if test="custCreateId != null">CUST_CREATE_ID,</if>
+                <if test="custCreateTime != null">CUST_CREATE_TIME,</if>
+                <if test="custSubmitId != null">CUST_SUBMIT_ID,</if>
+                <if test="custSubmitTime != null">CUST_SUBMIT_TIME,</if>
+                <if test="custConfirmId != null">CUST_CONFIRM_ID,</if>
+                <if test="custConfirmTime != null">CUST_CONFIRM_TIME,</if>
+                <if test="custProgressState != null">CUST_PROGRESS_STATE,</if>
+                <if test="custLevel != null">CUST_LEVEL,</if>
+                <if test="custCompanyWeb != null">CUST_COMPANY_WEB,</if>
+                <if test="orgId != null">ORG_ID,</if>
+                <if test="custVisitAgainTime != null">CUST_VISIT_AGAIN_TIME,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="custId != null">#{custId,jdbcType=BIGINT},</if>
+                <if test="custName != null">#{custName,jdbcType=VARCHAR},</if>
+                <if test="custIndustry != null">#{custIndustry,jdbcType=VARCHAR},</if>
+                <if test="custProvince != null">#{custProvince,jdbcType=VARCHAR},</if>
+                <if test="custCity != null">#{custCity,jdbcType=VARCHAR},</if>
+                <if test="custAddress != null">#{custAddress,jdbcType=VARCHAR},</if>
+                <if test="custScale != null">#{custScale,jdbcType=VARCHAR},</if>
+                <if test="custNature != null">#{custNature,jdbcType=VARCHAR},</if>
+                <if test="custIntroduce != null">#{custIntroduce,jdbcType=VARCHAR},</if>
+                <if test="custState != null">#{custState,jdbcType=VARCHAR},</if>
+                <if test="custCreateId != null">#{custCreateId,jdbcType=BIGINT},</if>
+                <if test="custCreateTime != null">#{custCreateTime,jdbcType=TIMESTAMP},</if>
+                <if test="custSubmitId != null">#{custSubmitId,jdbcType=BIGINT},</if>
+                <if test="custSubmitTime != null">#{custSubmitTime,jdbcType=TIMESTAMP},</if>
+                <if test="custConfirmId != null">#{custConfirmId,jdbcType=BIGINT},</if>
+                <if test="custConfirmTime != null">#{custConfirmTime,jdbcType=TIMESTAMP},</if>
+                <if test="custProgressState != null">#{custProgressState,jdbcType=VARCHAR},</if>
+                <if test="custLevel != null">#{custLevel,jdbcType=VARCHAR},</if>
+                <if test="custCompanyWeb != null">#{custCompanyWeb,jdbcType=VARCHAR},</if>
+                <if test="orgId != null">#{orgId,jdbcType=BIGINT},</if>
+                <if test="custVisitAgainTime != null">#{custVisitAgainTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.CustomerInfo">
+        update crm_customer_info
+        <set>
+                <if test="custName != null">
+                    CUST_NAME = #{custName,jdbcType=VARCHAR},
+                </if>
+                <if test="custIndustry != null">
+                    CUST_INDUSTRY = #{custIndustry,jdbcType=VARCHAR},
+                </if>
+                <if test="custProvince != null">
+                    CUST_PROVINCE = #{custProvince,jdbcType=VARCHAR},
+                </if>
+                <if test="custCity != null">
+                    CUST_CITY = #{custCity,jdbcType=VARCHAR},
+                </if>
+                <if test="custAddress != null">
+                    CUST_ADDRESS = #{custAddress,jdbcType=VARCHAR},
+                </if>
+                <if test="custScale != null">
+                    CUST_SCALE = #{custScale,jdbcType=VARCHAR},
+                </if>
+                <if test="custNature != null">
+                    CUST_NATURE = #{custNature,jdbcType=VARCHAR},
+                </if>
+                <if test="custIntroduce != null">
+                    CUST_INTRODUCE = #{custIntroduce,jdbcType=VARCHAR},
+                </if>
+                <if test="custState != null">
+                    CUST_STATE = #{custState,jdbcType=VARCHAR},
+                </if>
+                <if test="custCreateId != null">
+                    CUST_CREATE_ID = #{custCreateId,jdbcType=BIGINT},
+                </if>
+                <if test="custCreateTime != null">
+                    CUST_CREATE_TIME = #{custCreateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="custSubmitId != null">
+                    CUST_SUBMIT_ID = #{custSubmitId,jdbcType=BIGINT},
+                </if>
+                <if test="custSubmitTime != null">
+                    CUST_SUBMIT_TIME = #{custSubmitTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="custConfirmId != null">
+                    CUST_CONFIRM_ID = #{custConfirmId,jdbcType=BIGINT},
+                </if>
+                <if test="custConfirmTime != null">
+                    CUST_CONFIRM_TIME = #{custConfirmTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="custProgressState != null">
+                    CUST_PROGRESS_STATE = #{custProgressState,jdbcType=VARCHAR},
+                </if>
+                <if test="custLevel != null">
+                    CUST_LEVEL = #{custLevel,jdbcType=VARCHAR},
+                </if>
+                <if test="custCompanyWeb != null">
+                    CUST_COMPANY_WEB = #{custCompanyWeb,jdbcType=VARCHAR},
+                </if>
+                <if test="orgId != null">
+                    ORG_ID = #{orgId,jdbcType=BIGINT},
+                </if>
+                <if test="custVisitAgainTime != null">
+                    CUST_VISIT_AGAIN_TIME = #{custVisitAgainTime,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   CUST_ID = #{custId,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.CustomerInfo">
+        update crm_customer_info
+        set 
+            CUST_NAME =  #{custName,jdbcType=VARCHAR},
+            CUST_INDUSTRY =  #{custIndustry,jdbcType=VARCHAR},
+            CUST_PROVINCE =  #{custProvince,jdbcType=VARCHAR},
+            CUST_CITY =  #{custCity,jdbcType=VARCHAR},
+            CUST_ADDRESS =  #{custAddress,jdbcType=VARCHAR},
+            CUST_SCALE =  #{custScale,jdbcType=VARCHAR},
+            CUST_NATURE =  #{custNature,jdbcType=VARCHAR},
+            CUST_INTRODUCE =  #{custIntroduce,jdbcType=VARCHAR},
+            CUST_STATE =  #{custState,jdbcType=VARCHAR},
+            CUST_CREATE_ID =  #{custCreateId,jdbcType=BIGINT},
+            CUST_CREATE_TIME =  #{custCreateTime,jdbcType=TIMESTAMP},
+            CUST_SUBMIT_ID =  #{custSubmitId,jdbcType=BIGINT},
+            CUST_SUBMIT_TIME =  #{custSubmitTime,jdbcType=TIMESTAMP},
+            CUST_CONFIRM_ID =  #{custConfirmId,jdbcType=BIGINT},
+            CUST_CONFIRM_TIME =  #{custConfirmTime,jdbcType=TIMESTAMP},
+            CUST_PROGRESS_STATE =  #{custProgressState,jdbcType=VARCHAR},
+            CUST_LEVEL =  #{custLevel,jdbcType=VARCHAR},
+            CUST_COMPANY_WEB =  #{custCompanyWeb,jdbcType=VARCHAR},
+            ORG_ID =  #{orgId,jdbcType=BIGINT},
+            CUST_VISIT_AGAIN_TIME =  #{custVisitAgainTime,jdbcType=TIMESTAMP}
+        where   CUST_ID = #{custId,jdbcType=BIGINT} 
+    </update>
+</mapper>
