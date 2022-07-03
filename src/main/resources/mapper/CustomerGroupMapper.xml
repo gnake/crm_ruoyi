@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzjtuGrp2.mapper.CustomerGroupMapper">
+<mapper namespace="com.lzjtugrp2.mapper.CustomerGroupMapper">
 
     <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.CustomerGroup">
             <id property="grpId" column="GRP_ID" jdbcType="BIGINT"/>

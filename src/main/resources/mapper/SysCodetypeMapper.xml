@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzjtuGrp2.mapper.SysCodetypeMapper">
+<mapper namespace="com.lzjtugrp2.mapper.SysCodetypeMapper">
 
     <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.SysCodetype">
             <id property="typeId" column="TYPE_ID" jdbcType="BIGINT"/>
