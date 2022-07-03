@@ -97,7 +97,7 @@
         where   SYS_ID = #{sysId,jdbcType=BIGINT} 
     </update>
 
-    <select id="selectAllSysLoGPageQuery" resultMap="BaseResultMap">
+    <select id="selectAllSysLoG" resultMap="BaseResultMap">
         select *
         from crm_sys_log
     </select>

@@ -1,6 +1,7 @@
 package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.SysLog;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 * @createDate 2022-07-02 09:09:08
 * @Entity com.lzjtuGrp2.domain.SysLog
 */
+@Mapper
 public interface SysLogMapper {
 
     int deleteByPrimaryKey(Long id);
@@ -25,7 +27,7 @@ public interface SysLogMapper {
 
     int updateByPrimaryKey(SysLog record);
 
-    List<SysLog> selectAllSysLoGPageQuery();
+    List<SysLog> selectAllSysLoG();
 
     List<SysLog> getSysLogsByMultipleConditions(Date startOperTime, Date endOperTime, String ipAddtress, Long userId, String funcName, String actionType);
 }

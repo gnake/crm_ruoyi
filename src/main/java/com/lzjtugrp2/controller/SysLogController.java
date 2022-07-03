@@ -2,24 +2,23 @@ package com.lzjtugrp2.controller;
 
 import com.lzjtugrp2.domain.SysLog;
 import com.lzjtugrp2.service.SysLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class SysLogController {
-    @Resource
+    @Autowired
     private SysLogService sysLogService;
     @GetMapping("/showLog")
     public String show(Model model) {
         return "sysLogPage";
     }
-    //
+    //分页查询
     @GetMapping("/selectAllSysLoGPageQuery")
     public String selectAllSysLoGPageQuery(Model model) {
         List<SysLog> sysLogs = sysLogService.selectAllSysLoGPageQuery();
