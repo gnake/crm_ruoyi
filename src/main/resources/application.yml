@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://47.100.85.89:3306/CRM
+    url: jdbc:mysql://8.142.91.137/CRM
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
