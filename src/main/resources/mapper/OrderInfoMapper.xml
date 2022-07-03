@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzjtuGrp2.mapper.OrderInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.OrderInfo">
+            <id property="orderId" column="ORDER_ID" jdbcType="BIGINT"/>
+            <result property="oppId" column="OPP_ID" jdbcType="BIGINT"/>
+            <result property="orderChief" column="ORDER_CHIEF" jdbcType="VARCHAR"/>
+            <result property="orderDeliveryCost" column="ORDER_DELIVERY_COST" jdbcType="DECIMAL"/>
+            <result property="orderCost" column="ORDER_COST" jdbcType="DECIMAL"/>
+            <result property="orderDes" column="ORDER_DES" jdbcType="VARCHAR"/>
+            <result property="orderState" column="ORDER_STATE" jdbcType="VARCHAR"/>
+            <result property="orderCreater" column="ORDER_CREATER" jdbcType="CHAR"/>
+            <result property="orderCreateTime" column="ORDER_CREATE_TIME" jdbcType="TIMESTAMP"/>
+            <result property="orderConfirmPerson" column="ORDER_CONFIRM_PERSON" jdbcType="CHAR"/>
+            <result property="orderConfirmTime" column="ORDER_CONFIRM_TIME" jdbcType="TIMESTAMP"/>
+            <result property="clueSalesman" column="CLUE_SALESMAN" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ORDER_ID,OPP_ID,ORDER_CHIEF,
+        ORDER_DELIVERY_COST,ORDER_COST,ORDER_DES,
+        ORDER_STATE,ORDER_CREATER,ORDER_CREATE_TIME,
+        ORDER_CONFIRM_PERSON,ORDER_CONFIRM_TIME,CLUE_SALESMAN
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from crm_order_info
+        where  ORDER_ID = #{orderId,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from crm_order_info
+        where  ORDER_ID = #{orderId,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="ORDER_ID" keyProperty="orderId" parameterType="com.lzjtugrp2.domain.OrderInfo" useGeneratedKeys="true">
+        insert into crm_order_info
+        ( ORDER_ID,OPP_ID,ORDER_CHIEF
+        ,ORDER_DELIVERY_COST,ORDER_COST,ORDER_DES
+        ,ORDER_STATE,ORDER_CREATER,ORDER_CREATE_TIME
+        ,ORDER_CONFIRM_PERSON,ORDER_CONFIRM_TIME,CLUE_SALESMAN
+        )
+        values (#{orderId,jdbcType=BIGINT},#{oppId,jdbcType=BIGINT},#{orderChief,jdbcType=VARCHAR}
+        ,#{orderDeliveryCost,jdbcType=DECIMAL},#{orderCost,jdbcType=DECIMAL},#{orderDes,jdbcType=VARCHAR}
+        ,#{orderState,jdbcType=VARCHAR},#{orderCreater,jdbcType=CHAR},#{orderCreateTime,jdbcType=TIMESTAMP}
+        ,#{orderConfirmPerson,jdbcType=CHAR},#{orderConfirmTime,jdbcType=TIMESTAMP},#{clueSalesman,jdbcType=CHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="ORDER_ID" keyProperty="orderId" parameterType="com.lzjtugrp2.domain.OrderInfo" useGeneratedKeys="true">
+        insert into crm_order_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="orderId != null">ORDER_ID,</if>
+                <if test="oppId != null">OPP_ID,</if>
+                <if test="orderChief != null">ORDER_CHIEF,</if>
+                <if test="orderDeliveryCost != null">ORDER_DELIVERY_COST,</if>
+                <if test="orderCost != null">ORDER_COST,</if>
+                <if test="orderDes != null">ORDER_DES,</if>
+                <if test="orderState != null">ORDER_STATE,</if>
+                <if test="orderCreater != null">ORDER_CREATER,</if>
+                <if test="orderCreateTime != null">ORDER_CREATE_TIME,</if>
+                <if test="orderConfirmPerson != null">ORDER_CONFIRM_PERSON,</if>
+                <if test="orderConfirmTime != null">ORDER_CONFIRM_TIME,</if>
+                <if test="clueSalesman != null">CLUE_SALESMAN,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="orderId != null">#{orderId,jdbcType=BIGINT},</if>
+                <if test="oppId != null">#{oppId,jdbcType=BIGINT},</if>
+                <if test="orderChief != null">#{orderChief,jdbcType=VARCHAR},</if>
+                <if test="orderDeliveryCost != null">#{orderDeliveryCost,jdbcType=DECIMAL},</if>
+                <if test="orderCost != null">#{orderCost,jdbcType=DECIMAL},</if>
+                <if test="orderDes != null">#{orderDes,jdbcType=VARCHAR},</if>
+                <if test="orderState != null">#{orderState,jdbcType=VARCHAR},</if>
+                <if test="orderCreater != null">#{orderCreater,jdbcType=CHAR},</if>
+                <if test="orderCreateTime != null">#{orderCreateTime,jdbcType=TIMESTAMP},</if>
+                <if test="orderConfirmPerson != null">#{orderConfirmPerson,jdbcType=CHAR},</if>
+                <if test="orderConfirmTime != null">#{orderConfirmTime,jdbcType=TIMESTAMP},</if>
+                <if test="clueSalesman != null">#{clueSalesman,jdbcType=CHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.OrderInfo">
+        update crm_order_info
+        <set>
+                <if test="oppId != null">
+                    OPP_ID = #{oppId,jdbcType=BIGINT},
+                </if>
+                <if test="orderChief != null">
+                    ORDER_CHIEF = #{orderChief,jdbcType=VARCHAR},
+                </if>
+                <if test="orderDeliveryCost != null">
+                    ORDER_DELIVERY_COST = #{orderDeliveryCost,jdbcType=DECIMAL},
+                </if>
+                <if test="orderCost != null">
+                    ORDER_COST = #{orderCost,jdbcType=DECIMAL},
+                </if>
+                <if test="orderDes != null">
+                    ORDER_DES = #{orderDes,jdbcType=VARCHAR},
+                </if>
+                <if test="orderState != null">
+                    ORDER_STATE = #{orderState,jdbcType=VARCHAR},
+                </if>
+                <if test="orderCreater != null">
+                    ORDER_CREATER = #{orderCreater,jdbcType=CHAR},
+                </if>
+                <if test="orderCreateTime != null">
+                    ORDER_CREATE_TIME = #{orderCreateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="orderConfirmPerson != null">
+                    ORDER_CONFIRM_PERSON = #{orderConfirmPerson,jdbcType=CHAR},
+                </if>
+                <if test="orderConfirmTime != null">
+                    ORDER_CONFIRM_TIME = #{orderConfirmTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="clueSalesman != null">
+                    CLUE_SALESMAN = #{clueSalesman,jdbcType=CHAR},
+                </if>
+        </set>
+        where   ORDER_ID = #{orderId,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.OrderInfo">
+        update crm_order_info
+        set 
+            OPP_ID =  #{oppId,jdbcType=BIGINT},
+            ORDER_CHIEF =  #{orderChief,jdbcType=VARCHAR},
+            ORDER_DELIVERY_COST =  #{orderDeliveryCost,jdbcType=DECIMAL},
+            ORDER_COST =  #{orderCost,jdbcType=DECIMAL},
+            ORDER_DES =  #{orderDes,jdbcType=VARCHAR},
+            ORDER_STATE =  #{orderState,jdbcType=VARCHAR},
+            ORDER_CREATER =  #{orderCreater,jdbcType=CHAR},
+            ORDER_CREATE_TIME =  #{orderCreateTime,jdbcType=TIMESTAMP},
+            ORDER_CONFIRM_PERSON =  #{orderConfirmPerson,jdbcType=CHAR},
+            ORDER_CONFIRM_TIME =  #{orderConfirmTime,jdbcType=TIMESTAMP},
+            CLUE_SALESMAN =  #{clueSalesman,jdbcType=CHAR}
+        where   ORDER_ID = #{orderId,jdbcType=BIGINT} 
+    </update>
+</mapper>

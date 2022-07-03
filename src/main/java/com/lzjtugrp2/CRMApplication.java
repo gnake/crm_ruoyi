@@ -1,4 +1,4 @@
-package com.lzjtuGrp2;
+package com.lzjtugrp2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

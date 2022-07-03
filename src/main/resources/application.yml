@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   profiles:
     active:
@@ -14,3 +16,4 @@ mybatis:
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"
+
