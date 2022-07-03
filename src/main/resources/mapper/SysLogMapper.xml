@@ -96,4 +96,22 @@
             ACTION_TYPE =  #{actionType,jdbcType=VARCHAR}
         where   SYS_ID = #{sysId,jdbcType=BIGINT} 
     </update>
+
+    <select id="examineSysLogs" resultMap="BaseResultMap">
+        select *
+        from crm_sys_log
+    </select>
+
+    <select id="getSysLogsByMultipleConditions" resultMap="BaseResultMap">
+        select *
+        from crm_sys_log
+        <where>
+            <if test="startOperTime!=null"> OPER_TIME >= #{startOperTime,jdbctype=TIMESTAMP} </if>
+            <if test="endOperTime!=null"> and OPER_TIME <= #{endOperTime,jdbcType=TIMESTAMP} </if>
+            <if test="ipAddtress!=null"> and IP_ADDTRESS like #{ipAddtress,jdbcType=VARCHAR} </if>
+            <if test="userId!=null"> and USER_ID like #{userId,jdbcType=BIGINT} </if>
+            <if test="funcName!=null"> and FUNC_NAME like #{funcName,jdbcType=VARCHAR} </if>
+            <if test="actionType!=null"> and ACTION_TYPE like #{actionType,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
 </mapper>

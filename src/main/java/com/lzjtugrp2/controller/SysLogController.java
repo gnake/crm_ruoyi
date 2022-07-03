@@ -8,18 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.sql.rowset.serial.SerialStruct;
 import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sysLogPage")
 public class SysLogController {
     private SysLogService sysLogService;
+    @GetMapping("/showLog")
+    public String show(Model model) {
+        return "sysLogPage";
+    }
     //查出日志信息
     @GetMapping("/examineSysLogs")
     public String examineSysLogs(Model model) {
         List<SysLog> sysLogs = sysLogService.examineSysLogs();
+        System.out.println("sysLogs = " + sysLogs);
         model.addAttribute("sysLogs",sysLogs);
         return "sysLogPage";
     }

@@ -2,6 +2,9 @@ package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.SysLog;
 
+import java.util.Date;
+import java.util.List;
+
 /**
 * @author gsh
 * @description 针对表【crm_sys_log(系统日志表)】的数据库操作Mapper
@@ -22,4 +25,7 @@ public interface SysLogMapper {
 
     int updateByPrimaryKey(SysLog record);
 
+    List<SysLog> examineSysLogs();
+
+    List<SysLog> getSysLogsByMultipleConditions(Date startOperTime, Date endOperTime, String ipAddtress, Long userId, String funcName, String actionType);
 }
