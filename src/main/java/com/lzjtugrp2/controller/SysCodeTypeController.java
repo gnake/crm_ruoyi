@@ -17,7 +17,7 @@ public class SysCodeTypeController {
         return "sysCodetype";
     }
 
-    @GetMapping("/selectByPrimaryKey")
+    @GetMapping("/selectByPrimaryKeyCodetype")
     public String selectByPrimaryKey(Long id){
         SysCodetype sysCodetype = sysCodetypeService.selectByPrimaryKey(id);
         return "sysCodeType";
