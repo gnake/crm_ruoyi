@@ -1,15 +1,15 @@
 package com.lzjtugrp2.service.impl;
 
-import cn.hutool.db.PageResult;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.lzjtugrp2.domain.SysLog;
+import com.lzjtugrp2.domain.dto.SysLogDTO;
+import com.lzjtugrp2.mapper.SecurityUserMapper;
 import com.lzjtugrp2.mapper.SysLogMapper;
 import com.lzjtugrp2.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -17,27 +17,64 @@ public class SysLogServiceImpl implements SysLogService {
     @Autowired
     private SysLogMapper sysLogMapper;
 
-    @Override
-    public List<SysLog> selectAllSysLoGPageQuery() {
-        return sysLogMapper.selectAllSysLoG();
-    }
-    //执行分页查询
-    public PageResult<SysLog> selectAllSysLog(Integer page, Integer rows) {
-        Page ps = PageHelper.startPage(page,rows);
+    @Autowired
+    private SecurityUserMapper securityUserMapper;
 
-        List<SysLog> list = sysLogMapper.selectAllSysLoG();
-        System.out.println("list = " + list);
-        PageResult<SysLog> result = new PageResult<SysLog>();
-
-        return result;
-    }
     @Override
-    public SysLog selectByPrimaryKey(Long id) {
-        return sysLogMapper.selectByPrimaryKey(id);
+    public List<SysLog> selectPageSysLog() {
+        return sysLogMapper.selectAllSysLog();
     }
 
     @Override
-    public List<SysLog> getSysLogsByMultipleConditions(Date startOperTime, Date endOperTime, String ipAddtress, Long userId, String funcName, String actionType) {
-        return sysLogMapper.getSysLogsByMultipleConditions(startOperTime,endOperTime,ipAddtress,userId,funcName,actionType);
+    public SysLogDTO selectByPrimaryKey(Long id) {
+        SysLog sysLog =  sysLogMapper.selectByPrimaryKey(id);
+        SysLogDTO sysLogDTO = new SysLogDTO();
+        String userCode = securityUserMapper.selectByPrimaryKey(sysLog.getUserId()).getUserCode();
+        sysLogDTO.setSysId(sysLog.getSysId());
+        sysLogDTO.setOperTime(sysLog.getOperTime());
+        sysLogDTO.setIpAddtress(sysLog.getIpAddtress());
+        sysLogDTO.setUserName(sysLog.getUserName());
+        sysLogDTO.setUserCode(userCode);
+        sysLogDTO.setFuncName(sysLog.getFuncName());
+        sysLogDTO.setActionType(sysLog.getActionType());
+        return sysLogDTO;
+    }
+
+    @Override
+    public List<SysLogDTO> getSysLogsByMultipleConditions(SysLog sysLog) {
+        ArrayList<SysLogDTO> sysLogDTOS = new ArrayList<>();
+        ArrayList<SysLog> sysLogs = sysLogMapper.getSysLogsByMultipleConditions(sysLog);
+        for (SysLog item : sysLogs) {
+            String userCode = securityUserMapper.selectByPrimaryKey(item.getUserId()).getUserCode();
+            SysLogDTO sysLogDTO = new SysLogDTO();
+            sysLogDTO.setSysId(item.getSysId());
+            sysLogDTO.setOperTime(item.getOperTime());
+            sysLogDTO.setIpAddtress(item.getIpAddtress());
+            sysLogDTO.setUserName(item.getUserName());
+            sysLogDTO.setUserCode(userCode);
+            sysLogDTO.setFuncName(item.getFuncName());
+            sysLogDTO.setActionType(item.getActionType());
+            sysLogDTOS.add(sysLogDTO);
+        }
+        return sysLogDTOS;
+    }
+
+    @Override
+    public List<SysLogDTO> selectAllSysLogDTO() {
+        ArrayList<SysLogDTO> sysLogDTOS = new ArrayList<>();
+        ArrayList<SysLog> sysLogs = sysLogMapper.selectAllSysLog();
+        for (SysLog item : sysLogs) {
+            String userCode = securityUserMapper.selectByPrimaryKey(item.getUserId()).getUserCode();
+            SysLogDTO sysLogDTO = new SysLogDTO();
+            sysLogDTO.setSysId(item.getSysId());
+            sysLogDTO.setOperTime(item.getOperTime());
+            sysLogDTO.setIpAddtress(item.getIpAddtress());
+            sysLogDTO.setUserName(item.getUserName());
+            sysLogDTO.setUserCode(userCode);
+            sysLogDTO.setFuncName(item.getFuncName());
+            sysLogDTO.setActionType(item.getActionType());
+            sysLogDTOS.add(sysLogDTO);
+        }
+        return sysLogDTOS;
     }
 }

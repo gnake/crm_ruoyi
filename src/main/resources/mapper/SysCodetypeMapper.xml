@@ -19,7 +19,9 @@
         TYPE_GROUP,IS_EDITABLE,IS_EFFECTIVE,
         IS_EXTEND
     </sql>
-
+    <select id="selectAll" resultType="com.lzjtugrp2.domain.SysCodetype">
+        select * from CRM_SYS_CODETYPE
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
