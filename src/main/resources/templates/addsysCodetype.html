@@ -9,7 +9,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>编码类型</title>
+    <title>AdminX</title>
 
     <!--icheck-->
     <link href="/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
@@ -47,9 +47,45 @@
         <div th:replace="~{commons/common::top}"></div>
         <!-- header section end-->
 
-
         <!--body wrapper start-->
-
+        <section class="panel">
+            <header class="panel-heading">
+                Form Elements
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post" th:action="@{/addCodetype}">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">类型标识</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="typeIdent" name="typeIdent">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">类型名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="typeName" name="typeName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">类型分组</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="typeGroup" name="typeGroup">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">是否SQL扩展</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="isExtend" name="isExtend">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
         <!--body wrapper end-->
 
         <!--footer section start-->
@@ -81,7 +117,7 @@
 
 <!--icheck -->
 <script src="/js/iCheck/jquery.icheck.js"></script>
-<script src="js/icheck-init.js"></script>
+<script src="/js/icheck-init.js"></script>
 
 <!-- jQuery Flot Chart-->
 <script src="/js/flot-chart/jquery.flot.js"></script>

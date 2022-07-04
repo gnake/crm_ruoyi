@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords"
+          content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>AdminX</title>
+
+    <!--icheck-->
+    <link href="/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="/js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="/js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="/js/iCheck/skins/square/blue.css" rel="stylesheet">
+
+    <!--dashboard calendar-->
+    <link href="/css/clndr.css" rel="stylesheet">
+
+
+    <!--common-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div th:replace="~{commons/common::left}"></div>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content">
+
+        <!-- header section start-->
+        <div th:replace="~{commons/common::top}"></div>
+        <!-- header section end-->
+
+        <!--body wrapper start-->
+        <section class="panel">
+            <header class="panel-heading">
+                Form Elements
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post" th:action="@{/updatecodetypeById}" >
+                    <input type="text" class="form-control" id="typeId" name="typeId" th:value="${codetype.typeId} " hidden="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">类型标识</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="typeIdent" name="typeIdent">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">类型名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="typeName" name="typeName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">类型分组</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="typeGroup" name="typeGroup">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">是否SQL扩展</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="isExtend" name="isExtend">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            2014 &copy; AdminEx by ThemeBucket
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/modernizr.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+
+<!--easy pie chart-->
+<script src="/js/easypiechart/jquery.easypiechart.js"></script>
+<script src="/js/easypiechart/easypiechart-init.js"></script>
+
+<!--Sparkline Chart-->
+<script src="/js/sparkline/jquery.sparkline.js"></script>
+<script src="/js/sparkline/sparkline-init.js"></script>
+
+<!--icheck -->
+<script src="/js/iCheck/jquery.icheck.js"></script>
+<script src="/js/icheck-init.js"></script>
+
+<!-- jQuery Flot Chart-->
+<script src="/js/flot-chart/jquery.flot.js"></script>
+<script src="/js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="/js/flot-chart/jquery.flot.resize.js"></script>
+<script src="/js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="/js/flot-chart/jquery.flot.selection.js"></script>
+<script src="/js/flot-chart/jquery.flot.stack.js"></script>
+<script src="/js/flot-chart/jquery.flot.time.js"></script>
+<script src="/js/main-chart.js"></script>
+
+<!--common scripts for all pages-->
+<script src="/js/scripts.js"></script>
+
+</body>
+</html>

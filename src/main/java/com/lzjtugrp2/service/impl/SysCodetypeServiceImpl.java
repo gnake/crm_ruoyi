@@ -47,4 +47,9 @@ public class SysCodetypeServiceImpl implements SysCodetypeService {
     public int updateByPrimaryKey(SysCodetype record) {
         return sysCodetypeMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public SysCodetype selectById(Long typeId) {
+        return sysCodetypeMapper.selectByPrimaryKey(typeId);
+    }
 }

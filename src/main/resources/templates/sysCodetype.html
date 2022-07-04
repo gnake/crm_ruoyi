@@ -9,7 +9,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>编码类型</title>
+    <title>AdminX</title>
 
     <!--icheck-->
     <link href="/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
@@ -65,7 +65,7 @@
                                 <div class="adv-table editable-table ">
                                     <div class="clearfix">
                                         <div class="btn-group">
-                                            <a href="/toeditcodelist" methods="get"><button id="editable-sample_new" class="btn btn-primary">
+                                            <a href="/toaddCodetype" methods="get"><button id="editable-sample_new" class="btn btn-primary">
                                                 Add New <i class="fa fa-plus"></i>
                                             </button></a>
                                         </div>
@@ -85,6 +85,7 @@
                                         <thead>
                                         <tr>
                                             <th>序号</th>
+                                            <th>类型标识</th>
                                             <th>类型名称</th>
                                             <th>类型分组</th>
                                             <th>是否SQL扩展</th>
@@ -104,7 +105,7 @@
                                                     <span th:case="0">N</span>
                                                 </span>
                                             </td>
-                                            <td><a class="edit" href="/editCodetype" methods="get">Edit</a></td>
+                                            <td><a class="edit" th:href="@{/toupdatecodetype(typeId=${codetype.typeId})}" methods="get">Edit</a></td>
                                             <td><a class="delete"
                                                    th:href="@{/delete/{typeid}(typeid=${codetype.typeId})}">Delete</a>
                                             </td>

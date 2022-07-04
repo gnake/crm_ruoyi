@@ -98,4 +98,8 @@
             IS_EXTEND =  #{isExtend,jdbcType=INTEGER}
         where   TYPE_ID = #{typeId,jdbcType=BIGINT} 
     </update>
+
+    <select id="selectById" resultType="com.lzjtugrp2.domain.SysCodetype" parameterType="long">
+        select  * from CRM_SYS_CODETYPE where TYPE_ID = #{typeId,jdbcType=BIGINT}
+    </select>
 </mapper>

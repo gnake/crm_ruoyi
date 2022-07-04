@@ -29,4 +29,6 @@ public interface SysCodetypeMapper {
 
     int updateByPrimaryKey(SysCodetype record);
 
+    SysCodetype selectById(Long typeId);
+
 }

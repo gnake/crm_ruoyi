@@ -19,5 +19,7 @@ public interface SysCodetypeService {
     int updateByPrimaryKeySelective(SysCodetype record);
 
     int updateByPrimaryKey(SysCodetype record);
+
+    SysCodetype selectById(Long typeId);
 }
 
