@@ -1,6 +1,9 @@
 package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.TaskCycle;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author gsh
@@ -8,7 +11,10 @@ import com.lzjtugrp2.domain.TaskCycle;
 * @createDate 2022-07-02 09:09:08
 * @Entity com.lzjtuGrp2.domain.TaskCycle
 */
+@Mapper
 public interface TaskCycleMapper {
+
+    List<TaskCycle> getAllTask();
 
     int deleteByPrimaryKey(Long id);
 

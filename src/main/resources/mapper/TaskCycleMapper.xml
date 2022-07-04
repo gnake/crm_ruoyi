@@ -14,6 +14,12 @@
         TC_ID,TC_BEGIN,TC_END
     </sql>
 
+    <select id="getAllTask" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from crm_task_cycle
+    </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />

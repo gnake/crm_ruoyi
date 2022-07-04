@@ -1,9 +1,25 @@
 package com.lzjtugrp2.service.impl;
 
 import com.lzjtugrp2.domain.TaskCycle;
+import com.lzjtugrp2.mapper.TaskCycleMapper;
 import com.lzjtugrp2.service.TaskCycleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import java.util.List;
+@Service
+@Transactional
 public class TaskCycleServiceImpl implements TaskCycleService {
+
+    @Resource
+    private TaskCycleMapper taskcycleMapper;
+
+    @Override
+    public List<TaskCycle> getAllTask() {
+        return taskcycleMapper.getAllTask();
+    }
     @Override
     public int deleteByPrimaryKey(Long id) {
         return 0;
