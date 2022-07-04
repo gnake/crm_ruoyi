@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface SysLogService {
-    List<SysLog> selectAllSysLoGPageQuery();
+    List<SysLog> selectPageSysLog();
 
     SysLog selectByPrimaryKey(Long id);
 
