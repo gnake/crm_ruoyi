@@ -65,7 +65,7 @@
                                 <div class="adv-table editable-table ">
                                     <div class="clearfix">
                                         <div class="btn-group">
-                                            <a href="/toeditcodelist" methods="get"><button id="editable-sample_new" class="btn btn-primary">
+                                            <a href="/toinsertcodelist" methods="get"><button id="editable-sample_new" class="btn btn-primary">
                                                 Add New <i class="fa fa-plus"></i>
                                             </button></a>
                                         </div>
@@ -114,7 +114,7 @@
                                                 </span>
                                             </td>
                                             <td th:text="${codelist.codeSort}"></td>
-                                            <td><a class="edit" href="/toeditcodelist" methods="get">Edit</a></td>
+                                            <td><a class="edit" th:href="@{/toupdatecodelist/{codeid}(codeid=${codelist.codeId})}" methods="get">Edit</a></td>
                                             <td><a class="delete"
                                                    th:href="@{/delete/{codeid}(codeid=${codelist.codeId})}">Delete</a>
                                             </td>

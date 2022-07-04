@@ -43,20 +43,22 @@ public class SysCodeListServiceImpl implements SysCodeListService {
 
     @Override
     public int insert(SysCodelist sysCodelist) {
-        int i = sysCodelistMapper.insertSelective(sysCodelist);
-        return i;
+        return sysCodelistMapper.insertSelective(sysCodelist);
     }
 
     @Override
     public int deleteByPrimaryKey(Long id) {
-        int i = sysCodelistMapper.deleteByPrimaryKey(id);
-        return i;
+        return sysCodelistMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int updateByPrimaryKeySelective(SysCodelist sysCodelist) {
-        int i = sysCodelistMapper.updateByPrimaryKeySelective(sysCodelist);
-        return i;
+        return sysCodelistMapper.updateByPrimaryKeySelective(sysCodelist);
+    }
+
+    @Override
+    public SysCodelist selectById(Long codeId) {
+        return sysCodelistMapper.selectByPrimaryKey(codeId);
     }
 
 

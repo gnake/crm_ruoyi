@@ -18,10 +18,13 @@ public class SysCodeListMapperTest {
 
     @Test
     public void Insert(){
-        SysCodelist sysCodelist = new SysCodelist();
-        sysCodelist.setCodeValue("11111111111111111");
-        int i = sysCodelistMapper.insertSelective(sysCodelist);
-        System.out.println(i);
+//        SysCodelist sysCodelist = new SysCodelist();
+//        sysCodelist.setCodeValue("11111111111111111");
+//        int i = sysCodelistMapper.insertSelective(sysCodelist);
+//        System.out.println(i);
+
+        SysCodelist sysCodelist1 = sysCodelistMapper.selectByPrimaryKey(1L);
+        System.out.println(sysCodelist1);
     }
 
 }

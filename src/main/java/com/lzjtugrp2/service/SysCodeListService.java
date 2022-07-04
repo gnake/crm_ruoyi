@@ -14,4 +14,6 @@ public interface SysCodeListService {
     int deleteByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(SysCodelist record);
+
+    SysCodelist selectById(Long codeId);
 }
