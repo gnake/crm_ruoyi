@@ -52,6 +52,11 @@
         </header>
         <div class="panel-body">
         <div class="adv-table">
+            <div class="btn-group">
+                <a th:href="@{/toinsertsyslog}" methods="get"><button id="editable-sample_new" class="btn btn-primary">
+                    Add New <i class="fa fa-plus"></i>
+                </button></a>
+            </div>
 <!--            <div>-->
 <!--                <button>查看</button>-->
 <!--                <button>刷新</button>-->
@@ -60,7 +65,7 @@
         <thead>
         <tr>
             <th class="hidden-phone">序号</th>
-            <th class="hidden-phone">操作时间</th>
+            <th>操作时间</th>
             <th class="hidden-phone">所在地址</th>
             <th class="hidden-phone">用户标识</th>
             <th class="hidden-phone">用户名称</th>
@@ -78,7 +83,7 @@
             <td class="center hidden-phone" th:text="${syslogdto.userName}">管理员</td>
             <td class="center hidden-phone" th:text="${syslogdto.funcName}">系统登录</td>
             <td class="center hidden-phone" th:text="${syslogdto.actionType}">login</td>
-            <td class="center hidden-phone"><a th:href="@{/updatesyslog}">edit</a> </td>
+            <td class="center hidden-phone"><a th:href="@{/toupdatesyslog}">Edit</a></td>
         </tr>
         </tbody>
 <!--        <tfoot>-->

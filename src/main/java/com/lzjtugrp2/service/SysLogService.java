@@ -13,4 +13,8 @@ public interface SysLogService {
     List<SysLogDTO> getSysLogsByMultipleConditions(SysLog sysLog);
 
     List<SysLogDTO> selectAllSysLogDTO();
+
+    void insertSysLog(SysLog sysLog);
+
+    void updateSysLog(SysLog sysLog);
 }

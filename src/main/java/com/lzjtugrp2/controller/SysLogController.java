@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -21,6 +22,24 @@ public class SysLogController {
         List<SysLogDTO> sysLogDTOS = sysLogService.selectAllSysLogDTO();
         model.addAttribute("sysLogDTOS",sysLogDTOS);
         return "sysLogPage";
+    }
+    @GetMapping("/toinsertsyslog")
+    public String toinsertsyslog() {
+        return "addsyslog";
+    }
+    @PostMapping("/insertSysLog")
+    public String insertSysLog(SysLog sysLog) {
+        sysLogService.insertSysLog(sysLog);
+        return "redirect:sysLogPage";
+    }
+    @GetMapping("/toupdatesyslog")
+    public String toupdatesyslog() {
+        return "updatesyslog";
+    }
+    @GetMapping("/updateSysLog")
+    public String updateSysLog(SysLog sysLog) {
+        sysLogService.updateSysLog(sysLog);
+        return "redirect:sysLogPage";
     }
     //分页查询
     @GetMapping("/selectPageSysLog")
