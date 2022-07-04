@@ -1,7 +1,10 @@
 package com.lzjtugrp2.mapper;
 
+import com.lzjtugrp2.domain.SysCodelist;
 import com.lzjtugrp2.domain.SysCodetype;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author gsh
@@ -11,6 +14,8 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface SysCodetypeMapper {
+
+    List<SysCodetype> selectAll();
 
     int deleteByPrimaryKey(Long id);
 
