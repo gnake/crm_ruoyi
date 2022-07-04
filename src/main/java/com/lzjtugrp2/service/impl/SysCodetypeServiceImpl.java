@@ -6,10 +6,17 @@ import com.lzjtugrp2.service.SysCodetypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SysCodetypeServiceImpl implements SysCodetypeService {
     @Autowired
     private SysCodetypeMapper sysCodetypeMapper;
+
+    @Override
+    public List<SysCodetype> selectAll() {
+        return sysCodetypeMapper.selectAll();
+    }
 
     @Override
     public int deleteByPrimaryKey(Long id) {
