@@ -2,6 +2,8 @@ package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.TaskCycle;
 
+import java.util.List;
+
 /**
 * @author gsh
 * @description 针对表【crm_task_cycle(任务周期定义表)】的数据库操作Mapper
@@ -9,6 +11,8 @@ import com.lzjtugrp2.domain.TaskCycle;
 * @Entity com.lzjtuGrp2.domain.TaskCycle
 */
 public interface TaskCycleMapper {
+
+    List<TaskCycle> getAllTask();
 
     int deleteByPrimaryKey(Long id);
 
