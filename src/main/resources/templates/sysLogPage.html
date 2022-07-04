@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -34,9 +34,9 @@
     <!-- main content start-->
     <div class="main-content" >
 
-<!--        &lt;!&ndash; header section start&ndash;&gt;-->
-<!--        <div th:replace="~{commons/common::top}"></div>-->
-<!--        &lt;!&ndash; header section end&ndash;&gt;-->
+        <!-- header section start-->
+        <div th:replace="~{commons/common::top}"></div>
+        <!-- header section end-->
 
         <!--body wrapper start-->
         <div class="wrapper">
@@ -52,6 +52,10 @@
         </header>
         <div class="panel-body">
         <div class="adv-table">
+<!--            <div>-->
+<!--                <button>查看</button>-->
+<!--                <button>刷新</button>-->
+<!--            </div>-->
         <table  class="display table table-bordered table-striped" id="dynamic-table">
         <thead>
         <tr>
