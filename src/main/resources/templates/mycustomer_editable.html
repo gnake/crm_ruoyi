@@ -120,13 +120,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="" th:each="${custormerInfo}">
-                                        <td>Jonathan</td>
-                                        <td>Smith</td>
-                                        <td>3455</td>
-                                        <td class="center">Lorem ipsume</td>
-                                        <td><a class="edit" href="javascript:">Edit</a></td>
-                                        <td><a class="delete" href="javascript:">Delete</a></td>
+                                    <tr class="" th:each="item : ${custormerInfo}">
+                                        <td th:text="${item.custId}">Jonathan</td>
+                                        <td th:text="${item.custName}">Smith</td>
+                                        <td th:text="${item.custLevel}">3455</td>
+                                        <td class="center" th:text="${item.custVisitAgainTime}">Lorem ipsume</td>
+<!--                                        <td th:text="${item}">3455</td>-->
+<!--                                        <td th:text="${item}">3455</td>-->
+                                        <td th:text="${item.custState}">3455</td>
+
+                                        <td><a class="edit" href="#">Edit</a></td>
+                                        <td><a class="delete" href="#">Delete</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
