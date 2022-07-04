@@ -1,6 +1,7 @@
 package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.TaskCycle;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 * @createDate 2022-07-02 09:09:08
 * @Entity com.lzjtuGrp2.domain.TaskCycle
 */
+@Mapper
 public interface TaskCycleMapper {
 
     List<TaskCycle> getAllTask();

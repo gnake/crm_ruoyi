@@ -29,16 +29,16 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from crm_security_user
+        from CRM_SECURITY_USER
         where  USER_ID = #{userId,jdbcType=BIGINT} 
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from crm_security_user
+        delete from CRM_SECURITY_USER
         where  USER_ID = #{userId,jdbcType=BIGINT} 
     </delete>
     <insert id="insert" keyColumn="USER_ID" keyProperty="userId" parameterType="com.lzjtugrp2.domain.SecurityUser" useGeneratedKeys="true">
-        insert into crm_security_user
+        insert into CRM_SECURITY_USER
         ( USER_ID,USER_NAME,USER_CODE
         ,USER_PWD,USER_SEX,USER_DESC
         ,USER_STATE,USER_MAIL,USER_SORT
@@ -51,7 +51,7 @@
         )
     </insert>
     <insert id="insertSelective" keyColumn="USER_ID" keyProperty="userId" parameterType="com.lzjtugrp2.domain.SecurityUser" useGeneratedKeys="true">
-        insert into crm_security_user
+        insert into CRM_SECURITY_USER
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="userId != null">USER_ID,</if>
                 <if test="userName != null">USER_NAME,</if>
@@ -82,7 +82,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.SecurityUser">
-        update crm_security_user
+        update CRM_SECURITY_USER
         <set>
                 <if test="userName != null">
                     USER_NAME = #{userName,jdbcType=VARCHAR},
@@ -121,7 +121,7 @@
         where   USER_ID = #{userId,jdbcType=BIGINT} 
     </update>
     <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.SecurityUser">
-        update crm_security_user
+        update CRM_SECURITY_USER
         set 
             USER_NAME =  #{userName,jdbcType=VARCHAR},
             USER_CODE =  #{userCode,jdbcType=VARCHAR},
