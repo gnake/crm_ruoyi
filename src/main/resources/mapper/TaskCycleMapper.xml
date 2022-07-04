@@ -17,29 +17,29 @@
     <select id="getAllTask" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from crm_task_cycle
+        from CRM_TASK_CYCLE
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from crm_task_cycle
+        from CRM_TASK_CYCLE
         where  TC_ID = #{tcId,jdbcType=BIGINT} 
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from crm_task_cycle
+        delete from CRM_TASK_CYCLE
         where  TC_ID = #{tcId,jdbcType=BIGINT} 
     </delete>
     <insert id="insert" keyColumn="TC_ID" keyProperty="tcId" parameterType="com.lzjtugrp2.domain.TaskCycle" useGeneratedKeys="true">
-        insert into crm_task_cycle
+        insert into CRM_TASK_CYCLE
         ( TC_ID,TC_BEGIN,TC_END
         )
         values (#{tcId,jdbcType=BIGINT},#{tcBegin,jdbcType=TIMESTAMP},#{tcEnd,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="insertSelective" keyColumn="TC_ID" keyProperty="tcId" parameterType="com.lzjtugrp2.domain.TaskCycle" useGeneratedKeys="true">
-        insert into crm_task_cycle
+        insert into CRM_TASK_CYCLE
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="tcId != null">TC_ID,</if>
                 <if test="tcBegin != null">TC_BEGIN,</if>
@@ -52,7 +52,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.TaskCycle">
-        update crm_task_cycle
+        update CRM_TASK_CYCLE
         <set>
                 <if test="tcBegin != null">
                     TC_BEGIN = #{tcBegin,jdbcType=TIMESTAMP},
@@ -64,7 +64,7 @@
         where   TC_ID = #{tcId,jdbcType=BIGINT} 
     </update>
     <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.TaskCycle">
-        update crm_task_cycle
+        update CRM_TASK_CYCLE
         set 
             TC_BEGIN =  #{tcBegin,jdbcType=TIMESTAMP},
             TC_END =  #{tcEnd,jdbcType=TIMESTAMP}
