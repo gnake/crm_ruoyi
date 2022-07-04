@@ -86,4 +86,9 @@ public class SysLogServiceImpl implements SysLogService {
     public void updateSysLog(SysLog sysLog) {
         sysLogMapper.updateByPrimaryKeySelective(sysLog);
     }
+
+    @Override
+    public void deleteBySysId(long sysId) {
+        sysLogMapper.deleteByPrimaryKey(sysId);
+    }
 }

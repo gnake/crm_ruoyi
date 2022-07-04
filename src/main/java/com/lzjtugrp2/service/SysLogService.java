@@ -17,4 +17,6 @@ public interface SysLogService {
     void insertSysLog(SysLog sysLog);
 
     void updateSysLog(SysLog sysLog);
+
+    void deleteBySysId(long sysId);
 }

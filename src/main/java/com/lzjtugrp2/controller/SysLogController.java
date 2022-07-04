@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -36,13 +37,16 @@ public class SysLogController {
     public String toupdatesyslog() {
         return "updatesyslog";
     }
-
     @PostMapping("/updateSysLog")
     public String updateSysLog(SysLog sysLog) {
         sysLogService.updateSysLog(sysLog);
         return "redirect:/syslog";
     }
-
+    @GetMapping("/delete/{sysId}")
+    public String deleteBySysId(@PathVariable long sysId) {
+        sysLogService.deleteBySysId(sysId);
+        return "redirect:/syslog";
+    }
     //分页查询
     @GetMapping("/selectPageSysLog")
     public PageInfo<SysLogDTO> selectPageSysLog(Model model, int pageNum, int pageSize) {
