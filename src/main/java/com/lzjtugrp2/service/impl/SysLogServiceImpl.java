@@ -1,8 +1,5 @@
 package com.lzjtugrp2.service.impl;
 
-import cn.hutool.db.PageResult;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.lzjtugrp2.domain.SysLog;
 import com.lzjtugrp2.mapper.SysLogMapper;
 import com.lzjtugrp2.service.SysLogService;
@@ -18,19 +15,10 @@ public class SysLogServiceImpl implements SysLogService {
     private SysLogMapper sysLogMapper;
 
     @Override
-    public List<SysLog> selectAllSysLoGPageQuery() {
-        return sysLogMapper.selectAllSysLoG();
+    public List<SysLog> selectPageSysLog() {
+        return sysLogMapper.selectPageSysLog();
     }
-    //执行分页查询
-    public PageResult<SysLog> selectAllSysLog(Integer page, Integer rows) {
-        Page ps = PageHelper.startPage(page,rows);
 
-        List<SysLog> list = sysLogMapper.selectAllSysLoG();
-        System.out.println("list = " + list);
-        PageResult<SysLog> result = new PageResult<SysLog>();
-
-        return result;
-    }
     @Override
     public SysLog selectByPrimaryKey(Long id) {
         return sysLogMapper.selectByPrimaryKey(id);

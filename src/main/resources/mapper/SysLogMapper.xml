@@ -23,16 +23,16 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from crm_sys_log
+        from CRM_SYS_LOG
         where  SYS_ID = #{sysId,jdbcType=BIGINT} 
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from crm_sys_log
+        delete from CRM_SYS_LOG
         where  SYS_ID = #{sysId,jdbcType=BIGINT} 
     </delete>
     <insert id="insert" keyColumn="SYS_ID" keyProperty="sysId" parameterType="com.lzjtugrp2.domain.SysLog" useGeneratedKeys="true">
-        insert into crm_sys_log
+        insert into CRM_SYS_LOG
         ( SYS_ID,OPER_TIME,IP_ADDTRESS
         ,USER_ID,USER_NAME,FUNC_NAME
         ,ACTION_TYPE)
@@ -41,7 +41,7 @@
         ,#{actionType,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" keyColumn="SYS_ID" keyProperty="sysId" parameterType="com.lzjtugrp2.domain.SysLog" useGeneratedKeys="true">
-        insert into crm_sys_log
+        insert into CRM_SYS_LOG
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="sysId != null">SYS_ID,</if>
                 <if test="operTime != null">OPER_TIME,</if>
@@ -62,7 +62,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.lzjtugrp2.domain.SysLog">
-        update crm_sys_log
+        update CRM_SYS_LOG
         <set>
                 <if test="operTime != null">
                     OPER_TIME = #{operTime,jdbcType=TIMESTAMP},
@@ -86,7 +86,7 @@
         where   SYS_ID = #{sysId,jdbcType=BIGINT} 
     </update>
     <update id="updateByPrimaryKey" parameterType="com.lzjtugrp2.domain.SysLog">
-        update crm_sys_log
+        update CRM_SYS_LOG
         set 
             OPER_TIME =  #{operTime,jdbcType=TIMESTAMP},
             IP_ADDTRESS =  #{ipAddtress,jdbcType=VARCHAR},
@@ -97,17 +97,17 @@
         where   SYS_ID = #{sysId,jdbcType=BIGINT} 
     </update>
 
-    <select id="selectAllSysLoG" resultMap="BaseResultMap">
+    <select id="selectPageSysLog" resultMap="BaseResultMap">
         select *
-        from crm_sys_log
+        from CRM_SYS_LOG
     </select>
 
     <select id="getSysLogsByMultipleConditions" resultMap="BaseResultMap">
         select *
-        from crm_sys_log
+        from CRM_SYS_LOG
         <where>
-            <if test="startOperTime!=null || endOperTime!=null"> OPER_TIME between #{startOperTime,jdbcType=TIMESTAMP} and #{endOperTime,jdbcType=TIMESTAMP}</if>
-            <if test="ipAddtress!=null"> and IP_ADDTRESS like #{ipAddtress,jdbcType=VARCHAR} </if>
+<!--            <if test="startOperTime!=null || endOperTime!=null"> OPER_TIME between #{startOperTime,jdbcType=TIMESTAMP} and #{endOperTime,jdbcType=TIMESTAMP}</if>-->
+            <if test="ipAddtress!=null"> IP_ADDTRESS like #{ipAddtress,jdbcType=VARCHAR} </if>
             <if test="userId!=null"> and USER_ID like #{userId,jdbcType=BIGINT} </if>
             <if test="funcName!=null"> and FUNC_NAME like #{funcName,jdbcType=VARCHAR} </if>
             <if test="actionType!=null"> and ACTION_TYPE like #{actionType,jdbcType=VARCHAR}</if>

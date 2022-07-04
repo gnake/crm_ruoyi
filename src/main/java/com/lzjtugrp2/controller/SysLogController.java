@@ -1,5 +1,7 @@
 package com.lzjtugrp2.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lzjtugrp2.domain.SysLog;
 import com.lzjtugrp2.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +16,19 @@ import java.util.List;
 public class SysLogController {
     @Autowired
     private SysLogService sysLogService;
-    @GetMapping("/showLog")
+    @GetMapping("/syslog")
     public String show(Model model) {
         return "sysLogPage";
     }
     //分页查询
-    @GetMapping("/selectAllSysLoGPageQuery")
-    public String selectAllSysLoGPageQuery(Model model) {
-        List<SysLog> sysLogs = sysLogService.selectAllSysLoGPageQuery();
+    @GetMapping("/selectPageSysLog")
+    public PageInfo<SysLog> selectPageSysLog(Model model, int pageNum, int pageSize) {
+        //pageNum当前页；pageSize每页显示的数据数目
+        PageHelper.startPage(pageNum,pageSize);
+        List<SysLog> sysLogs = sysLogService.selectPageSysLog();
         System.out.println("sysLogs = " + sysLogs);
-        model.addAttribute("sysLogs",sysLogs);
-        return "sysLogPage";
+        //获得分页后的数据信息
+        return new PageInfo<>(sysLogs);
     }
     //根据输入进行多条件查询
     @GetMapping("/getSysLogsByMultipleConditions")
