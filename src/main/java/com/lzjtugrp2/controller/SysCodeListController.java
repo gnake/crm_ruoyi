@@ -30,11 +30,11 @@ public class SysCodeListController {
         return "updatesyscodelist";
     }
 
-    @GetMapping("/toupdatecodelist/{codeId}")
-    public String toupdateCodeList(Model model, @PathVariable Long codeId) {
+    @GetMapping("/toupdatecodelist")
+    public String toupdateCodeList(Model model, Long codeId) {
         SysCodelist codelist = sysCodeManagerService.selectById(codeId);
         model.addAttribute("codelist", codelist);
-        return "redirect:/toinsertcodelistView";
+        return "updatesyscodelist";
     }
 
     /**
@@ -49,6 +49,12 @@ public class SysCodeListController {
         return "syscodelist";
     }
 
+    @GetMapping("/delete/{codeid}")
+    public String deleteByPrimaryKey(@PathVariable long codeid) {
+        sysCodeManagerService.deleteByPrimaryKey(codeid);
+        return "redirect:/selectAll";
+    }
+
     /**
      * 新增数据
      *
@@ -61,9 +67,9 @@ public class SysCodeListController {
         return "redirect:/selectAll";
     }
 
-    @GetMapping("/delete/{codeid}")
-    public String deleteByPrimaryKey(@PathVariable long codeid) {
-        sysCodeManagerService.deleteByPrimaryKey(codeid);
+    @PostMapping("/updatecodelistById")
+    public String update(SysCodelist sysCodelist) {
+        sysCodeManagerService.updateByPrimaryKeySelective(sysCodelist);
         return "redirect:/selectAll";
     }
 }

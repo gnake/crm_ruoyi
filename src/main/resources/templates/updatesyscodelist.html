@@ -53,9 +53,8 @@
                 Form Elements
             </header>
             <div class="panel-body">
-                <form class="form-horizontal adminex-form" method="post" th:action="@{/toupdatecodelist}" >
-                    <!--/*@thymesVar id="codelist" type="com.lzjtugrp2.domain.SysCodelist"*/-->
-                    <input type="text" class="form-control" id="codeId" name="codeId" th:value="${codelist.codeId}">
+                <form class="form-horizontal adminex-form" method="post" th:action="@{/updatecodelistById}" >
+                    <input type="text" class="form-control" id="codeId" name="codeId" th:value="${codelist.codeId}" hidden="hidden">
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">编码标识</label>
                         <div class="col-sm-10">

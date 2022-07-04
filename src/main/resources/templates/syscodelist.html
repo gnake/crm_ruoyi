@@ -114,7 +114,7 @@
                                                 </span>
                                             </td>
                                             <td th:text="${codelist.codeSort}"></td>
-                                            <td><a class="edit" th:href="@{/toupdatecodelist/{codeid}(codeid=${codelist.codeId})}" methods="get">Edit</a></td>
+                                            <td><a class="edit" th:href="@{/toupdatecodelist(codeId=${codelist.codeId})}" methods="get">Edit</a></td>
                                             <td><a class="delete"
                                                    th:href="@{/delete/{codeid}(codeid=${codelist.codeId})}">Delete</a>
                                             </td>
