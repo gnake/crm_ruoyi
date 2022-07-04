@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -10,7 +10,7 @@
     <title> My Customer Table</title>
 
     <!--data table-->
-    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css"/>
 
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet">
@@ -30,7 +30,7 @@
     <!-- left side end-->
 
     <!-- main content start-->
-    <div class="main-content" >
+    <div class="main-content">
 
         <!-- header section start-->
         <div th:replace="~{commons/common::top}"></div>
@@ -48,7 +48,7 @@
                 <li>
                     <a href="#">Data Table</a>
                 </li>
-                <li class="active"> Editable Table </li>
+                <li class="active"> Editable Table</li>
             </ul>
         </div>
         <!-- page heading end-->
@@ -74,7 +74,8 @@
                                         </button>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">级别 <i class="fa fa-angle-down"></i>
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">级别 <i
+                                                class="fa fa-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu pull-right">
                                             <li><a href="#">重点</a></li>
@@ -83,7 +84,8 @@
                                         </ul>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">状态 <i class="fa fa-angle-down"></i>
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">状态 <i
+                                                class="fa fa-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu pull-right">
                                             <li><a href="#">初始化</a></li>
@@ -93,7 +95,8 @@
                                         </ul>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">沟通效果<i class="fa fa-angle-down"></i>
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">沟通效果<i
+                                                class="fa fa-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu pull-right">
                                             <li><a href="#">有意向</a></li>
@@ -107,17 +110,17 @@
                                 <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                     <thead>
                                     <tr>
-                                        <th>序号 </th>
-                                        <th>客户名称 </th>
+                                        <th>序号</th>
+                                        <th>客户名称</th>
                                         <th>级别</th>
                                         <th>拜访时间</th>
                                         <th>拜访人员</th>
                                         <th>沟通效果</th>
-                                        <th>状态 </th>
+                                        <th>状态</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="">
+                                    <tr class="" th:each="${custormerInfo}">
                                         <td>Jonathan</td>
                                         <td>Smith</td>
                                         <td>3455</td>
@@ -125,16 +128,6 @@
                                         <td><a class="edit" href="javascript:">Edit</a></td>
                                         <td><a class="delete" href="javascript:">Delete</a></td>
                                     </tr>
-                                    <tr class="">
-                                        <td>Mojela</td>
-                                        <td>Firebox</td>
-                                        <td>567</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:">Edit</a></td>
-                                        <td><a class="delete" href="javascript:">Delete</a></td>
-                                    </tr>
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -176,7 +169,7 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         EditableTable.init();
     });
 </script>
