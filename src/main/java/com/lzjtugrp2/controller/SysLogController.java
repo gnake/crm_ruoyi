@@ -48,4 +48,9 @@ public class SysLogController {
         model.addAttribute("sysLogDTO",sysLogDTO);
         return "sysLogPage";
     }
+    //修改日志
+    @GetMapping("/updatesyslog")
+    public String updatesyslog() {
+        return "sysLogPage";
+    }
 }

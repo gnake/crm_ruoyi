@@ -1,6 +1,9 @@
 package com.lzjtugrp2.mapper;
 
 import com.lzjtugrp2.domain.CustomerInfo;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author gsh
@@ -8,6 +11,7 @@ import com.lzjtugrp2.domain.CustomerInfo;
 * @createDate 2022-07-02 09:09:08
 * @Entity com.lzjtuGrp2.domain.CustomerInfo
 */
+@Mapper
 public interface CustomerInfoMapper {
 
     int deleteByPrimaryKey(long id);
@@ -22,4 +26,5 @@ public interface CustomerInfoMapper {
 
     int updateByPrimaryKey(CustomerInfo record);
 
+    List<CustomerInfo> selectAll();
 }

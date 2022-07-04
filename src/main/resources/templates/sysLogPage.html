@@ -60,12 +60,13 @@
         <thead>
         <tr>
             <th class="hidden-phone">序号</th>
-            <th>操作时间</th>
-            <th>所在地址</th>
+            <th class="hidden-phone">操作时间</th>
+            <th class="hidden-phone">所在地址</th>
             <th class="hidden-phone">用户标识</th>
             <th class="hidden-phone">用户名称</th>
             <th class="hidden-phone">功能名称</th>
             <th class="hidden-phone">操作类型</th>
+            <th class="hidden-phone">编辑</th>
         </tr>
         </thead>
         <tbody>
@@ -77,6 +78,7 @@
             <td class="center hidden-phone" th:text="${syslogdto.userName}">管理员</td>
             <td class="center hidden-phone" th:text="${syslogdto.funcName}">系统登录</td>
             <td class="center hidden-phone" th:text="${syslogdto.actionType}">login</td>
+            <td class="center hidden-phone"><a th:href="@{/updatesyslog}">edit</a> </td>
         </tr>
         </tbody>
 <!--        <tfoot>-->

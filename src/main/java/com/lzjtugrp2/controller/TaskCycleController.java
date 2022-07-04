@@ -8,17 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("task")
 public class TaskCycleController {
     @Autowired
     private TaskCycleService taskcycleService;
-    //存储预返回给页面的对象数据
-    private Map<String, Object> result = new HashMap<>();
 
     @GetMapping("/taskCycle")
     public String taskcycle(Model model){

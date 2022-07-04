@@ -3,7 +3,6 @@ package com.lzjtugrp2.controller;
 import com.lzjtugrp2.domain.SysCodelist;
 import com.lzjtugrp2.domain.dto.SysCodeListDTO;
 import com.lzjtugrp2.service.SysCodeListService;
-import com.lzjtugrp2.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +20,21 @@ public class SysCodeListController {
         return "syscodelist";
     }
 
-    @GetMapping("/toeditcodelist")
-    public String toEditCodeList() {
-        return "editsyscodelist";
+    @GetMapping("/toinsertcodelist")
+    public String toInsertCodeList() {
+        return "insertsyscodelist";
+    }
+
+    @GetMapping("/toinsertcodelistView")
+    public String toupdateCodeListView() {
+        return "updatesyscodelist";
+    }
+
+    @GetMapping("/toupdatecodelist")
+    public String toupdateCodeList(Model model, Long codeId) {
+        SysCodelist codelist = sysCodeManagerService.selectById(codeId);
+        model.addAttribute("codelist", codelist);
+        return "updatesyscodelist";
     }
 
     /**
@@ -38,22 +49,27 @@ public class SysCodeListController {
         return "syscodelist";
     }
 
+    @GetMapping("/delete/{codeid}")
+    public String deleteByPrimaryKey(@PathVariable long codeid) {
+        sysCodeManagerService.deleteByPrimaryKey(codeid);
+        return "redirect:/selectAll";
+    }
+
     /**
      * 新增数据
      *
      * @param sysCodelist 实体对象
      * @return 新增结果
      */
-    @RequestMapping("/insertCodelist")
-    public ResultVO insert(@RequestBody SysCodelist sysCodelist) {
+    @PostMapping("/insertCodelist")
+    public String insert(SysCodelist sysCodelist) {
         sysCodeManagerService.insert(sysCodelist);
-        return null;
+        return "redirect:/selectAll";
     }
 
-    @GetMapping("/delete/{codeid}")
-    @ResponseBody
-    public String deleteByPrimaryKey(@PathVariable long codeid) {
-        sysCodeManagerService.deleteByPrimaryKey(codeid);
-        return "syscodelist";
+    @PostMapping("/updatecodelistById")
+    public String update(SysCodelist sysCodelist) {
+        sysCodeManagerService.updateByPrimaryKeySelective(sysCodelist);
+        return "redirect:/selectAll";
     }
 }
