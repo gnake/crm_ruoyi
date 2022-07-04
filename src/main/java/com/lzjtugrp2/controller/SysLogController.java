@@ -30,17 +30,19 @@ public class SysLogController {
     @PostMapping("/insertSysLog")
     public String insertSysLog(SysLog sysLog) {
         sysLogService.insertSysLog(sysLog);
-        return "redirect:sysLogPage";
+        return "redirect:/syslog";
     }
     @GetMapping("/toupdatesyslog")
     public String toupdatesyslog() {
         return "updatesyslog";
     }
-    @GetMapping("/updateSysLog")
+
+    @PostMapping("/updateSysLog")
     public String updateSysLog(SysLog sysLog) {
         sysLogService.updateSysLog(sysLog);
-        return "redirect:sysLogPage";
+        return "redirect:/syslog";
     }
+
     //分页查询
     @GetMapping("/selectPageSysLog")
     public PageInfo<SysLogDTO> selectPageSysLog(Model model, int pageNum, int pageSize) {
@@ -65,11 +67,6 @@ public class SysLogController {
         SysLogDTO sysLogDTO = sysLogService.selectByPrimaryKey(id);
         System.out.println("sysLogDTO = " + sysLogDTO);
         model.addAttribute("sysLogDTO",sysLogDTO);
-        return "sysLogPage";
-    }
-    //修改日志
-    @GetMapping("/updatesyslog")
-    public String updatesyslog() {
         return "sysLogPage";
     }
 }
