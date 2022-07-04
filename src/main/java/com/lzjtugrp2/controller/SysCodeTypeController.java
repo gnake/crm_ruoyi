@@ -2,7 +2,6 @@ package com.lzjtugrp2.controller;
 
 import com.lzjtugrp2.domain.SysCodetype;
 import com.lzjtugrp2.service.SysCodetypeService;
-import com.lzjtugrp2.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +37,6 @@ public class SysCodeTypeController {
     /*
     * 删除一项数据*/
     @GetMapping("/delete/{typeid}")
-    @ResponseBody
     public String deleteByPrimaryKey(@PathVariable long typeid){
         sysCodetypeService.deleteByPrimaryKey(typeid);
         return "redirect:/selectAllCodetype";
