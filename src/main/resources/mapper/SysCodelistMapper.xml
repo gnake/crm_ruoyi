@@ -79,4 +79,8 @@
         where   CODE_ID = #{codeId,jdbcType=BIGINT} 
     </update>
 
+    <select id="selectById" resultType="com.lzjtugrp2.domain.SysCodelist" parameterType="long">
+        select * from CRM_SYS_CODELIST where CODE_ID=#{codeId,jdbcType=BIGINT}
+    </select>
+
 </mapper>

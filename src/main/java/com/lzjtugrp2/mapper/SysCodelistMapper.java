@@ -28,4 +28,6 @@ public interface SysCodelistMapper {
 
     int updateByPrimaryKey(SysCodelist record);
 
+    SysCodelist selectById(Long codeId);
+
 }
