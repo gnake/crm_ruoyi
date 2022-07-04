@@ -3,6 +3,7 @@ package com.lzjtugrp2.mapper;
 import com.lzjtugrp2.domain.SysLog;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface SysLogMapper {
 
     int updateByPrimaryKey(SysLog record);
 
-    List<SysLog> selectPageSysLog();
-
     List<SysLog> getSysLogsByMultipleConditions(Date startOperTime, Date endOperTime, String ipAddtress, Long userId, String funcName, String actionType);
+
+    ArrayList<SysLog> selectAllSysLog();
 }

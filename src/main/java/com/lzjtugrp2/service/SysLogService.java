@@ -1,6 +1,7 @@
 package com.lzjtugrp2.service;
 
 import com.lzjtugrp2.domain.SysLog;
+import com.lzjtugrp2.domain.dto.SysLogDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -11,4 +12,6 @@ public interface SysLogService {
     SysLog selectByPrimaryKey(Long id);
 
     List<SysLog> getSysLogsByMultipleConditions(Date startOperTime, Date endOperTime, String ipAddtress, Long userId, String funcName, String actionType);
+
+    List<SysLogDTO> selectAllSysLogDTO();
 }

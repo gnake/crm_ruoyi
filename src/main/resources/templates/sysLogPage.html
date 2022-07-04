@@ -34,6 +34,10 @@
     <!-- main content start-->
     <div class="main-content" >
 
+<!--        &lt;!&ndash; header section start&ndash;&gt;-->
+<!--        <div th:replace="~{commons/common::top}"></div>-->
+<!--        &lt;!&ndash; header section end&ndash;&gt;-->
+
         <!--body wrapper start-->
         <div class="wrapper">
         <div class="row">
@@ -61,14 +65,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="gradeX" th:each="syslog : ${sysLogs}">
-            <td th:text="${syslog.sysId}">1</td>
-            <td th:text="${syslog.operTime}">2022-07-03</td>
-            <td th:text="${syslog.ipAddtress}">192.168.12</td>
-            <td class="center hidden-phone" th:text="${syslog.userId}">admin</td>
-            <td class="center hidden-phone" th:text="${syslog.userName}">管理员</td>
-            <td class="center hidden-phone" th:text="${syslog.funcName}">系统登录</td>
-            <td class="center hidden-phone" th:text="${syslog.actionType}">login</td>
+        <tr class="gradeX" th:each="syslogdto : ${sysLogDTOS}">
+            <td th:text="${syslogdto.sysId}">1</td>
+            <td th:text="${syslogdto.operTime}">2022-07-03</td>
+            <td th:text="${syslogdto.ipAddtress}">192.168.12</td>
+            <td class="center hidden-phone" th:text="${syslogdto.userCode}">admin</td>
+            <td class="center hidden-phone" th:text="${syslogdto.userName}">管理员</td>
+            <td class="center hidden-phone" th:text="${syslogdto.funcName}">系统登录</td>
+            <td class="center hidden-phone" th:text="${syslogdto.actionType}">login</td>
         </tr>
         </tbody>
 <!--        <tfoot>-->
