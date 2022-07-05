@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzjtugrp2.mapper.CustomerLoginMapper">
+
+    <resultMap id="BaseResultMap" type="com.lzjtugrp2.domain.SecurityUser">
+        <id property="userId" column="USER_ID" jdbcType="BIGINT"/>
+        <result property="userName" column="USER_NAME" jdbcType="BIGINT"/>
+        <result property="userCode" column="USER_CODE" jdbcType="VARCHAR"/>
+        <result property="userPwd" column="USER_PWD" jdbcType="VARCHAR"/>
+        <result property="userSex" column="USER_SEX" jdbcType="INTEGER"/>
+        <result property="userDesc" column="USER_DESC" jdbcType="VARCHAR"/>
+        <result property="userState" column="USER_STATE" jdbcType="VARCHAR"/>
+        <result property="userMail" column="USER_MAIL" jdbcType="VARCHAR"/>
+        <result property="userSort" column="USER_SORT" jdbcType="INTEGER"/>
+        <result property="userPhone" column="USER_PHONE" jdbcType="VARCHAR"/>
+        <result property="displayCount" column="DISPLAY_COUNT" jdbcType="INTEGER"/>
+        <result property="grpId" column="GRP_ID" jdbcType="BIGINT"/>
+
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        USER_ID,USER_NAME,USER_CODE,
+        USER_PWD,USER_SEX,USER_DESC,
+        USER_STATE,USER_MAIL,USER_SORT,
+        USER_PHONE,DISPLAY_COUNT,GRP_ID
+    </sql>
+
+    <select id="findByUcodeAndPwd" resultType="com.wm.pojo.SecurityUser">
+    select * from CRM_CUSTOMER_INFO
+    <where>
+        <if test ="true"> 1=1 </if>
+        <if test ="usercode!=null">
+            and USER_CODE = #{usercode}
+        </if>
+        <if test="password!=null">
+            and USER_PWD = #{password}
+        </if>
+    </where>
+    </select>
+
+</mapper>
