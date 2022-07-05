@@ -2,11 +2,18 @@ server:
   port: 8082
 spring:
   datasource:
-    #    连接docker数据库
+    #  连接docker数据库
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
     url: jdbc:mysql://172.19.0.2/CRM
+    #  连接redis
+  redis:
+    database: 0
+    host: 172.17.0.2
+    port: 6379
+    password: # 如果未单独配置默认为空即可
+    timeout: 1000
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
