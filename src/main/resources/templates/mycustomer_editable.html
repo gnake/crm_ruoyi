@@ -121,14 +121,13 @@
                                     </thead>
                                     <tbody>
                                     <tr class="" th:each="item : ${custormerInfo}">
-                                        <td th:text="${item.custId}">Jonathan</td>
-                                        <td th:text="${item.custName}">Smith</td>
-                                        <td th:text="${item.custLevel}">3455</td>
-                                        <td class="center" th:text="${item.custVisitAgainTime}">Lorem ipsume</td>
-<!--                                        <td th:text="${item}">3455</td>-->
-<!--                                        <td th:text="${item}">3455</td>-->
+                                        <td th:text="${item.custId}"></td>
+                                        <td th:text="${item.custName}"></td>
+                                        <td th:text="${item.custLevel}"></td>
+                                        <td class="center" th:text="${item.custVisitAgainTime}"></td>
+                                        <td class="center" th:text="${item.custName}"></td>
+                                        <td class="center" th:text="${item.custProgressState}"></td>
                                         <td th:text="${item.custState}">3455</td>
-
                                         <td><a class="edit" href="#">Edit</a></td>
                                         <td><a class="delete" href="#">Delete</a></td>
                                     </tr>
