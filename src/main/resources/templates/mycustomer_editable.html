@@ -120,16 +120,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="" th:each="item : ${custormerInfo}">
-                                        <td th:text="${item.custId}"></td>
-                                        <td th:text="${item.custName}"></td>
-                                        <td th:text="${item.custLevel}"></td>
-                                        <td class="center" th:text="${item.custVisitAgainTime}"></td>
-                                        <td class="center" th:text="${item.custName}"></td>
-                                        <td class="center" th:text="${item.custProgressState}"></td>
-                                        <td th:text="${item.custState}">3455</td>
-                                        <td><a class="edit" href="#">Edit</a></td>
-                                        <td><a class="delete" href="#">Delete</a></td>
+                                    <tr class="" th:each="customerInfo,iterStat:${custormerInfos}">
+                                        <td th:text="${iterStat.index}">Jonathan</td>
+                                        <td th:text="${custormerInfo.custName}">Jonathan</td>
+                                        <td th:text="${customerInfo.custLevel}"></td>
+                                        <td class="center">Lorem ipsume</td>
+                                        <td><a class="edit" href="javascript:">Edit</a></td>
+                                        <td><a class="delete" href="javascript:">Delete</a></td>
                                     </tr>
                                     </tbody>
                                 </table>

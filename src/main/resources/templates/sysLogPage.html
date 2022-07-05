@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="ThemeBucket">
-  <link rel="shortcut icon" href="#" type="image/png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>Dynamic Table</title>
+    <title>Dynamic Table</title>
 
-  <!--dynamic table-->
-  <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-  <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-  <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+    <!--dynamic table-->
+    <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet"/>
+    <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css"/>
 
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <script src="js/respond.min.js"></script>
-  <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body class="sticky-header">
@@ -30,9 +30,9 @@
     <!-- left side start-->
     <div th:replace="~{commons/common::left}"></div>
     <!-- left side end-->
-    
+
     <!-- main content start-->
-    <div class="main-content" >
+    <div class="main-content">
 
         <!-- header section start-->
         <div th:replace="~{commons/common::top}"></div>
@@ -40,68 +40,70 @@
 
         <!--body wrapper start-->
         <div class="wrapper">
-        <div class="row">
-        <div class="col-sm-12">
-        <section class="panel">
-        <header class="panel-heading">
-            当前功能：<a href="#">客户管理系统</a>-- >系统管理--><a href="syslog">系统日志</a>
-            <span class="tools pull-right">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Dynamic Table
+                            <span class="tools pull-right">
                 <a href="javascript:" class="fa fa-chevron-down"></a>
                 <a href="javascript:" class="fa fa-times"></a>
              </span>
-        </header>
-        <div class="panel-body">
-        <div class="adv-table">
-            <div class="btn-group">
-                <a th:href="@{/toinsertsyslog}" methods="get"><button id="editable-sample_new" class="btn btn-primary">
-                    Add New <i class="fa fa-plus"></i>
-                </button></a>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table">
+                                <div class="btn-group">
+                                    <a th:href="@{/toinsertsyslog}" methods="get">
+                                        <button id="editable-sample_new" class="btn btn-primary">
+                                            Add New <i class="fa fa-plus"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <!--            <div>-->
+                                <!--                <button>查看</button>-->
+                                <!--                <button>刷新</button>-->
+                                <!--            </div>-->
+                                <table class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-phone">序号</th>
+                                        <th>操作时间</th>
+                                        <th class="hidden-phone">所在地址</th>
+                                        <th class="hidden-phone">用户标识</th>
+                                        <th class="hidden-phone">用户名称</th>
+                                        <th class="hidden-phone">功能名称</th>
+                                        <th class="hidden-phone">操作类型</th>
+                                        <th class="hidden-phone">编辑</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeX" th:each="syslogdto : ${sysLogDTOS}">
+                                        <td th:text="${syslogdto.sysId}">1</td>
+                                        <td th:text="${syslogdto.operTime}">2022-07-03</td>
+                                        <td th:text="${syslogdto.ipAddtress}">192.168.12</td>
+                                        <td class="center hidden-phone" th:text="${syslogdto.userCode}">admin</td>
+                                        <td class="center hidden-phone" th:text="${syslogdto.userName}">管理员</td>
+                                        <td class="center hidden-phone" th:text="${syslogdto.funcName}">系统登录</td>
+                                        <td class="center hidden-phone" th:text="${syslogdto.actionType}">login</td>
+                                        <td class="center hidden-phone"><a th:href="@{/toupdatesyslog}">Edit</a></td>
+                                        <!--            <td><a th:href="@{/delete/{sysId}/(sysId=${sysLogDTO.sysId})}">Delete</a></td>-->
+                                    </tr>
+                                    </tbody>
+                                    <!--        <tfoot>-->
+                                    <!--        <tr>-->
+                                    <!--            <th>Rendering engine</th>-->
+                                    <!--            <th>Browser</th>-->
+                                    <!--            <th>Platform(s)</th>-->
+                                    <!--            <th class="hidden-phone">Engine version</th>-->
+                                    <!--            <th class="hidden-phone">CSS grade</th>-->
+                                    <!--        </tr>-->
+                                    <!--        </tfoot>-->
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
-<!--            <div>-->
-<!--                <button>查看</button>-->
-<!--                <button>刷新</button>-->
-<!--            </div>-->
-        <table  class="display table table-bordered table-striped" id="dynamic-table">
-        <thead>
-        <tr>
-            <th class="hidden-phone">序号</th>
-            <th>操作时间</th>
-            <th class="hidden-phone">所在地址</th>
-            <th class="hidden-phone">用户标识</th>
-            <th class="hidden-phone">用户名称</th>
-            <th class="hidden-phone">功能名称</th>
-            <th class="hidden-phone">操作类型</th>
-            <th class="hidden-phone">编辑</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="gradeX" th:each="syslogdto : ${sysLogDTOS}">
-            <td th:text="${syslogdto.sysId}">1</td>
-            <td th:text="${syslogdto.operTime}">2022-07-03</td>
-            <td th:text="${syslogdto.ipAddtress}">192.168.12</td>
-            <td class="center hidden-phone" th:text="${syslogdto.userCode}">admin</td>
-            <td class="center hidden-phone" th:text="${syslogdto.userName}">管理员</td>
-            <td class="center hidden-phone" th:text="${syslogdto.funcName}">系统登录</td>
-            <td class="center hidden-phone" th:text="${syslogdto.actionType}">login</td>
-            <td class="center hidden-phone"><a th:href="@{/toupdatesyslog}">Edit</a></td>
-<!--            <td><a th:href="@{/delete/{sysId}/(sysId=${sysLogDTO.sysId})}">Delete</a></td>-->
-        </tr>
-        </tbody>
-<!--        <tfoot>-->
-<!--        <tr>-->
-<!--            <th>Rendering engine</th>-->
-<!--            <th>Browser</th>-->
-<!--            <th>Platform(s)</th>-->
-<!--            <th class="hidden-phone">Engine version</th>-->
-<!--            <th class="hidden-phone">CSS grade</th>-->
-<!--        </tr>-->
-<!--        </tfoot>-->
-        </table>
-        </div>
-        </div>
-        </section>
-        </div>
-        </div>
         </div>
         <!--body wrapper end-->
 

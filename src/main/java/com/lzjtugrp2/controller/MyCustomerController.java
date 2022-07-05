@@ -22,7 +22,7 @@ public class MyCustomerController {
     @GetMapping("/selectAllCustomer")
     public String selectAll(Model model) {
         List<CustomerInfo> customerInfos = myCustomerService.selectAll();
-        model.addAttribute("custormerInfo", customerInfos);
+        model.addAttribute("custormerInfos", customerInfos);
         return "mycustomer_editable";
     }
 }

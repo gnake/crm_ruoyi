@@ -1,5 +1,6 @@
 package com.lzjtugrp2.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lzjtugrp2.domain.SecurityUser;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.lzjtuGrp2.domain.SecurityUser
 */
 @Mapper
-public interface SecurityUserMapper {
+public interface SecurityUserMapper extends BaseMapper<SecurityUser> {
 
     int deleteByPrimaryKey(Long id);
 

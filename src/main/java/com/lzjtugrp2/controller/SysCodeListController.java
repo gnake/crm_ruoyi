@@ -49,7 +49,7 @@ public class SysCodeListController {
         return "syscodelist";
     }
 
-    @GetMapping("/delete/{codeid}")
+    @GetMapping("/deletecodelistbyid/{codeid}")
     public String deleteByPrimaryKey(@PathVariable long codeid) {
         sysCodeManagerService.deleteByPrimaryKey(codeid);
         return "redirect:/selectAll";

@@ -31,7 +31,6 @@ public class SysCodeListServiceImpl implements SysCodeListService {
             sysCodeListDTO.setTypeIdent(sysCodetype.getTypeIdent());
             sysCodeListDTO.setCodeValue(sysCodelist.getCodeValue());
             sysCodeListDTO.setCodeSort(sysCodelist.getCodeSort());
-            sysCodeListDTO.setCodeValue(sysCodetype.getTypeIdent());
             sysCodeListDTO.setTypeName(sysCodetype.getTypeName());
             sysCodeListDTO.setIsEffective(sysCodetype.getIsEffective());
             sysCodeListDTO.setIsEditable(sysCodetype.getIsEditable());

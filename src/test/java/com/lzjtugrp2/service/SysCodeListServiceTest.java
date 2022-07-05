@@ -14,9 +14,9 @@ public class SysCodeListServiceTest {
     @Autowired
     private SysCodeListService codeListService;
 
-    @Test
-    public void selectAll() {
-        List<SysCodeListDTO> sysCodelists = codeListService.selectAll();
-        System.out.println(sysCodelists);
-    }
+//    @Test
+//    public void selectAll() {
+//        List<SysCodeListDTO> sysCodelists = codeListService.selectAll();
+//        System.out.println(sysCodelists);
+//    }
 }
