@@ -24,15 +24,15 @@
 
 <div class="container">
 
-    <form class="form-signin" action="/login" method="post">
+    <form class="form-signin" action="" method="post">
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">登录</h1>
             <img src="images/login-logo.png" alt=""/>
         </div>
         <div class="login-wrap">
             <p th:text="${error}" style="color: red"/>
-            <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
-            <input type="password" class="form-control" placeholder="密码" name="password" >
+            <input type="text" class="form-control" placeholder="用户名" autofocus name="userCode">
+            <input type="password" class="form-control" placeholder="密码" name="userPwd" >
 
             <button class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>

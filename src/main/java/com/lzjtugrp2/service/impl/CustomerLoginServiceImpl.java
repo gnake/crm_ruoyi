@@ -11,7 +11,7 @@ public class CustomerLoginServiceImpl implements CustomerLoginService{
     @Autowired
     private CustomerLoginMapper customerLoginMapper;
 
-    public boolean findUserByDetail(String usercode,String password){
+    public boolean findByUcodeAndPwd(String usercode,String password){
         SecurityUser securityUser = customerLoginMapper.findByUcodeAndPwd(usercode,password);
         if(securityUser == null){
             return false;
