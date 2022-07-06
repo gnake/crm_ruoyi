@@ -1,16 +1,5 @@
 server:
   port: 8081
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: root
-#    password: 123456
-#    url: jdbc:mysql://8.142.91.137:3306/CRM
-#  redis:
-#    database: 0
-#    host: 8.142.91.137
-#    port: 6379
-#    password: 123456
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
