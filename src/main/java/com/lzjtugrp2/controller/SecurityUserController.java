@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 public class SecurityUserController {
     private SecurityUserService securityUserService;
 
-    public void login(SecurityUser securityUser) {
-        try {
-            securityUserService.login(securityUser);
-        } catch (CRMException e) {
-        }
-    }
+//    public void login(SecurityUser securityUser) {
+//        try {
+//            securityUserService.login(securityUser);
+//        } catch (CRMException e) {
+//        }
+//    }
 }

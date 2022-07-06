@@ -19,12 +19,13 @@ public class CustomerLoginController {
     }
 
     @PostMapping("/login")
-    public String getIndex(@RequestBody SecurityUser user, HttpSession httpSession) throws Exception {
+    public String getIndex(SecurityUser user, HttpSession httpSession) throws Exception {
         SecurityUser loginUser = new SecurityUser();
-
+        System.out.println("\"1\" = " + "1");
         boolean userIsCurrent = customerLoginService.findByUcodeAndPwd(user.getUserCode(), user.getUserPwd());
         loginUser.setUserCode(user.getUserCode());
         loginUser.setUserPwd(user.getUserPwd());
+        System.out.println("loginUser = " + loginUser);
         if (userIsCurrent) { //当前登录的用户存在
             httpSession.setAttribute("loginUser",loginUser);
             return "redirect:/toIndex";
