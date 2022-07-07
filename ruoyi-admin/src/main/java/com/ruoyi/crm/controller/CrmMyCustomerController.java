@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.crm.domain.SysMyCustomer;
-import com.ruoyi.crm.service.ISysMyCustomerService;
+import com.ruoyi.crm.domain.CrmMyCustomer;
+import com.ruoyi.crm.service.ICrmMyCustomerService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -27,12 +27,12 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @Controller
 @RequestMapping("/crm/mycustomer")
-public class SysMyCustomerController extends BaseController
+public class CrmMyCustomerController extends BaseController
 {
     private final String prefix = "crm/mycustomer";
 
     @Autowired
-    private ISysMyCustomerService sysMyCustomerService;
+    private ICrmMyCustomerService crmMyCustomerService;
 
     @RequiresPermissions("crm:mycustomer:view")
     @GetMapping()
@@ -47,10 +47,10 @@ public class SysMyCustomerController extends BaseController
     @RequiresPermissions("crm:mycustomer:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysMyCustomer sysMyCustomer)
+    public TableDataInfo list(CrmMyCustomer crmMyCustomer)
     {
         startPage();
-        List<SysMyCustomer> list = sysMyCustomerService.selectSysMyCustomerList(sysMyCustomer);
+        List<CrmMyCustomer> list = crmMyCustomerService.selectCrmMyCustomerList(crmMyCustomer);
         return getDataTable(list);
     }
 
@@ -61,10 +61,10 @@ public class SysMyCustomerController extends BaseController
     @Log(title = "我的客户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(SysMyCustomer sysMyCustomer)
+    public AjaxResult export(CrmMyCustomer crmMyCustomer)
     {
-        List<SysMyCustomer> list = sysMyCustomerService.selectSysMyCustomerList(sysMyCustomer);
-        ExcelUtil<SysMyCustomer> util = new ExcelUtil<SysMyCustomer>(SysMyCustomer.class);
+        List<CrmMyCustomer> list = crmMyCustomerService.selectCrmMyCustomerList(crmMyCustomer);
+        ExcelUtil<CrmMyCustomer> util = new ExcelUtil<CrmMyCustomer>(CrmMyCustomer.class);
         return util.exportExcel(list, "我的客户数据");
     }
 
@@ -84,9 +84,9 @@ public class SysMyCustomerController extends BaseController
     @Log(title = "我的客户", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysMyCustomer sysMyCustomer)
+    public AjaxResult addSave(CrmMyCustomer crmMyCustomer)
     {
-        return toAjax(sysMyCustomerService.insertSysMyCustomer(sysMyCustomer));
+        return toAjax(crmMyCustomerService.insertCrmMyCustomer(crmMyCustomer));
     }
 
     /**
@@ -96,8 +96,8 @@ public class SysMyCustomerController extends BaseController
     @GetMapping("/edit/{custId}")
     public String edit(@PathVariable("custId") Long custId, ModelMap mmap)
     {
-        SysMyCustomer sysMyCustomer = sysMyCustomerService.selectSysMyCustomerByCustId(custId);
-        mmap.put("sysMyCustomer", sysMyCustomer);
+        CrmMyCustomer crmMyCustomer = crmMyCustomerService.selectCrmMyCustomerByCustId(custId);
+        mmap.put("crmMyCustomer", crmMyCustomer);
         return prefix + "/edit";
     }
 
@@ -108,9 +108,9 @@ public class SysMyCustomerController extends BaseController
     @Log(title = "我的客户", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SysMyCustomer sysMyCustomer)
+    public AjaxResult editSave(CrmMyCustomer crmMyCustomer)
     {
-        return toAjax(sysMyCustomerService.updateSysMyCustomer(sysMyCustomer));
+        return toAjax(crmMyCustomerService.updateCrmMyCustomer(crmMyCustomer));
     }
 
     /**
@@ -122,6 +122,6 @@ public class SysMyCustomerController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(sysMyCustomerService.deleteSysMyCustomerByCustIds(ids));
+        return toAjax(crmMyCustomerService.deleteCrmMyCustomerByCustIds(ids));
     }
 }

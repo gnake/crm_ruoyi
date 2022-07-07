@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <th:block th:include="include :: header('新增我的客户')" />
-    <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -15,48 +14,6 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">行业：</label>
-                <div class="col-sm-8">
-                    <input name="custIndustry" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">省份：</label>
-                <div class="col-sm-8">
-                    <input name="custProvince" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">城市：</label>
-                <div class="col-sm-8">
-                    <input name="custCity" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">地址：</label>
-                <div class="col-sm-8">
-                    <input name="custAddress" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">规模：</label>
-                <div class="col-sm-8">
-                    <input name="custScale" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">性质：</label>
-                <div class="col-sm-8">
-                    <input name="custNature" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">简要介绍：</label>
-                <div class="col-sm-8">
-                    <textarea name="custIntroduce" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group">    
                 <label class="col-sm-3 control-label">状态：</label>
                 <div class="col-sm-8">
                     <select name="custState" class="form-control m-b" th:with="type=${@dict.getType('sys_cust_precedence')}">
@@ -65,83 +22,11 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">创建人：</label>
-                <div class="col-sm-8">
-                    <input name="custCreateId" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">创建时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="custCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">提交人：</label>
-                <div class="col-sm-8">
-                    <input name="custSubmitId" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">提交时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="custSubmitTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">确认人：</label>
-                <div class="col-sm-8">
-                    <input name="custConfirmId" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">确认时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="custConfirmTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">进展状态：</label>
-                <div class="col-sm-8">
-                    <input name="custProgressState" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
                 <label class="col-sm-3 control-label">级别：</label>
                 <div class="col-sm-8">
                     <select name="custLevel" class="form-control m-b" th:with="type=${@dict.getType('sys_cust_level')}">
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司网站：</label>
-                <div class="col-sm-8">
-                    <input name="custCompanyWeb" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">潜在客户：</label>
-                <div class="col-sm-8">
-                    <input name="orgId" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">计划拜访时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="custVisitAgainTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
                 </div>
             </div>
             <h4 class="form-header h4">我的客户信息</h4>
@@ -157,7 +42,6 @@
         </form>
     </div>
     <th:block th:include="include :: footer" />
-    <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
         var prefix = ctx + "crm/mycustomer"
         var visitEffectDatas = [[${@dict.getType('sys_visit_effect')}]];
@@ -170,30 +54,6 @@
                 $.operate.save(prefix + "/add", $('#form-mycustomer-add').serialize());
             }
         }
-
-        $("input[name='custCreateTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='custSubmitTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='custConfirmTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='custVisitAgainTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
 
         $(function() {
             var options = {

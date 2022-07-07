@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.crm.mapper.SysMyCustomerMapper">
+<mapper namespace="com.ruoyi.crm.mapper.CrmMyCustomerMapper">
     
-    <resultMap type="SysMyCustomer" id="SysMyCustomerResult">
+    <resultMap type="CrmMyCustomer" id="CrmMyCustomerResult">
         <result property="custId"    column="CUST_ID"    />
         <result property="custName"    column="CUST_NAME"    />
         <result property="custIndustry"    column="CUST_INDUSTRY"    />
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="custVisitAgainTime"    column="CUST_VISIT_AGAIN_TIME"    />
     </resultMap>
 
-    <resultMap id="SysMyCustomerCrmVisitResult" type="SysMyCustomer" extends="SysMyCustomerResult">
+    <resultMap id="CrmMyCustomerCrmVisitResult" type="CrmMyCustomer" extends="CrmMyCustomerResult">
         <collection property="crmVisitList" notNullColumn="sub_VISIT_ID" javaType="java.util.List" resultMap="CrmVisitResult" />
     </resultMap>
 
@@ -56,12 +56,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="visitConfirmTime"    column="sub_VISIT_CONFIRM_TIME"    />
     </resultMap>
 
-    <sql id="selectSysMyCustomerVo">
+    <sql id="selectCrmMyCustomerVo">
         select CUST_ID, CUST_NAME, CUST_INDUSTRY, CUST_PROVINCE, CUST_CITY, CUST_ADDRESS, CUST_SCALE, CUST_NATURE, CUST_INTRODUCE, CUST_STATE, CUST_CREATE_ID, CUST_CREATE_TIME, CUST_SUBMIT_ID, CUST_SUBMIT_TIME, CUST_CONFIRM_ID, CUST_CONFIRM_TIME, CUST_PROGRESS_STATE, CUST_LEVEL, CUST_COMPANY_WEB, ORG_ID, CUST_VISIT_AGAIN_TIME from CRM_CUSTOMER_INFO
     </sql>
 
-    <select id="selectSysMyCustomerList" parameterType="SysMyCustomer" resultMap="SysMyCustomerResult">
-        <include refid="selectSysMyCustomerVo"/>
+    <select id="selectCrmMyCustomerList" parameterType="CrmMyCustomer" resultMap="CrmMyCustomerResult">
+        <include refid="selectCrmMyCustomerVo"/>
         <where>  
             <if test="custName != null  and custName != ''"> and CUST_NAME like concat('%', #{custName}, '%')</if>
             <if test="custState != null  and custState != ''"> and CUST_STATE = #{custState}</if>
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectSysMyCustomerByCustId" parameterType="Long" resultMap="SysMyCustomerCrmVisitResult">
+    <select id="selectCrmMyCustomerByCustId" parameterType="Long" resultMap="CrmMyCustomerCrmVisitResult">
         select a.CUST_ID, a.CUST_NAME, a.CUST_INDUSTRY, a.CUST_PROVINCE, a.CUST_CITY, a.CUST_ADDRESS, a.CUST_SCALE, a.CUST_NATURE, a.CUST_INTRODUCE, a.CUST_STATE, a.CUST_CREATE_ID, a.CUST_CREATE_TIME, a.CUST_SUBMIT_ID, a.CUST_SUBMIT_TIME, a.CUST_CONFIRM_ID, a.CUST_CONFIRM_TIME, a.CUST_PROGRESS_STATE, a.CUST_LEVEL, a.CUST_COMPANY_WEB, a.ORG_ID, a.CUST_VISIT_AGAIN_TIME,
  b.VISIT_ID as sub_VISIT_ID, b.VISIT_TYPE as sub_VISIT_TYPE, b.VISIT_CUST_ID as sub_VISIT_CUST_ID, b.VISIT_RECEPTION_NAME as sub_VISIT_RECEPTION_NAME, b.VISIT_RECEPTION_SEX as sub_VISIT_RECEPTION_SEX, b.VISIT_RECEPTION_JOB as sub_VISIT_RECEPTION_JOB, b.VISIT_RECEPTION_PHONE as sub_VISIT_RECEPTION_PHONE, b.VISIT_USER_ID as sub_VISIT_USER_ID, b.VISIT_PEER_NAME as sub_VISIT_PEER_NAME, b.VISIT_DATE as sub_VISIT_DATE, b.VISIT_CONTENT as sub_VISIT_CONTENT, b.VISIT_CUST_FOCUS as sub_VISIT_CUST_FOCUS, b.VISIT_EFFECT as sub_VISIT_EFFECT, b.VISIT_IMPROVEMENT as sub_VISIT_IMPROVEMENT, b.VISIT_COST as sub_VISIT_COST, b.VISIT_COST_EXPLAIN as sub_VISIT_COST_EXPLAIN, b.VISIT_STATE as sub_VISIT_STATE, b.VISIT_FILL_ID as sub_VISIT_FILL_ID, b.VISIT_FILL_TIME as sub_VISIT_FILL_TIME, b.VISIT_CONFIRM_ID as sub_VISIT_CONFIRM_ID, b.VISIT_CONFIRM_TIME as sub_VISIT_CONFIRM_TIME
         from CRM_CUSTOMER_INFO a
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where a.CUST_ID = #{custId}
     </select>
         
-    <insert id="insertSysMyCustomer" parameterType="SysMyCustomer">
+    <insert id="insertCrmMyCustomer" parameterType="CrmMyCustomer">
         insert into CRM_CUSTOMER_INFO
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="custId != null">CUST_ID,</if>
@@ -127,7 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSysMyCustomer" parameterType="SysMyCustomer">
+    <update id="updateCrmMyCustomer" parameterType="CrmMyCustomer">
         update CRM_CUSTOMER_INFO
         <trim prefix="SET" suffixOverrides=",">
             <if test="custName != null">CUST_NAME = #{custName},</if>
@@ -154,11 +154,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where CUST_ID = #{custId}
     </update>
 
-    <delete id="deleteSysMyCustomerByCustId" parameterType="Long">
+    <delete id="deleteCrmMyCustomerByCustId" parameterType="Long">
         delete from CRM_CUSTOMER_INFO where CUST_ID = #{custId}
     </delete>
 
-    <delete id="deleteSysMyCustomerByCustIds" parameterType="String">
+    <delete id="deleteCrmMyCustomerByCustIds" parameterType="String">
         delete from CRM_CUSTOMER_INFO where CUST_ID in 
         <foreach item="custId" collection="array" open="(" separator="," close=")">
             #{custId}

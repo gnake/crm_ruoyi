@@ -14,7 +14,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author tkh
  * @date 2022-07-07
  */
-public class SysMyCustomer extends BaseEntity
+public class CrmMyCustomer extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

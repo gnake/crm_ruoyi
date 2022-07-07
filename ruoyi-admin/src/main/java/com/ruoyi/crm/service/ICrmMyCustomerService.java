@@ -1,7 +1,7 @@
 package com.ruoyi.crm.service;
 
 import java.util.List;
-import com.ruoyi.crm.domain.SysMyCustomer;
+import com.ruoyi.crm.domain.CrmMyCustomer;
 
 /**
  * 我的客户Service接口
@@ -9,7 +9,7 @@ import com.ruoyi.crm.domain.SysMyCustomer;
  * @author tkh
  * @date 2022-07-07
  */
-public interface ISysMyCustomerService 
+public interface ICrmMyCustomerService 
 {
     /**
      * 查询我的客户
@@ -17,31 +17,31 @@ public interface ISysMyCustomerService
      * @param custId 我的客户主键
      * @return 我的客户
      */
-        SysMyCustomer selectSysMyCustomerByCustId(Long custId);
+        CrmMyCustomer selectCrmMyCustomerByCustId(Long custId);
 
     /**
      * 查询我的客户列表
      * 
-     * @param sysMyCustomer 我的客户
+     * @param crmMyCustomer 我的客户
      * @return 我的客户集合
      */
-    List<SysMyCustomer> selectSysMyCustomerList(SysMyCustomer sysMyCustomer);
+    List<CrmMyCustomer> selectCrmMyCustomerList(CrmMyCustomer crmMyCustomer);
 
     /**
      * 新增我的客户
      * 
-     * @param sysMyCustomer 我的客户
+     * @param crmMyCustomer 我的客户
      * @return 结果
      */
-    int insertSysMyCustomer(SysMyCustomer sysMyCustomer);
+    int insertCrmMyCustomer(CrmMyCustomer crmMyCustomer);
 
     /**
      * 修改我的客户
      * 
-     * @param sysMyCustomer 我的客户
+     * @param crmMyCustomer 我的客户
      * @return 结果
      */
-    int updateSysMyCustomer(SysMyCustomer sysMyCustomer);
+    int updateCrmMyCustomer(CrmMyCustomer crmMyCustomer);
 
     /**
      * 批量删除我的客户
@@ -49,7 +49,7 @@ public interface ISysMyCustomerService
      * @param custIds 需要删除的我的客户主键集合
      * @return 结果
      */
-    int deleteSysMyCustomerByCustIds(String custIds);
+    int deleteCrmMyCustomerByCustIds(String custIds);
 
     /**
      * 删除我的客户信息
@@ -57,5 +57,5 @@ public interface ISysMyCustomerService
      * @param custId 我的客户主键
      * @return 结果
      */
-    int deleteSysMyCustomerByCustId(Long custId);
+    int deleteCrmMyCustomerByCustId(Long custId);
 }
