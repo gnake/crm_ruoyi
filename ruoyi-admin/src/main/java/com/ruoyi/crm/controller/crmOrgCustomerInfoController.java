@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.crm.domain.CrmOrgInfo;
-import com.ruoyi.crm.service.ICrmOrgInfoService;
+import com.ruoyi.crm.domain.crmOrgCustomerInfo;
+import com.ruoyi.crm.service.IcrmOrgCustomerInfoService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -26,45 +26,45 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-07-07
  */
 @Controller
-@RequestMapping("/crm/mycust_info")
-public class CrmOrgInfoController extends BaseController
+@RequestMapping("/crm/mycust")
+public class crmOrgCustomerInfoController extends BaseController
 {
-    private String prefix = "crm/mycust_info";
+    private final String prefix = "crm/mycust";
 
     @Autowired
-    private ICrmOrgInfoService crmOrgInfoService;
+    private IcrmOrgCustomerInfoService crmOrgCustomerInfoService;
 
-    @RequiresPermissions("crm:mycust_info:view")
+    @RequiresPermissions("crm:mycust:view")
     @GetMapping()
-    public String mycust_info()
+    public String mycust()
     {
-        return prefix + "/mycust_info";
+        return prefix + "/mycust";
     }
 
     /**
      * 查询潜在客户列表
      */
-    @RequiresPermissions("crm:mycust_info:list")
+    @RequiresPermissions("crm:mycust:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(CrmOrgInfo crmOrgInfo)
+    public TableDataInfo list(crmOrgCustomerInfo crmOrgCustomerInfo)
     {
         startPage();
-        List<CrmOrgInfo> list = crmOrgInfoService.selectCrmOrgInfoList(crmOrgInfo);
+        List<crmOrgCustomerInfo> list = crmOrgCustomerInfoService.selectcrmOrgCustomerInfoList(crmOrgCustomerInfo);
         return getDataTable(list);
     }
 
     /**
      * 导出潜在客户列表
      */
-    @RequiresPermissions("crm:mycust_info:export")
+    @RequiresPermissions("crm:mycust:export")
     @Log(title = "潜在客户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(CrmOrgInfo crmOrgInfo)
+    public AjaxResult export(crmOrgCustomerInfo crmOrgCustomerInfo)
     {
-        List<CrmOrgInfo> list = crmOrgInfoService.selectCrmOrgInfoList(crmOrgInfo);
-        ExcelUtil<CrmOrgInfo> util = new ExcelUtil<CrmOrgInfo>(CrmOrgInfo.class);
+        List<crmOrgCustomerInfo> list = crmOrgCustomerInfoService.selectcrmOrgCustomerInfoList(crmOrgCustomerInfo);
+        ExcelUtil<crmOrgCustomerInfo> util = new ExcelUtil<crmOrgCustomerInfo>(crmOrgCustomerInfo.class);
         return util.exportExcel(list, "潜在客户数据");
     }
 
@@ -80,48 +80,48 @@ public class CrmOrgInfoController extends BaseController
     /**
      * 新增保存潜在客户
      */
-    @RequiresPermissions("crm:mycust_info:add")
+    @RequiresPermissions("crm:mycust:add")
     @Log(title = "潜在客户", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(CrmOrgInfo crmOrgInfo)
+    public AjaxResult addSave(crmOrgCustomerInfo crmOrgCustomerInfo)
     {
-        return toAjax(crmOrgInfoService.insertCrmOrgInfo(crmOrgInfo));
+        return toAjax(crmOrgCustomerInfoService.insertcrmOrgCustomerInfo(crmOrgCustomerInfo));
     }
 
     /**
      * 修改潜在客户
      */
-    @RequiresPermissions("crm:mycust_info:edit")
+    @RequiresPermissions("crm:mycust:edit")
     @GetMapping("/edit/{orgId}")
     public String edit(@PathVariable("orgId") Long orgId, ModelMap mmap)
     {
-        CrmOrgInfo crmOrgInfo = crmOrgInfoService.selectCrmOrgInfoByOrgId(orgId);
-        mmap.put("crmOrgInfo", crmOrgInfo);
+        crmOrgCustomerInfo crmOrgCustomerInfo = crmOrgCustomerInfoService.selectcrmOrgCustomerInfoByOrgId(orgId);
+        mmap.put("crmOrgCustomerInfo", crmOrgCustomerInfo);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存潜在客户
      */
-    @RequiresPermissions("crm:mycust_info:edit")
+    @RequiresPermissions("crm:mycust:edit")
     @Log(title = "潜在客户", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(CrmOrgInfo crmOrgInfo)
+    public AjaxResult editSave(crmOrgCustomerInfo crmOrgCustomerInfo)
     {
-        return toAjax(crmOrgInfoService.updateCrmOrgInfo(crmOrgInfo));
+        return toAjax(crmOrgCustomerInfoService.updatecrmOrgCustomerInfo(crmOrgCustomerInfo));
     }
 
     /**
      * 删除潜在客户
      */
-    @RequiresPermissions("crm:mycust_info:remove")
+    @RequiresPermissions("crm:mycust:remove")
     @Log(title = "潜在客户", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(crmOrgInfoService.deleteCrmOrgInfoByOrgIds(ids));
+        return toAjax(crmOrgCustomerInfoService.deletecrmOrgCustomerInfoByOrgIds(ids));
     }
 }
