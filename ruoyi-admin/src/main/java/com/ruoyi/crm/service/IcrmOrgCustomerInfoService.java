@@ -1,7 +1,7 @@
 package com.ruoyi.crm.service;
 
 import java.util.List;
-import com.ruoyi.crm.domain.CrmOrgInfo;
+import com.ruoyi.crm.domain.crmOrgCustomerInfo;
 
 /**
  * 潜在客户Service接口
@@ -9,7 +9,7 @@ import com.ruoyi.crm.domain.CrmOrgInfo;
  * @author zxl
  * @date 2022-07-07
  */
-public interface ICrmOrgInfoService 
+public interface IcrmOrgCustomerInfoService 
 {
     /**
      * 查询潜在客户
@@ -17,31 +17,31 @@ public interface ICrmOrgInfoService
      * @param orgId 潜在客户主键
      * @return 潜在客户
      */
-    public CrmOrgInfo selectCrmOrgInfoByOrgId(Long orgId);
+        crmOrgCustomerInfo selectcrmOrgCustomerInfoByOrgId(Long orgId);
 
     /**
      * 查询潜在客户列表
      * 
-     * @param crmOrgInfo 潜在客户
+     * @param crmOrgCustomerInfo 潜在客户
      * @return 潜在客户集合
      */
-    public List<CrmOrgInfo> selectCrmOrgInfoList(CrmOrgInfo crmOrgInfo);
+    List<crmOrgCustomerInfo> selectcrmOrgCustomerInfoList(crmOrgCustomerInfo crmOrgCustomerInfo);
 
     /**
      * 新增潜在客户
      * 
-     * @param crmOrgInfo 潜在客户
+     * @param crmOrgCustomerInfo 潜在客户
      * @return 结果
      */
-    public int insertCrmOrgInfo(CrmOrgInfo crmOrgInfo);
+    int insertcrmOrgCustomerInfo(crmOrgCustomerInfo crmOrgCustomerInfo);
 
     /**
      * 修改潜在客户
      * 
-     * @param crmOrgInfo 潜在客户
+     * @param crmOrgCustomerInfo 潜在客户
      * @return 结果
      */
-    public int updateCrmOrgInfo(CrmOrgInfo crmOrgInfo);
+    int updatecrmOrgCustomerInfo(crmOrgCustomerInfo crmOrgCustomerInfo);
 
     /**
      * 批量删除潜在客户
@@ -49,7 +49,7 @@ public interface ICrmOrgInfoService
      * @param orgIds 需要删除的潜在客户主键集合
      * @return 结果
      */
-    public int deleteCrmOrgInfoByOrgIds(String orgIds);
+    int deletecrmOrgCustomerInfoByOrgIds(String orgIds);
 
     /**
      * 删除潜在客户信息
@@ -57,5 +57,5 @@ public interface ICrmOrgInfoService
      * @param orgId 潜在客户主键
      * @return 结果
      */
-    public int deleteCrmOrgInfoByOrgId(Long orgId);
+    int deletecrmOrgCustomerInfoByOrgId(Long orgId);
 }
