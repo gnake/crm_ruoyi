@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TaskCycleMapper">
+    
+    <resultMap type="TaskCycle" id="TaskCycleResult">
+        <result property="tcId"    column="TC_ID"    />
+        <result property="tcBegin"    column="TC_BEGIN"    />
+        <result property="tcEnd"    column="TC_END"    />
+    </resultMap>
+
+    <sql id="selectTaskCycleVo">
+        select TC_ID, TC_BEGIN, TC_END from task_cycle
+    </sql>
+
+    <select id="selectTaskCycleList" parameterType="TaskCycle" resultMap="TaskCycleResult">
+        <include refid="selectTaskCycleVo"/>
+        <where>  
+            <if test="tcBegin != null "> and TC_BEGIN = #{tcBegin}</if>
+            <if test="tcEnd != null "> and TC_END = #{tcEnd}</if>
+        </where>
+    </select>
+    
+    <select id="selectTaskCycleByTcId" parameterType="Long" resultMap="TaskCycleResult">
+        <include refid="selectTaskCycleVo"/>
+        where TC_ID = #{tcId}
+    </select>
+        
+    <insert id="insertTaskCycle" parameterType="TaskCycle" useGeneratedKeys="true" keyProperty="tcId">
+        insert into task_cycle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tcBegin != null">TC_BEGIN,</if>
+            <if test="tcEnd != null">TC_END,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tcBegin != null">#{tcBegin},</if>
+            <if test="tcEnd != null">#{tcEnd},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTaskCycle" parameterType="TaskCycle">
+        update task_cycle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tcBegin != null">TC_BEGIN = #{tcBegin},</if>
+            <if test="tcEnd != null">TC_END = #{tcEnd},</if>
+        </trim>
+        where TC_ID = #{tcId}
+    </update>
+
+    <delete id="deleteTaskCycleByTcId" parameterType="Long">
+        delete from task_cycle where TC_ID = #{tcId}
+    </delete>
+
+    <delete id="deleteTaskCycleByTcIds" parameterType="String">
+        delete from task_cycle where TC_ID in 
+        <foreach item="tcId" collection="array" open="(" separator="," close=")">
+            #{tcId}
+        </foreach>
+    </delete>
+
+</mapper>
