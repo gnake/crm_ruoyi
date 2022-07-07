@@ -95,34 +95,34 @@ CREATE TABLE IF NOT EXISTS CRM_ORDER_INFO
 DROP TABLE IF EXISTS CRM_SECURITY_USER;
 CREATE TABLE IF NOT EXISTS CRM_SECURITY_USER
 (
-    USER_ID       BIGINT  COMMENT '用户ID',
-    USER_NAME     VARCHAR(32) COMMENT '姓名',
-    USER_CODE     VARCHAR(32) COMMENT '用户编码',
-    USER_PWD      VARCHAR(32) COMMENT '密码',
-    USER_SEX      int(1) COMMENT '性别',
-    USER_DESC     VARCHAR(128) COMMENT '描述',
-    USER_STATE    VARCHAR(32) COMMENT '状态',
-    USER_MAIL     VARCHAR(64) COMMENT '邮箱',
-    USER_SORT     INT COMMENT '排序',
-    USER_PHONE    VARCHAR(64) COMMENT '手机',
-    DISPLAY_COUNT INT COMMENT '显示个数',
-    GRP_ID        BIGINT COMMENT '组织ID，关联SECURITY_GROUP',
+    USER_ID       BIGINT                  COMMENT '用户ID',
+    USER_NAME     VARCHAR(32)             COMMENT '姓名',
+    USER_CODE     VARCHAR(32)             COMMENT '用户编码',
+    USER_PWD      VARCHAR(32)             COMMENT '密码',
+    USER_SEX      int(1)                  COMMENT '性别',
+    USER_DESC     VARCHAR(128)            COMMENT '描述',
+    USER_STATE    VARCHAR(32)             COMMENT '状态',
+    USER_MAIL     VARCHAR(64)             COMMENT '邮箱',
+    USER_SORT     INT                     COMMENT '排序',
+    USER_PHONE    VARCHAR(64)             COMMENT '手机',
+    DISPLAY_COUNT INT                     COMMENT '显示个数',
+    GRP_ID        BIGINT                  COMMENT '组织ID，关联SECURITY_GROUP',
     PRIMARY KEY (USER_ID)
 ) DEFAULT CHARSET = utf8mb4 comment '系统用户表';
 
 DROP TABLE IF EXISTS `CRM_SECURITY_GROUP`;
 CREATE TABLE IF NOT EXISTS `CRM_SECURITY_GROUP`
 (
-    `GRP_ID`    bigint primary key  comment '组织ID',
-    `GRP_CODE`  varchar(32) comment '组织编码',
-    `GRP_NAME`  varchar(32) comment '组织名',
-    `GRP_PID`   bigint comment '组织父ID',
-    `GRP_DESC`  varchar(128) comment '组织描述',
-    `GRP_STATE` int(1) comment '组织状态',
-    `GRP_SORT`  int(11) comment '组织排序',
-    `GRP_TYPE`  varchar(32) comment '组织类型',
-    `GRP_RANK`  varchar(32) comment '组织等级'
-) DEFAULT CHARSET = utf8mb4 comment '组织部门表';
+    `GRP_ID`    bigint primary key               comment '组织ID',
+    `GRP_CODE`  varchar(32)                      comment '组织编码',
+    `GRP_NAME`  varchar(32)                      comment '组织名',
+    `GRP_PID`   bigint                           comment '组织父ID',
+    `GRP_DESC`  varchar(128)                     comment '组织描述',
+    `GRP_STATE` int(1)                           comment '组织状态',
+    `GRP_SORT`  int(11)                          comment '组织排序',
+    `GRP_TYPE`  varchar(32)                      comment '组织类型',
+    `GRP_RANK`  varchar(32)                      comment '组织等级'
+) DEFAULT CHARSET = utf8mb4                      comment '组织部门表';
 
 DROP TABLE IF EXISTS `CRM_SYS_LOG`;
 CREATE TABLE IF NOT EXISTS `CRM_SYS_LOG`
