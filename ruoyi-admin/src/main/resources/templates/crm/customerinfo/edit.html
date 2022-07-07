@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改客户信息')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-customerinfo-edit" th:object="${customerInfo}">
+            <input name="custId" th:field="*{custId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户名称：</label>
+                <div class="col-sm-8">
+                    <input name="custName" th:field="*{custName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">行业：</label>
+                <div class="col-sm-8">
+                    <input name="custIndustry" th:field="*{custIndustry}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">省份：</label>
+                <div class="col-sm-8">
+                    <input name="custProvince" th:field="*{custProvince}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">城市：</label>
+                <div class="col-sm-8">
+                    <input name="custCity" th:field="*{custCity}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地址：</label>
+                <div class="col-sm-8">
+                    <input name="custAddress" th:field="*{custAddress}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">规模：</label>
+                <div class="col-sm-8">
+                    <input name="custScale" th:field="*{custScale}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">性质：</label>
+                <div class="col-sm-8">
+                    <input name="custNature" th:field="*{custNature}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">简要介绍：</label>
+                <div class="col-sm-8">
+                    <textarea name="custIntroduce" class="form-control">[[*{custIntroduce}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人：</label>
+                <div class="col-sm-8">
+                    <input name="custCreateId" th:field="*{custCreateId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="custCreateTime" th:value="${#dates.format(customerInfo.custCreateTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">提交人：</label>
+                <div class="col-sm-8">
+                    <input name="custSubmitId" th:field="*{custSubmitId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">提交时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="custSubmitTime" th:value="${#dates.format(customerInfo.custSubmitTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">确认人：</label>
+                <div class="col-sm-8">
+                    <input name="custConfirmId" th:field="*{custConfirmId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">确认时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="custConfirmTime" th:value="${#dates.format(customerInfo.custConfirmTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">进展状态：</label>
+                <div class="col-sm-8">
+                    <input name="custProgressState" th:field="*{custProgressState}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">公司网站：</label>
+                <div class="col-sm-8">
+                    <input name="custCompanyWeb" th:field="*{custCompanyWeb}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">潜在客户：</label>
+                <div class="col-sm-8">
+                    <input name="orgId" th:field="*{orgId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">计划拜访时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="custVisitAgainTime" th:value="${#dates.format(customerInfo.custVisitAgainTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "crm/customerinfo";
+        $("#form-customerinfo-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-customerinfo-edit').serialize());
+            }
+        }
+
+        $("input[name='custCreateTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='custSubmitTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='custConfirmTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='custVisitAgainTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>
