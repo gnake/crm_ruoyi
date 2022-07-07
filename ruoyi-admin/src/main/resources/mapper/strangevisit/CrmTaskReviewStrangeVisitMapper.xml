@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.crm.mapper.CrmOrgInfoMapper">
+<mapper namespace="com.ruoyi.crm.mapper.CrmTaskReviewStrangeVisitMapper">
     
-    <resultMap type="CrmOrgInfo" id="CrmOrgInfoResult">
+    <resultMap type="CrmTaskReviewStrangeVisit" id="CrmTaskReviewStrangeVisitResult">
         <result property="orgId"    column="ORG_ID"    />
         <result property="orgName"    column="ORG_NAME"    />
         <result property="orgType"    column="ORG_TYPE"    />
@@ -27,44 +27,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orgClassify"    column="ORG_CLASSIFY"    />
     </resultMap>
 
-    <sql id="selectCrmOrgInfoVo">
-        select ORG_ID, ORG_NAME, ORG_TYPE, ORG_INTRODUCTION, ORG_LINKMAN_NAME, ORG_EMAIL, ORG_CONTACT_WAY, ORG_STATE, ORG_LABELS, ORG_ADDRESS, ORG_WEBSITE, ORG_CREATER, ORG_CREATE_TIME, ORG_UPDATE_TIME, ORG_CLASSIFICATION, ORG_VISIT_AGAIN_TIME, CUST_ID, ORG_SOURCES, ORG_SALESMAN, ORG_CLASSIFY from crm_org_info
+    <sql id="selectCrmTaskReviewStrangeVisitVo">
+        select ORG_ID, ORG_NAME, ORG_TYPE, ORG_INTRODUCTION, ORG_LINKMAN_NAME, ORG_EMAIL, ORG_CONTACT_WAY, ORG_STATE, ORG_LABELS, ORG_ADDRESS, ORG_WEBSITE, ORG_CREATER, ORG_CREATE_TIME, ORG_UPDATE_TIME, ORG_CLASSIFICATION, ORG_VISIT_AGAIN_TIME, CUST_ID, ORG_SOURCES, ORG_SALESMAN, ORG_CLASSIFY from CRM_ORG_INFO
     </sql>
 
-    <select id="selectCrmOrgInfoList" parameterType="CrmOrgInfo" resultMap="CrmOrgInfoResult">
-        <include refid="selectCrmOrgInfoVo"/>
+    <select id="selectCrmTaskReviewStrangeVisitList" parameterType="CrmTaskReviewStrangeVisit" resultMap="CrmTaskReviewStrangeVisitResult">
+        <include refid="selectCrmTaskReviewStrangeVisitVo"/>
         <where>  
-            <if test="orgName != null  and orgName != ''"> and ORG_NAME like concat('%', #{orgName}, '%')</if>
-            <if test="orgType != null  and orgType != ''"> and ORG_TYPE = #{orgType}</if>
-            <if test="orgIntroduction != null  and orgIntroduction != ''"> and ORG_INTRODUCTION = #{orgIntroduction}</if>
-            <if test="orgLinkmanName != null  and orgLinkmanName != ''"> and ORG_LINKMAN_NAME like concat('%', #{orgLinkmanName}, '%')</if>
-            <if test="orgEmail != null  and orgEmail != ''"> and ORG_EMAIL = #{orgEmail}</if>
-            <if test="orgContactWay != null  and orgContactWay != ''"> and ORG_CONTACT_WAY = #{orgContactWay}</if>
-            <if test="orgState != null  and orgState != ''"> and ORG_STATE = #{orgState}</if>
-            <if test="orgLabels != null  and orgLabels != ''"> and ORG_LABELS = #{orgLabels}</if>
-            <if test="orgAddress != null  and orgAddress != ''"> and ORG_ADDRESS = #{orgAddress}</if>
-            <if test="orgWebsite != null  and orgWebsite != ''"> and ORG_WEBSITE = #{orgWebsite}</if>
-            <if test="orgCreater != null  and orgCreater != ''"> and ORG_CREATER = #{orgCreater}</if>
-            <if test="orgCreateTime != null  and orgCreateTime != ''"> and ORG_CREATE_TIME = #{orgCreateTime}</if>
-            <if test="orgUpdateTime != null  and orgUpdateTime != ''"> and ORG_UPDATE_TIME = #{orgUpdateTime}</if>
-            <if test="orgClassification != null  and orgClassification != ''"> and ORG_CLASSIFICATION = #{orgClassification}</if>
-            <if test="orgVisitAgainTime != null  and orgVisitAgainTime != ''"> and ORG_VISIT_AGAIN_TIME = #{orgVisitAgainTime}</if>
-            <if test="custId != null "> and CUST_ID = #{custId}</if>
-            <if test="orgSources != null  and orgSources != ''"> and ORG_SOURCES = #{orgSources}</if>
-            <if test="orgSalesman != null  and orgSalesman != ''"> and ORG_SALESMAN = #{orgSalesman}</if>
-            <if test="orgClassify != null "> and ORG_CLASSIFY = #{orgClassify}</if>
         </where>
     </select>
     
-    <select id="selectCrmOrgInfoByOrgId" parameterType="Long" resultMap="CrmOrgInfoResult">
-        <include refid="selectCrmOrgInfoVo"/>
+    <select id="selectCrmTaskReviewStrangeVisitByOrgId" parameterType="Long" resultMap="CrmTaskReviewStrangeVisitResult">
+        <include refid="selectCrmTaskReviewStrangeVisitVo"/>
         where ORG_ID = #{orgId}
     </select>
         
-    <insert id="insertCrmOrgInfo" parameterType="CrmOrgInfo">
-        insert into crm_org_info
+    <insert id="insertCrmTaskReviewStrangeVisit" parameterType="CrmTaskReviewStrangeVisit" useGeneratedKeys="true" keyProperty="orgId">
+        insert into CRM_ORG_INFO
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="orgId != null">ORG_ID,</if>
             <if test="orgName != null">ORG_NAME,</if>
             <if test="orgType != null">ORG_TYPE,</if>
             <if test="orgIntroduction != null">ORG_INTRODUCTION,</if>
@@ -86,7 +66,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orgClassify != null">ORG_CLASSIFY,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="orgId != null">#{orgId},</if>
             <if test="orgName != null">#{orgName},</if>
             <if test="orgType != null">#{orgType},</if>
             <if test="orgIntroduction != null">#{orgIntroduction},</if>
@@ -109,8 +88,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCrmOrgInfo" parameterType="CrmOrgInfo">
-        update crm_org_info
+    <update id="updateCrmTaskReviewStrangeVisit" parameterType="CrmTaskReviewStrangeVisit">
+        update CRM_ORG_INFO
         <trim prefix="SET" suffixOverrides=",">
             <if test="orgName != null">ORG_NAME = #{orgName},</if>
             <if test="orgType != null">ORG_TYPE = #{orgType},</if>
@@ -135,12 +114,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where ORG_ID = #{orgId}
     </update>
 
-    <delete id="deleteCrmOrgInfoByOrgId" parameterType="Long">
-        delete from crm_org_info where ORG_ID = #{orgId}
+    <delete id="deleteCrmTaskReviewStrangeVisitByOrgId" parameterType="Long">
+        delete from CRM_ORG_INFO where ORG_ID = #{orgId}
     </delete>
 
-    <delete id="deleteCrmOrgInfoByOrgIds" parameterType="String">
-        delete from crm_org_info where ORG_ID in 
+    <delete id="deleteCrmTaskReviewStrangeVisitByOrgIds" parameterType="String">
+        delete from CRM_ORG_INFO where ORG_ID in 
         <foreach item="orgId" collection="array" open="(" separator="," close=")">
             #{orgId}
         </foreach>

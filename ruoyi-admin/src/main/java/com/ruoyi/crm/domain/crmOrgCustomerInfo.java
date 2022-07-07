@@ -1,17 +1,19 @@
 package com.ruoyi.crm.domain;
 
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 潜在客户对象 crm_org_info
+ * 潜在客户对象 CRM_ORG_INFO
  * 
  * @author zxl
  * @date 2022-07-07
  */
-public class CrmOrgInfo extends BaseEntity
+public class crmOrgCustomerInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +25,6 @@ public class CrmOrgInfo extends BaseEntity
     private String orgName;
 
     /** 组织性质 */
-    @Excel(name = "组织性质")
     private String orgType;
 
     /** 简要介绍 */
@@ -37,38 +38,41 @@ public class CrmOrgInfo extends BaseEntity
     private String orgEmail;
 
     /** 联系方式 */
-    @Excel(name = "联系方式")
     private String orgContactWay;
 
     /** 状态 */
     @Excel(name = "状态")
     private String orgState;
 
-    /** 标签，0表未标记，1表已标记，2表无人接听，3表号码信息不符，4表空号，5表暂停服务，6表暂无需求，7表后续联系，8表态度恶劣 */
-    @Excel(name = "标签，0表未标记，1表已标记，2表无人接听，3表号码信息不符，4表空号，5表暂停服务，6表暂无需求，7表后续联系，8表态度恶劣")
+    /** 标签 */
+    @Excel(name = "标签")
     private String orgLabels;
 
     /** 地址 */
-    @Excel(name = "地址")
     private String orgAddress;
 
     /** 公司网站 */
     private String orgWebsite;
 
     /** 创建人 */
+    @Excel(name = "创建人")
     private String orgCreater;
 
     /** 创建时间 */
-    private String orgCreateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date orgCreateTime;
 
     /** 更新时间 */
-    private String orgUpdateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date orgUpdateTime;
 
     /** 公司分类 */
     private String orgClassification;
 
     /** 计划拜访时间 */
-    private String orgVisitAgainTime;
+    private Date orgVisitAgainTime;
 
     /** 客户管理(CRM_CUSTOMER_INFO) */
     private Long custId;
@@ -77,9 +81,11 @@ public class CrmOrgInfo extends BaseEntity
     private String orgSources;
 
     /** 跟进人员 */
+    @Excel(name = "跟进人员")
     private String orgSalesman;
 
-    /** 分类，0表示其他，1表企业实体，2表软件开发商，3表软件代理商，4表系统集成商 */
+    /** 分类 */
+    @Excel(name = "分类")
     private Integer orgClassify;
 
     public void setOrgId(Long orgId) 
@@ -190,21 +196,21 @@ public class CrmOrgInfo extends BaseEntity
     {
         return orgCreater;
     }
-    public void setOrgCreateTime(String orgCreateTime) 
+    public void setOrgCreateTime(Date orgCreateTime) 
     {
         this.orgCreateTime = orgCreateTime;
     }
 
-    public String getOrgCreateTime() 
+    public Date getOrgCreateTime() 
     {
         return orgCreateTime;
     }
-    public void setOrgUpdateTime(String orgUpdateTime) 
+    public void setOrgUpdateTime(Date orgUpdateTime) 
     {
         this.orgUpdateTime = orgUpdateTime;
     }
 
-    public String getOrgUpdateTime() 
+    public Date getOrgUpdateTime() 
     {
         return orgUpdateTime;
     }
@@ -217,12 +223,12 @@ public class CrmOrgInfo extends BaseEntity
     {
         return orgClassification;
     }
-    public void setOrgVisitAgainTime(String orgVisitAgainTime) 
+    public void setOrgVisitAgainTime(Date orgVisitAgainTime) 
     {
         this.orgVisitAgainTime = orgVisitAgainTime;
     }
 
-    public String getOrgVisitAgainTime() 
+    public Date getOrgVisitAgainTime() 
     {
         return orgVisitAgainTime;
     }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增陌生拜访')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-strangevisit-add">
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "strangevisit/strangevisit"
+        $("#form-strangevisit-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-strangevisit-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>
