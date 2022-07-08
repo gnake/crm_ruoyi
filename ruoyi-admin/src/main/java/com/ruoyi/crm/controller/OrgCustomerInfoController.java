@@ -22,8 +22,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 潜在客户Controller
  * 
- * @author zxl
- * @date 2022-07-07
+ * @author swj
+ * @date 2022-07-08
  */
 @Controller
 @RequestMapping("/crm/orgcust")

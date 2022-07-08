@@ -6,8 +6,8 @@ import com.ruoyi.crm.domain.OrgCustomerInfo;
 /**
  * 潜在客户Service接口
  * 
- * @author zxl
- * @date 2022-07-07
+ * @author swj
+ * @date 2022-07-08
  */
 public interface IOrgCustomerInfoService 
 {

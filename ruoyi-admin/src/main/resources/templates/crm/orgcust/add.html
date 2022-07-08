@@ -2,138 +2,13 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <th:block th:include="include :: header('新增潜在客户')" />
-    <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-orgcust-add">
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">组织名称：</label>
-                <div class="col-sm-8">
-                    <input name="orgName" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">简要介绍：</label>
-                <div class="col-sm-8">
-                    <textarea name="orgIntroduction" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">联系人：</label>
-                <div class="col-sm-8">
-                    <input name="orgLinkmanName" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">邮箱：</label>
-                <div class="col-sm-8">
-                    <input name="orgEmail" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">联系方式：</label>
-                <div class="col-sm-8">
-                    <input name="orgContactWay" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">状态：</label>
-                <div class="col-sm-8">
-                    <select name="orgState" class="form-control m-b" th:with="type=${@dict.getType('orgstate')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">标签：</label>
-                <div class="col-sm-8">
-                    <select name="orgLabels" class="form-control m-b" th:with="type=${@dict.getType('orglabel')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">地址：</label>
-                <div class="col-sm-8">
-                    <input name="orgAddress" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司网站：</label>
-                <div class="col-sm-8">
-                    <input name="orgWebsite" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">创建人：</label>
-                <div class="col-sm-8">
-                    <input name="orgCreater" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">创建时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="orgCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">更新时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="orgUpdateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司分类：</label>
-                <div class="col-sm-8">
-                    <input name="orgClassification" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">计划拜访时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="orgVisitAgainTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">客户管理(CRM_CUSTOMER_INFO)：</label>
-                <div class="col-sm-8">
-                    <input name="custId" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">来源渠道：</label>
-                <div class="col-sm-8">
-                    <input name="orgSources" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">跟进人员：</label>
-                <div class="col-sm-8">
-                    <input name="orgSalesman" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">分类：</label>
-                <div class="col-sm-8">
-                    <select name="orgClassify" class="form-control m-b" th:with="type=${@dict.getType('orginfo')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
-                </div>
-            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
-    <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
         var prefix = ctx + "crm/orgcust"
         $("#form-orgcust-add").validate({
@@ -145,24 +20,6 @@
                 $.operate.save(prefix + "/add", $('#form-orgcust-add').serialize());
             }
         }
-
-        $("input[name='orgCreateTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='orgUpdateTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='orgVisitAgainTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
     </script>
 </body>
 </html>

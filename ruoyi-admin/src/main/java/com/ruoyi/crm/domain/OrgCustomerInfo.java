@@ -10,18 +10,18 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 潜在客户对象 CRM_ORG_INFO
  * 
- * @author zxl
- * @date 2022-07-07
+ * @author swj
+ * @date 2022-07-08
  */
 public class OrgCustomerInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
+    @Excel(name = "主键")
     private Long orgId;
 
     /** 组织名称 */
-    @Excel(name = "组织名称")
     private String orgName;
 
     /** 组织性质 */
@@ -31,7 +31,6 @@ public class OrgCustomerInfo extends BaseEntity
     private String orgIntroduction;
 
     /** 联系人 */
-    @Excel(name = "联系人")
     private String orgLinkmanName;
 
     /** 邮箱 */
