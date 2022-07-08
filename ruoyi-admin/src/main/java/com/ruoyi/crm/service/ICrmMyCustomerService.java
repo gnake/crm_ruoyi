@@ -6,8 +6,8 @@ import com.ruoyi.crm.domain.CrmMyCustomer;
 /**
  * 我的客户Service接口
  * 
- * @author tkh
- * @date 2022-07-07
+ * @author 童楷涵
+ * @date 2022-07-08
  */
 public interface ICrmMyCustomerService 
 {

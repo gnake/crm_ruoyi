@@ -11,10 +11,6 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>客户名称：</label>
-                                <input type="text" name="custName"/>
-                            </li>
-                            <li>
                                 <label>状态：</label>
                                 <select name="custState" th:with="type=${@dict.getType('sys_cust_precedence')}">
                                     <option value="">所有</option>
