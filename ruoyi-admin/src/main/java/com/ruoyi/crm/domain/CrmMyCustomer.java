@@ -11,8 +11,8 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 我的客户对象 CRM_CUSTOMER_INFO
  * 
- * @author tkh
- * @date 2022-07-07
+ * @author 童楷涵
+ * @date 2022-07-08
  */
 public class CrmMyCustomer extends BaseEntity
 {
@@ -85,7 +85,7 @@ public class CrmMyCustomer extends BaseEntity
     private Date custVisitAgainTime;
 
     /** 我的客户信息 */
-    private List<CrmVisit> crmVisitList;
+    private List<CrmVisitCustomer> crmVisitCustomerList;
 
     public void setCustId(Long custId) 
     {
@@ -277,14 +277,14 @@ public class CrmMyCustomer extends BaseEntity
         return custVisitAgainTime;
     }
 
-    public List<CrmVisit> getCrmVisitList()
+    public List<CrmVisitCustomer> getCrmVisitCustomerList()
     {
-        return crmVisitList;
+        return crmVisitCustomerList;
     }
 
-    public void setCrmVisitList(List<CrmVisit> crmVisitList)
+    public void setCrmVisitCustomerList(List<CrmVisitCustomer> crmVisitCustomerList)
     {
-        this.crmVisitList = crmVisitList;
+        this.crmVisitCustomerList = crmVisitCustomerList;
     }
 
     @Override
@@ -311,7 +311,7 @@ public class CrmMyCustomer extends BaseEntity
             .append("custCompanyWeb", getCustCompanyWeb())
             .append("orgId", getOrgId())
             .append("custVisitAgainTime", getCustVisitAgainTime())
-            .append("crmVisitList", getCrmVisitList())
+            .append("crmVisitCustomerList", getCrmVisitCustomerList())
             .toString();
     }
 }

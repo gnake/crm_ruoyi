@@ -80,7 +80,7 @@
                     align: 'center',
                     title: '拜访类型',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitType' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitType' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -89,7 +89,7 @@
                     align: 'center',
                     title: '接待人姓名',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitReceptionName' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitReceptionName' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -98,7 +98,7 @@
                     align: 'center',
                     title: '接待人性别',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitReceptionSex' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitReceptionSex' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -107,7 +107,7 @@
                     align: 'center',
                     title: '接待人职位',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitReceptionJob' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitReceptionJob' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -116,7 +116,7 @@
                     align: 'center',
                     title: '接待人电话',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitReceptionPhone' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitReceptionPhone' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -125,7 +125,7 @@
                     align: 'center',
                     title: '拜访人员',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitUserId' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitUserId' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -134,7 +134,7 @@
                     align: 'center',
                     title: '同行人员',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitPeerName' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitPeerName' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -143,7 +143,7 @@
                     align: 'center',
                     title: '拜访日期',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitDate' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitDate' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -152,7 +152,7 @@
                     align: 'center',
                     title: '交互内容',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitContent' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitContent' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -161,7 +161,7 @@
                     align: 'center',
                     title: '客户关注点',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitCustFocus' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitCustFocus' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -170,7 +170,7 @@
                     align: 'center',
                     title: '沟通效果',
                     formatter: function(value, row, index) {
-                        var name = $.common.sprintf("crmVisitList[%s].visitEffect", index);
+                        var name = $.common.sprintf("crmVisitCustomerList[%s].visitEffect", index);
                         return $.common.dictToSelect(visitEffectDatas, value, name);
                     }
                 },
@@ -179,7 +179,7 @@
                     align: 'center',
                     title: '待改进情况',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitImprovement' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitImprovement' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -188,7 +188,7 @@
                     align: 'center',
                     title: '拜访费用',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitCost' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitCost' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -197,7 +197,7 @@
                     align: 'center',
                     title: '费用说明',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitCostExplain' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitCostExplain' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -206,7 +206,7 @@
                     align: 'center',
                     title: '状态',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitState' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitState' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -215,7 +215,7 @@
                     align: 'center',
                     title: '填写人',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitFillId' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitFillId' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -224,7 +224,7 @@
                     align: 'center',
                     title: '填写时间',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitFillTime' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitFillTime' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -233,7 +233,7 @@
                     align: 'center',
                     title: '确认人',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitConfirmId' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitConfirmId' value='%s'>", index, value);
                         return html;
                     }
                 },
@@ -242,7 +242,7 @@
                     align: 'center',
                     title: '确认时间',
                     formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitList[%s].visitConfirmTime' value='%s'>", index, value);
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmVisitCustomerList[%s].visitConfirmTime' value='%s'>", index, value);
                         return html;
                     }
                 },

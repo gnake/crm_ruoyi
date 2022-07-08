@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
-import com.ruoyi.crm.domain.CrmVisit;
+import com.ruoyi.crm.domain.CrmVisitCustomer;
 import com.ruoyi.crm.mapper.CrmMyCustomerMapper;
 import com.ruoyi.crm.domain.CrmMyCustomer;
 import com.ruoyi.crm.service.ICrmMyCustomerService;
@@ -15,8 +15,8 @@ import com.ruoyi.common.core.text.Convert;
 /**
  * 我的客户Service业务层处理
  * 
- * @author tkh
- * @date 2022-07-07
+ * @author 童楷涵
+ * @date 2022-07-08
  */
 @Service
 public class CrmMyCustomerServiceImpl implements ICrmMyCustomerService 
@@ -59,7 +59,7 @@ public class CrmMyCustomerServiceImpl implements ICrmMyCustomerService
     public int insertCrmMyCustomer(CrmMyCustomer crmMyCustomer)
     {
         int rows = crmMyCustomerMapper.insertCrmMyCustomer(crmMyCustomer);
-        insertCrmVisit(crmMyCustomer);
+        insertCrmVisitCustomer(crmMyCustomer);
         return rows;
     }
 
@@ -73,8 +73,8 @@ public class CrmMyCustomerServiceImpl implements ICrmMyCustomerService
     @Override
     public int updateCrmMyCustomer(CrmMyCustomer crmMyCustomer)
     {
-        crmMyCustomerMapper.deleteCrmVisitByVisitCustId(crmMyCustomer.getCustId());
-        insertCrmVisit(crmMyCustomer);
+        crmMyCustomerMapper.deleteCrmVisitCustomerByVisitCustId(crmMyCustomer.getCustId());
+        insertCrmVisitCustomer(crmMyCustomer);
         return crmMyCustomerMapper.updateCrmMyCustomer(crmMyCustomer);
     }
 
@@ -88,7 +88,7 @@ public class CrmMyCustomerServiceImpl implements ICrmMyCustomerService
     @Override
     public int deleteCrmMyCustomerByCustIds(String custIds)
     {
-        crmMyCustomerMapper.deleteCrmVisitByVisitCustIds(Convert.toStrArray(custIds));
+        crmMyCustomerMapper.deleteCrmVisitCustomerByVisitCustIds(Convert.toStrArray(custIds));
         return crmMyCustomerMapper.deleteCrmMyCustomerByCustIds(Convert.toStrArray(custIds));
     }
 
@@ -102,7 +102,7 @@ public class CrmMyCustomerServiceImpl implements ICrmMyCustomerService
     @Override
     public int deleteCrmMyCustomerByCustId(Long custId)
     {
-        crmMyCustomerMapper.deleteCrmVisitByVisitCustId(custId);
+        crmMyCustomerMapper.deleteCrmVisitCustomerByVisitCustId(custId);
         return crmMyCustomerMapper.deleteCrmMyCustomerByCustId(custId);
     }
 
@@ -111,21 +111,21 @@ public class CrmMyCustomerServiceImpl implements ICrmMyCustomerService
      * 
      * @param crmMyCustomer 我的客户对象
      */
-    public void insertCrmVisit(CrmMyCustomer crmMyCustomer)
+    public void insertCrmVisitCustomer(CrmMyCustomer crmMyCustomer)
     {
-        List<CrmVisit> crmVisitList = crmMyCustomer.getCrmVisitList();
+        List<CrmVisitCustomer> crmVisitCustomerList = crmMyCustomer.getCrmVisitCustomerList();
         Long custId = crmMyCustomer.getCustId();
-        if (StringUtils.isNotNull(crmVisitList))
+        if (StringUtils.isNotNull(crmVisitCustomerList))
         {
-            List<CrmVisit> list = new ArrayList<CrmVisit>();
-            for (CrmVisit crmVisit : crmVisitList)
+            List<CrmVisitCustomer> list = new ArrayList<CrmVisitCustomer>();
+            for (CrmVisitCustomer crmVisitCustomer : crmVisitCustomerList)
             {
-                crmVisit.setVisitCustId(custId);
-                list.add(crmVisit);
+                crmVisitCustomer.setVisitCustId(custId);
+                list.add(crmVisitCustomer);
             }
             if (list.size() > 0)
             {
-                crmMyCustomerMapper.batchCrmVisit(list);
+                crmMyCustomerMapper.batchCrmVisitCustomer(list);
             }
         }
     }

@@ -2,13 +2,13 @@ package com.ruoyi.crm.mapper;
 
 import java.util.List;
 import com.ruoyi.crm.domain.CrmMyCustomer;
-import com.ruoyi.crm.domain.CrmVisit;
+import com.ruoyi.crm.domain.CrmVisitCustomer;
 
 /**
  * 我的客户Mapper接口
  * 
- * @author tkh
- * @date 2022-07-07
+ * @author 童楷涵
+ * @date 2022-07-08
  */
 public interface CrmMyCustomerMapper 
 {
@@ -66,15 +66,15 @@ public interface CrmMyCustomerMapper
      * @param custIds 需要删除的数据主键集合
      * @return 结果
      */
-    int deleteCrmVisitByVisitCustIds(String[] custIds);
+    int deleteCrmVisitCustomerByVisitCustIds(String[] custIds);
     
     /**
      * 批量新增我的客户
      * 
-     * @param crmVisitList 我的客户列表
+     * @param crmVisitCustomerList 我的客户列表
      * @return 结果
      */
-    int batchCrmVisit(List<CrmVisit> crmVisitList);
+    int batchCrmVisitCustomer(List<CrmVisitCustomer> crmVisitCustomerList);
     
 
     /**
@@ -83,5 +83,5 @@ public interface CrmMyCustomerMapper
      * @param custId 我的客户ID
      * @return 结果
      */
-    int deleteCrmVisitByVisitCustId(Long custId);
+    int deleteCrmVisitCustomerByVisitCustId(Long custId);
 }

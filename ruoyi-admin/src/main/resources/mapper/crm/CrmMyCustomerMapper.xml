@@ -28,11 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="custVisitAgainTime"    column="CUST_VISIT_AGAIN_TIME"    />
     </resultMap>
 
-    <resultMap id="CrmMyCustomerCrmVisitResult" type="CrmMyCustomer" extends="CrmMyCustomerResult">
-        <collection property="crmVisitList" notNullColumn="sub_VISIT_ID" javaType="java.util.List" resultMap="CrmVisitResult" />
+    <resultMap id="CrmMyCustomerCrmVisitCustomerResult" type="CrmMyCustomer" extends="CrmMyCustomerResult">
+        <collection property="crmVisitCustomerList" notNullColumn="sub_VISIT_ID" javaType="java.util.List" resultMap="CrmVisitCustomerResult" />
     </resultMap>
 
-    <resultMap type="CrmVisit" id="CrmVisitResult">
+    <resultMap type="CrmVisitCustomer" id="CrmVisitCustomerResult">
         <result property="visitId"    column="sub_VISIT_ID"    />
         <result property="visitType"    column="sub_VISIT_TYPE"    />
         <result property="visitCustId"    column="sub_VISIT_CUST_ID"    />
@@ -63,13 +63,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCrmMyCustomerList" parameterType="CrmMyCustomer" resultMap="CrmMyCustomerResult">
         <include refid="selectCrmMyCustomerVo"/>
         <where>  
-            <if test="custName != null  and custName != ''"> and CUST_NAME like concat('%', #{custName}, '%')</if>
             <if test="custState != null  and custState != ''"> and CUST_STATE = #{custState}</if>
             <if test="custLevel != null  and custLevel != ''"> and CUST_LEVEL = #{custLevel}</if>
         </where>
     </select>
     
-    <select id="selectCrmMyCustomerByCustId" parameterType="Long" resultMap="CrmMyCustomerCrmVisitResult">
+    <select id="selectCrmMyCustomerByCustId" parameterType="Long" resultMap="CrmMyCustomerCrmVisitCustomerResult">
         select a.CUST_ID, a.CUST_NAME, a.CUST_INDUSTRY, a.CUST_PROVINCE, a.CUST_CITY, a.CUST_ADDRESS, a.CUST_SCALE, a.CUST_NATURE, a.CUST_INTRODUCE, a.CUST_STATE, a.CUST_CREATE_ID, a.CUST_CREATE_TIME, a.CUST_SUBMIT_ID, a.CUST_SUBMIT_TIME, a.CUST_CONFIRM_ID, a.CUST_CONFIRM_TIME, a.CUST_PROGRESS_STATE, a.CUST_LEVEL, a.CUST_COMPANY_WEB, a.ORG_ID, a.CUST_VISIT_AGAIN_TIME,
  b.VISIT_ID as sub_VISIT_ID, b.VISIT_TYPE as sub_VISIT_TYPE, b.VISIT_CUST_ID as sub_VISIT_CUST_ID, b.VISIT_RECEPTION_NAME as sub_VISIT_RECEPTION_NAME, b.VISIT_RECEPTION_SEX as sub_VISIT_RECEPTION_SEX, b.VISIT_RECEPTION_JOB as sub_VISIT_RECEPTION_JOB, b.VISIT_RECEPTION_PHONE as sub_VISIT_RECEPTION_PHONE, b.VISIT_USER_ID as sub_VISIT_USER_ID, b.VISIT_PEER_NAME as sub_VISIT_PEER_NAME, b.VISIT_DATE as sub_VISIT_DATE, b.VISIT_CONTENT as sub_VISIT_CONTENT, b.VISIT_CUST_FOCUS as sub_VISIT_CUST_FOCUS, b.VISIT_EFFECT as sub_VISIT_EFFECT, b.VISIT_IMPROVEMENT as sub_VISIT_IMPROVEMENT, b.VISIT_COST as sub_VISIT_COST, b.VISIT_COST_EXPLAIN as sub_VISIT_COST_EXPLAIN, b.VISIT_STATE as sub_VISIT_STATE, b.VISIT_FILL_ID as sub_VISIT_FILL_ID, b.VISIT_FILL_TIME as sub_VISIT_FILL_TIME, b.VISIT_CONFIRM_ID as sub_VISIT_CONFIRM_ID, b.VISIT_CONFIRM_TIME as sub_VISIT_CONFIRM_TIME
         from CRM_CUSTOMER_INFO a
@@ -165,18 +164,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
     
-    <delete id="deleteCrmVisitByVisitCustIds" parameterType="String">
+    <delete id="deleteCrmVisitCustomerByVisitCustIds" parameterType="String">
         delete from CRM_VISIT where VISIT_CUST_ID in 
         <foreach item="visitCustId" collection="array" open="(" separator="," close=")">
             #{visitCustId}
         </foreach>
     </delete>
 
-    <delete id="deleteCrmVisitByVisitCustId" parameterType="Long">
+    <delete id="deleteCrmVisitCustomerByVisitCustId" parameterType="Long">
         delete from CRM_VISIT where VISIT_CUST_ID = #{visitCustId}
     </delete>
 
-    <insert id="batchCrmVisit">
+    <insert id="batchCrmVisitCustomer">
         insert into CRM_VISIT( VISIT_ID, VISIT_TYPE, VISIT_CUST_ID, VISIT_RECEPTION_NAME, VISIT_RECEPTION_SEX, VISIT_RECEPTION_JOB, VISIT_RECEPTION_PHONE, VISIT_USER_ID, VISIT_PEER_NAME, VISIT_DATE, VISIT_CONTENT, VISIT_CUST_FOCUS, VISIT_EFFECT, VISIT_IMPROVEMENT, VISIT_COST, VISIT_COST_EXPLAIN, VISIT_STATE, VISIT_FILL_ID, VISIT_FILL_TIME, VISIT_CONFIRM_ID, VISIT_CONFIRM_TIME) values
 		<foreach item="item" index="index" collection="list" separator=",">
             ( #{item.visitId}, #{item.visitType}, #{item.visitCustId}, #{item.visitReceptionName}, #{item.visitReceptionSex}, #{item.visitReceptionJob}, #{item.visitReceptionPhone}, #{item.visitUserId}, #{item.visitPeerName}, #{item.visitDate}, #{item.visitContent}, #{item.visitCustFocus}, #{item.visitEffect}, #{item.visitImprovement}, #{item.visitCost}, #{item.visitCostExplain}, #{item.visitState}, #{item.visitFillId}, #{item.visitFillTime}, #{item.visitConfirmId}, #{item.visitConfirmTime})
