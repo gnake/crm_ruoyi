@@ -134,8 +134,34 @@
     <script th:inline="javascript">
         var prefix = ctx + "crm/orgstrangevisit"
         $("#form-orgstrangevisit-add").validate({
-            focusCleanup: true
+            focusCleanup: true,
+            rules: {
+                orgName: {
+                  required: true,
+                },
+                orgLinkmanName: {
+                    required: true
+                },
+                orgEmail: {
+                    required: true,
+                    email: true
+                },
+                orgContactWay: {
+                    required: true,
+                    number: true
+                },
+
+            },
+            messages: {
+                orgName: {
+                    required: "请输入组织名称"
+                },
+                orgLinkmanName: {
+                    required: "请输入联系人"
+                },
+            }
         });
+
 
         function submitHandler() {
             if ($.validate.form()) {

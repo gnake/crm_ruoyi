@@ -65,7 +65,45 @@
     <script th:inline="javascript">
         var prefix = ctx + "crm/ENTRY"
         $("#form-ENTRY-add").validate({
-            focusCleanup: true
+            focusCleanup: true,
+            rules: {
+                orderId: {
+                    required: true
+                },
+                entryOrderProduct: {
+                    required: true
+                },
+                entryProductModel: {
+                    required: true
+                },
+                entryNumber: {
+                    required: true,
+                    number: true
+                },
+                entryUnitPrice: {
+                    required: true,
+                    number: true
+                },
+                entryDiscount: {
+                    required: true,
+                    number: true
+                },
+                entryRealPrice: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                orderId: {
+                    required: "请输入订单标识"
+                },
+                entryOrderProduct: {
+                    required: "请输入预订产品"
+                },
+                entryProductModel: {
+                    required: "请输入产品型号"
+                }
+            }
         });
 
         function submitHandler() {

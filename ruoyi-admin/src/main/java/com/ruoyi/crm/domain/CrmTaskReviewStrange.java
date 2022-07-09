@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 陌生拜访对象 CRM_ORG_INFO
  * 
  * @author 高国文
- * @date 2022-07-08
+ * @date 2022-07-09
  */
 public class CrmTaskReviewStrange extends BaseEntity
 {
