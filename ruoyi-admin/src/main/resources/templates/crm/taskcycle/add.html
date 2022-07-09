@@ -48,10 +48,12 @@
             autoclose: true
         }).change(function (){
             let startDate = $("input[name='tcBegin']").val();
-            let endDate = $("input[name='tcEnd']").val();
-            if(startDate >= endDate){
-                $("input[name='tcBegin']").val(null);
-                alert("结束时间应大于开始时间");}
+            let endDate = $("input[name='tcEnd']").val(null);
+            if(endDate != null){
+                if(startDate >= endDate){
+                    $("input[name='tcBegin']").val(null);
+                    alert("结束时间应大于开始时间");}
+            }
         });
 
         $("input[name='tcEnd']").datetimepicker({
