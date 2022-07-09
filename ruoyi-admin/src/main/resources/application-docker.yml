@@ -1,9 +1,13 @@
+# 数据源配置
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://8.142.91.137:3306/ry
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      master:
+        url: jdbc:mysql://mysqlg21:3306/ry
+        username: root
+        password: 123456
   redis:
     database: 0
     host: rjredis
