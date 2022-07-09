@@ -2,8 +2,30 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('潜在客户列表')" />
+    <th:block th:include="include :: layout-latest-css" />
+    <th:block th:include="include :: ztree-css" />
 </head>
 <body class="gray-bg">
+<div class="ui-layout-west">
+    <div class="box box-main">
+        <div class="box-header">
+            <div class="box-title">
+                <i class="fa icon-grid"></i> 组织机构
+            </div>
+            <div class="box-tools pull-right">
+                <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
+                <button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;"><i class="fa fa-chevron-up"></i></button>
+                <button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠"><i class="fa fa-chevron-down"></i></button>
+                <button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新部门"><i class="fa fa-refresh"></i></button>
+            </div>
+        </div>
+        <div class="ui-layout-content">
+            <div id="tree" class="ztree"></div>
+        </div>
+    </div>
+</div>
+
+<div class="ui-layout-center">
      <div class="container-div">
         <div class="row">
             <div class="col-sm-12 search-collapse">
@@ -49,9 +71,7 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:orgcust:add">
-                    <i class="fa fa-plus"></i> 添加
-                </a>
+
                 <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:orgcust:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
@@ -67,7 +87,10 @@
             </div>
         </div>
     </div>
-    <th:block th:include="include :: footer" />
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: layout-latest-js" />
+<th:block th:include="include :: ztree-js" />
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('crm:orgcust:edit')}]];
         var removeFlag = [[${@permission.hasPermi('crm:orgcust:remove')}]];
@@ -75,6 +98,24 @@
         var orgLabelsDatas = [[${@dict.getType('orglabel')}]];
         var orgClassifyDatas = [[${@dict.getType('orginfo')}]];
         var prefix = ctx + "crm/orgcust";
+
+        $(function() {
+            var panehHidden = false;
+            if ($(this).width() < 769) {
+                panehHidden = true;
+            }
+            $('body').layout({ initClosed: panehHidden, west__size: 185 });
+            // 回到顶部绑定
+            if ($.fn.toTop !== undefined) {
+                var opt = {
+                    win:$('.ui-layout-center'),
+                    doc:$('.ui-layout-center')
+                };
+                $('#scroll-up').toTop(opt);
+            }
+            queryUserList();
+            queryDeptTree();
+        });
 
         $(function() {
             var options = {

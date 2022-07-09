@@ -20,7 +20,7 @@ public class TaskReview extends BaseEntity
     private Long taskReviewId;
 
     /** 任务周期定义(TASK_CYCLE) 关联 */
-    @Excel(name = "任务周期定义(TASK_CYCLE) 关联")
+    @Excel(name = "任务周期")
     private Long tcId;
 
     /** 销售人员 */
