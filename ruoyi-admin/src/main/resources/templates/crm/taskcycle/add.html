@@ -35,6 +35,7 @@
             focusCleanup: true
         });
 
+
         function submitHandler() {
             if ($.validate.form()) {
                 $.operate.save(prefix + "/add", $('#form-taskcycle-add').serialize());
@@ -45,12 +46,24 @@
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        }).change(function (){
+            let startDate = $("input[name='tcBegin']").val();
+            let endDate = $("input[name='tcEnd']").val();
+            if(startDate >= endDate){
+                $("input[name='tcBegin']").val(null);
+                alert("结束时间应大于开始时间");}
         });
 
         $("input[name='tcEnd']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        }).change(function (){
+            let startDate = $("input[name='tcBegin']").val();
+            let endDate = $("input[name='tcEnd']").val();
+            if(startDate >= endDate){
+                $("input[name='tcEnd']").val(null);
+                alert("结束时间应大于开始时间");}
         });
     </script>
 </body>
