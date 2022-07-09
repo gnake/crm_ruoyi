@@ -57,6 +57,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('crm:CrmVisitCustomer:edit')}]];
         var removeFlag = [[${@permission.hasPermi('crm:CrmVisitCustomer:remove')}]];
+        var visitReceptionSexDatas = [[${@dict.getType('sys_name_sex')}]];
         var visitEffectDatas = [[${@dict.getType('sys_visit_effect')}]];
         var prefix = ctx + "crm/CrmVisitCustomer";
 
@@ -73,7 +74,7 @@
                 },
                 {
                     field: 'visitId',
-                    title: '主键',
+                    title: '拜访序列',
                     visible: false
                 },
                 {
@@ -81,8 +82,19 @@
                     title: '客户ID'
                 },
                 {
+                    field: 'visitReceptionName',
+                    title: '接待人姓名'
+                },
+                {
+                    field: 'visitReceptionSex',
+                    title: '接待人性别',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(visitReceptionSexDatas, value);
+                    }
+                },
+                {
                     field: 'visitUserId',
-                    title: '拜访人员'
+                    title: '拜访人员ID'
                 },
                 {
                     field: 'visitDate',

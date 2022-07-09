@@ -8,10 +8,10 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 我的客户对象 CRM_CUSTOMER_INFO
+ * 意向跟进对象 CRM_CUSTOMER_INFO
  * 
  * @author 童楷涵
- * @date 2022-07-08
+ * @date 2022-07-09
  */
 public class MyCustomer extends BaseEntity
 {
@@ -44,6 +44,7 @@ public class MyCustomer extends BaseEntity
     private String custNature;
 
     /** 简要介绍 */
+    @Excel(name = "简要介绍")
     private String custIntroduce;
 
     /** 状态 */
