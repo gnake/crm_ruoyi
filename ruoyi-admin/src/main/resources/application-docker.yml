@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://mysqlg21:3306/ry
+    url: jdbc:mysql://8.142.91.137:3306/ry
   redis:
     database: 0
     host: rjredis
