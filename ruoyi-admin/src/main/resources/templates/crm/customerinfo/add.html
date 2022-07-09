@@ -22,13 +22,15 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">省份：</label>
                 <div class="col-sm-8">
-                    <input name="custProvince" class="form-control" type="text">
+                    <select name="custProvince" id="province" class="form-control">
+                        <option value="-1">请选择</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">城市：</label>
                 <div class="col-sm-8">
-                    <input name="custCity" class="form-control" type="text">
+                    <select id="city" name="custCity" class="form-control"></select>
                 </div>
             </div>
             <div class="form-group">    
@@ -65,7 +67,7 @@
                 <label class="col-sm-3 control-label">创建时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <input name="custCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <input name="custCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required="required">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -80,7 +82,7 @@
                 <label class="col-sm-3 control-label">提交时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <input name="custSubmitTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <input name="custSubmitTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required="required">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -88,14 +90,14 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">确认人：</label>
                 <div class="col-sm-8">
-                    <input name="custConfirmId" class="form-control" type="text">
+                    <input name="custConfirmId" class="form-control" type="text" required="required">
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">确认时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <input name="custConfirmTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <input name="custConfirmTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required="required">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -122,7 +124,7 @@
                 <label class="col-sm-3 control-label">计划拜访时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <input name="custVisitAgainTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <input name="custVisitAgainTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required="required">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -132,6 +134,30 @@
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
+        var provinceArr = ['上海','江苏','河北'];
+        var cityArr = [
+            ['上海市'],
+            ['苏州市','南京市','扬州市'],
+            ['石家庄','秦皇岛','张家口']
+        ];
+
+        function createOption(obj, data){
+            for(var i in data){
+                var op = new Option(data[i], i);
+                obj.options.add(op);
+            }
+        }
+        var province = document.getElementById('province');
+        createOption(province,provinceArr);
+
+        //城市下拉菜单
+        var city = document.getElementById('city');
+        province.onchange = function() {
+            city.options.length = 0;
+            createOption(city,cityArr[province.value]);
+        };
+
+
         var prefix = ctx + "crm/customerinfo"
         $("#form-customerinfo-add").validate({
             focusCleanup: true
