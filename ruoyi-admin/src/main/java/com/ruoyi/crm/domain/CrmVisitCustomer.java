@@ -13,14 +13,14 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 我的客户对象 CRM_VISIT
  * 
  * @author 童楷涵
- * @date 2022-07-08
+ * @date 2022-07-09
  */
 public class CrmVisitCustomer extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 主键 */
-    @Excel(name = "主键")
+    /** 拜访序列 */
+    @Excel(name = "拜访序列")
     private Long visitId;
 
     /** 拜访类型 */
@@ -31,9 +31,11 @@ public class CrmVisitCustomer extends BaseEntity
     private Long visitCustId;
 
     /** 接待人姓名 */
+    @Excel(name = "接待人姓名")
     private String visitReceptionName;
 
     /** 接待人性别 */
+    @Excel(name = "接待人性别")
     private String visitReceptionSex;
 
     /** 接待人职位 */
@@ -42,8 +44,8 @@ public class CrmVisitCustomer extends BaseEntity
     /** 接待人电话 */
     private String visitReceptionPhone;
 
-    /** 拜访人员 */
-    @Excel(name = "拜访人员")
+    /** 拜访人员ID */
+    @Excel(name = "拜访人员ID")
     private Long visitUserId;
 
     /** 同行人员 */
@@ -88,7 +90,7 @@ public class CrmVisitCustomer extends BaseEntity
     /** 确认时间 */
     private Date visitConfirmTime;
 
-    /** 我的客户信息 */
+    /** 意向跟进信息 */
     private List<MyCustomer> myCustomerList;
 
     public void setVisitId(Long visitId) 

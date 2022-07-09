@@ -8,7 +8,7 @@ import com.ruoyi.crm.domain.MyCustomer;
  * 我的客户Mapper接口
  * 
  * @author 童楷涵
- * @date 2022-07-08
+ * @date 2022-07-09
  */
 public interface CrmVisitCustomerMapper 
 {
@@ -61,7 +61,7 @@ public interface CrmVisitCustomerMapper
     int deleteCrmVisitCustomerByVisitIds(String[] visitIds);
 
     /**
-     * 批量删除我的客户
+     * 批量删除意向跟进
      * 
      * @param visitIds 需要删除的数据主键集合
      * @return 结果
@@ -69,16 +69,16 @@ public interface CrmVisitCustomerMapper
     int deleteMyCustomerByCustIds(String[] visitIds);
     
     /**
-     * 批量新增我的客户
+     * 批量新增意向跟进
      * 
-     * @param myCustomerList 我的客户列表
+     * @param myCustomerList 意向跟进列表
      * @return 结果
      */
     int batchMyCustomer(List<MyCustomer> myCustomerList);
     
 
     /**
-     * 通过我的客户主键删除我的客户信息
+     * 通过我的客户主键删除意向跟进信息
      * 
      * @param visitId 我的客户ID
      * @return 结果

@@ -16,7 +16,7 @@ import com.ruoyi.common.core.text.Convert;
  * 我的客户Service业务层处理
  * 
  * @author 童楷涵
- * @date 2022-07-08
+ * @date 2022-07-09
  */
 @Service
 public class CrmVisitCustomerServiceImpl implements ICrmVisitCustomerService 
@@ -107,7 +107,7 @@ public class CrmVisitCustomerServiceImpl implements ICrmVisitCustomerService
     }
 
     /**
-     * 新增我的客户信息
+     * 新增意向跟进信息
      * 
      * @param crmVisitCustomer 我的客户对象
      */
