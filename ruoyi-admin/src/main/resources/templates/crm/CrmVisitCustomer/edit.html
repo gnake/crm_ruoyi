@@ -86,41 +86,6 @@
             autoclose: true
         });
 
-        $(function () {
-            $('form').bootstrapValidator({
-
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
-                    visitId: {
-                        message: '拜访序列验证失败',
-                        validators: {
-                            notEmpty: {
-                                message: '拜访序列不能为空'
-                            }
-                        }
-                    },
-                    visitCustId: {
-                        validators: {
-                            notEmpty: {
-                                message: '客户ID不能为空'
-                            }
-                        }
-                    },
-                    visitUserId: {
-                        validators: {
-                            notEmpty: {
-                                message: '拜访人员ID不能为空'
-                            }
-                        }
-                    }
-                }
-            });
-        });
 
         $(function() {
             var options = {
@@ -211,7 +176,44 @@
             };
             $.table.init(options);
         });
-
+        $(function () {
+            $('form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    //user名称必须与name名称相同（区分大小写）
+                    visitId: {
+                        message: '请输入拜访序列',
+                        validators: {
+                            notEmpty: {
+                                message: '拜访序列不能为空'
+                            }
+                        }
+                    },
+                    visitReceptionName: {
+                        validators: {
+                            notEmpty: {
+                                message: '接待人姓名不能为空'
+                            },
+                            notNumeric:{
+                                message:'不能是数值'
+                            }
+                        }
+                    },
+                    visitReceptionSex: {
+                        validators: {
+                            notEmpty: {
+                                message: '接待人性别不能为空'
+                            }
+                        }
+                    }
+                }
+            });
+        });
         function addRow() {
             var count = $("#" + table.options.id).bootstrapTable('getData').length;
             var row = {
