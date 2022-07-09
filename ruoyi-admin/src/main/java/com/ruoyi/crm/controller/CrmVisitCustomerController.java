@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.crm.domain.CrmMyCustomer;
-import com.ruoyi.crm.service.ICrmMyCustomerService;
+import com.ruoyi.crm.domain.CrmVisitCustomer;
+import com.ruoyi.crm.service.ICrmVisitCustomerService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -26,45 +26,45 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-07-08
  */
 @Controller
-@RequestMapping("/crm/mycustomer")
-public class CrmMyCustomerController extends BaseController
+@RequestMapping("/crm/CrmVisitCustomer")
+public class CrmVisitCustomerController extends BaseController
 {
-    private final String prefix = "crm/mycustomer";
+    private final String prefix = "crm/CrmVisitCustomer";
 
     @Autowired
-    private ICrmMyCustomerService crmMyCustomerService;
+    private ICrmVisitCustomerService crmVisitCustomerService;
 
-    @RequiresPermissions("crm:mycustomer:view")
+    @RequiresPermissions("crm:CrmVisitCustomer:view")
     @GetMapping()
-    public String mycustomer()
+    public String CrmVisitCustomer()
     {
-        return prefix + "/mycustomer";
+        return prefix + "/CrmVisitCustomer";
     }
 
     /**
      * 查询我的客户列表
      */
-    @RequiresPermissions("crm:mycustomer:list")
+    @RequiresPermissions("crm:CrmVisitCustomer:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(CrmMyCustomer crmMyCustomer)
+    public TableDataInfo list(CrmVisitCustomer crmVisitCustomer)
     {
         startPage();
-        List<CrmMyCustomer> list = crmMyCustomerService.selectCrmMyCustomerList(crmMyCustomer);
+        List<CrmVisitCustomer> list = crmVisitCustomerService.selectCrmVisitCustomerList(crmVisitCustomer);
         return getDataTable(list);
     }
 
     /**
      * 导出我的客户列表
      */
-    @RequiresPermissions("crm:mycustomer:export")
+    @RequiresPermissions("crm:CrmVisitCustomer:export")
     @Log(title = "我的客户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(CrmMyCustomer crmMyCustomer)
+    public AjaxResult export(CrmVisitCustomer crmVisitCustomer)
     {
-        List<CrmMyCustomer> list = crmMyCustomerService.selectCrmMyCustomerList(crmMyCustomer);
-        ExcelUtil<CrmMyCustomer> util = new ExcelUtil<CrmMyCustomer>(CrmMyCustomer.class);
+        List<CrmVisitCustomer> list = crmVisitCustomerService.selectCrmVisitCustomerList(crmVisitCustomer);
+        ExcelUtil<CrmVisitCustomer> util = new ExcelUtil<CrmVisitCustomer>(CrmVisitCustomer.class);
         return util.exportExcel(list, "我的客户数据");
     }
 
@@ -80,48 +80,48 @@ public class CrmMyCustomerController extends BaseController
     /**
      * 新增保存我的客户
      */
-    @RequiresPermissions("crm:mycustomer:add")
+    @RequiresPermissions("crm:CrmVisitCustomer:add")
     @Log(title = "我的客户", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(CrmMyCustomer crmMyCustomer)
+    public AjaxResult addSave(CrmVisitCustomer crmVisitCustomer)
     {
-        return toAjax(crmMyCustomerService.insertCrmMyCustomer(crmMyCustomer));
+        return toAjax(crmVisitCustomerService.insertCrmVisitCustomer(crmVisitCustomer));
     }
 
     /**
      * 修改我的客户
      */
-    @RequiresPermissions("crm:mycustomer:edit")
-    @GetMapping("/edit/{custId}")
-    public String edit(@PathVariable("custId") Long custId, ModelMap mmap)
+    @RequiresPermissions("crm:CrmVisitCustomer:edit")
+    @GetMapping("/edit/{visitId}")
+    public String edit(@PathVariable("visitId") Long visitId, ModelMap mmap)
     {
-        CrmMyCustomer crmMyCustomer = crmMyCustomerService.selectCrmMyCustomerByCustId(custId);
-        mmap.put("crmMyCustomer", crmMyCustomer);
+        CrmVisitCustomer crmVisitCustomer = crmVisitCustomerService.selectCrmVisitCustomerByVisitId(visitId);
+        mmap.put("crmVisitCustomer", crmVisitCustomer);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存我的客户
      */
-    @RequiresPermissions("crm:mycustomer:edit")
+    @RequiresPermissions("crm:CrmVisitCustomer:edit")
     @Log(title = "我的客户", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(CrmMyCustomer crmMyCustomer)
+    public AjaxResult editSave(CrmVisitCustomer crmVisitCustomer)
     {
-        return toAjax(crmMyCustomerService.updateCrmMyCustomer(crmMyCustomer));
+        return toAjax(crmVisitCustomerService.updateCrmVisitCustomer(crmVisitCustomer));
     }
 
     /**
      * 删除我的客户
      */
-    @RequiresPermissions("crm:mycustomer:remove")
+    @RequiresPermissions("crm:CrmVisitCustomer:remove")
     @Log(title = "我的客户", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(crmMyCustomerService.deleteCrmMyCustomerByCustIds(ids));
+        return toAjax(crmVisitCustomerService.deleteCrmVisitCustomerByVisitIds(ids));
     }
 }

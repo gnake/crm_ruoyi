@@ -1,6 +1,7 @@
 package com.ruoyi.crm.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,6 +27,7 @@ public class CrmVisitCustomer extends BaseEntity
     private String visitType;
 
     /** 客户ID */
+    @Excel(name = "客户ID")
     private Long visitCustId;
 
     /** 接待人姓名 */
@@ -85,6 +87,9 @@ public class CrmVisitCustomer extends BaseEntity
 
     /** 确认时间 */
     private Date visitConfirmTime;
+
+    /** 我的客户信息 */
+    private List<MyCustomer> myCustomerList;
 
     public void setVisitId(Long visitId) 
     {
@@ -276,6 +281,16 @@ public class CrmVisitCustomer extends BaseEntity
         return visitConfirmTime;
     }
 
+    public List<MyCustomer> getMyCustomerList()
+    {
+        return myCustomerList;
+    }
+
+    public void setMyCustomerList(List<MyCustomer> myCustomerList)
+    {
+        this.myCustomerList = myCustomerList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -300,6 +315,7 @@ public class CrmVisitCustomer extends BaseEntity
             .append("visitFillTime", getVisitFillTime())
             .append("visitConfirmId", getVisitConfirmId())
             .append("visitConfirmTime", getVisitConfirmTime())
+            .append("myCustomerList", getMyCustomerList())
             .toString();
     }
 }

@@ -11,15 +11,16 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>状态：</label>
-                                <select name="custState" th:with="type=${@dict.getType('sys_cust_precedence')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
+                                <label>客户ID：</label>
+                                <input type="text" name="visitCustId"/>
                             </li>
                             <li>
-                                <label>级别：</label>
-                                <select name="custLevel" th:with="type=${@dict.getType('sys_cust_level')}">
+                                <label>拜访日期：</label>
+                                <input type="text" class="time-input" placeholder="请选择拜访日期" name="visitDate"/>
+                            </li>
+                            <li>
+                                <label>沟通效果：</label>
+                                <select name="visitEffect" th:with="type=${@dict.getType('sys_visit_effect')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
@@ -34,16 +35,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:mycustomer:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:CrmVisitCustomer:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:mycustomer:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:CrmVisitCustomer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:mycustomer:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:CrmVisitCustomer:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:mycustomer:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:CrmVisitCustomer:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -54,11 +55,10 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('crm:mycustomer:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('crm:mycustomer:remove')}]];
-        var custStateDatas = [[${@dict.getType('sys_cust_precedence')}]];
-        var custLevelDatas = [[${@dict.getType('sys_cust_level')}]];
-        var prefix = ctx + "crm/mycustomer";
+        var editFlag = [[${@permission.hasPermi('crm:CrmVisitCustomer:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('crm:CrmVisitCustomer:remove')}]];
+        var visitEffectDatas = [[${@dict.getType('sys_visit_effect')}]];
+        var prefix = ctx + "crm/CrmVisitCustomer";
 
         $(function() {
             var options = {
@@ -72,26 +72,27 @@
                     checkbox: true
                 },
                 {
-                    field: 'custId',
+                    field: 'visitId',
                     title: '主键',
                     visible: false
                 },
                 {
-                    field: 'custName',
-                    title: '客户名称'
+                    field: 'visitCustId',
+                    title: '客户ID'
                 },
                 {
-                    field: 'custState',
-                    title: '状态',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(custStateDatas, value);
-                    }
+                    field: 'visitUserId',
+                    title: '拜访人员'
                 },
                 {
-                    field: 'custLevel',
-                    title: '级别',
+                    field: 'visitDate',
+                    title: '拜访日期'
+                },
+                {
+                    field: 'visitEffect',
+                    title: '沟通效果',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(custLevelDatas, value);
+                       return $.table.selectDictLabel(visitEffectDatas, value);
                     }
                 },
                 {
@@ -99,8 +100,8 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.custId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.custId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.visitId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.visitId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]
