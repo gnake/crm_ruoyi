@@ -10,10 +10,10 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 陌生拜访对象 CRM_ORG_INFO
  * 
- * @author ggw
- * @date 2022-07-07
+ * @author 高国文
+ * @date 2022-07-08
  */
-public class CrmTaskReviewStrangeVisit extends BaseEntity
+public class CrmTaskReviewStrange extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -27,10 +27,10 @@ public class CrmTaskReviewStrangeVisit extends BaseEntity
     private String orgType;
 
     /** 简要介绍 */
+    @Excel(name = "简要介绍")
     private String orgIntroduction;
 
     /** 联系人 */
-    @Excel(name = "联系人")
     private String orgLinkmanName;
 
     /** 邮箱 */

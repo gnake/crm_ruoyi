@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.crm.mapper.CrmTaskReviewStrangeVisitMapper">
+<mapper namespace="com.ruoyi.crm.mapper.CrmTaskReviewStrangeMapper">
     
-    <resultMap type="CrmTaskReviewStrangeVisit" id="CrmTaskReviewStrangeVisitResult">
+    <resultMap type="CrmTaskReviewStrange" id="CrmTaskReviewStrangeResult">
         <result property="orgId"    column="ORG_ID"    />
         <result property="orgName"    column="ORG_NAME"    />
         <result property="orgType"    column="ORG_TYPE"    />
@@ -27,22 +27,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orgClassify"    column="ORG_CLASSIFY"    />
     </resultMap>
 
-    <sql id="selectCrmTaskReviewStrangeVisitVo">
+    <sql id="selectCrmTaskReviewStrangeVo">
         select ORG_ID, ORG_NAME, ORG_TYPE, ORG_INTRODUCTION, ORG_LINKMAN_NAME, ORG_EMAIL, ORG_CONTACT_WAY, ORG_STATE, ORG_LABELS, ORG_ADDRESS, ORG_WEBSITE, ORG_CREATER, ORG_CREATE_TIME, ORG_UPDATE_TIME, ORG_CLASSIFICATION, ORG_VISIT_AGAIN_TIME, CUST_ID, ORG_SOURCES, ORG_SALESMAN, ORG_CLASSIFY from CRM_ORG_INFO
     </sql>
 
-    <select id="selectCrmTaskReviewStrangeVisitList" parameterType="CrmTaskReviewStrangeVisit" resultMap="CrmTaskReviewStrangeVisitResult">
-        <include refid="selectCrmTaskReviewStrangeVisitVo"/>
+    <select id="selectCrmTaskReviewStrangeList" parameterType="CrmTaskReviewStrange" resultMap="CrmTaskReviewStrangeResult">
+        <include refid="selectCrmTaskReviewStrangeVo"/>
         <where>  
+            <if test="orgState != null  and orgState != ''"> and ORG_STATE = #{orgState}</if>
+            <if test="orgLabels != null  and orgLabels != ''"> and ORG_LABELS = #{orgLabels}</if>
+            <if test="orgUpdateTime != null "> and ORG_UPDATE_TIME = #{orgUpdateTime}</if>
+            <if test="orgSalesman != null  and orgSalesman != ''"> and ORG_SALESMAN = #{orgSalesman}</if>
+            <if test="orgClassify != null "> and ORG_CLASSIFY = #{orgClassify}</if>
         </where>
     </select>
     
-    <select id="selectCrmTaskReviewStrangeVisitByOrgId" parameterType="Long" resultMap="CrmTaskReviewStrangeVisitResult">
-        <include refid="selectCrmTaskReviewStrangeVisitVo"/>
+    <select id="selectCrmTaskReviewStrangeByOrgId" parameterType="Long" resultMap="CrmTaskReviewStrangeResult">
+        <include refid="selectCrmTaskReviewStrangeVo"/>
         where ORG_ID = #{orgId}
     </select>
         
-    <insert id="insertCrmTaskReviewStrangeVisit" parameterType="CrmTaskReviewStrangeVisit" useGeneratedKeys="true" keyProperty="orgId">
+    <insert id="insertCrmTaskReviewStrange" parameterType="CrmTaskReviewStrange" useGeneratedKeys="true" keyProperty="orgId">
         insert into CRM_ORG_INFO
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="orgName != null">ORG_NAME,</if>
@@ -88,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCrmTaskReviewStrangeVisit" parameterType="CrmTaskReviewStrangeVisit">
+    <update id="updateCrmTaskReviewStrange" parameterType="CrmTaskReviewStrange">
         update CRM_ORG_INFO
         <trim prefix="SET" suffixOverrides=",">
             <if test="orgName != null">ORG_NAME = #{orgName},</if>
@@ -114,11 +119,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where ORG_ID = #{orgId}
     </update>
 
-    <delete id="deleteCrmTaskReviewStrangeVisitByOrgId" parameterType="Long">
+    <delete id="deleteCrmTaskReviewStrangeByOrgId" parameterType="Long">
         delete from CRM_ORG_INFO where ORG_ID = #{orgId}
     </delete>
 
-    <delete id="deleteCrmTaskReviewStrangeVisitByOrgIds" parameterType="String">
+    <delete id="deleteCrmTaskReviewStrangeByOrgIds" parameterType="String">
         delete from CRM_ORG_INFO where ORG_ID in 
         <foreach item="orgId" collection="array" open="(" separator="," close=")">
             #{orgId}

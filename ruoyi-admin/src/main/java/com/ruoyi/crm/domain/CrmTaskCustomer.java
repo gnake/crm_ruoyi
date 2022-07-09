@@ -11,14 +11,15 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 意向跟进对象 CRM_CUSTOMER_INFO
  * 
- * @author ggw
- * @date 2022-07-07
+ * @author swj
+ * @date 2022-07-08
  */
-public class CrmTaskReviewIntention extends BaseEntity
+public class CrmTaskCustomer extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
+    @Excel(name = "主键")
     private Long custId;
 
     /** 客户名称 */
@@ -86,6 +87,9 @@ public class CrmTaskReviewIntention extends BaseEntity
 
     /** 计划拜访时间 */
     private Date custVisitAgainTime;
+
+    /** 我的客户信息 */
+    private List<CrmVisitCustomer> crmVisitCustomerList;
 
     public void setCustId(Long custId) 
     {
@@ -277,6 +281,16 @@ public class CrmTaskReviewIntention extends BaseEntity
         return custVisitAgainTime;
     }
 
+    public List<CrmVisitCustomer> getCrmVisitCustomerList()
+    {
+        return crmVisitCustomerList;
+    }
+
+    public void setCrmVisitCustomerList(List<CrmVisitCustomer> crmVisitCustomerList)
+    {
+        this.crmVisitCustomerList = crmVisitCustomerList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -301,6 +315,7 @@ public class CrmTaskReviewIntention extends BaseEntity
             .append("custCompanyWeb", getCustCompanyWeb())
             .append("orgId", getOrgId())
             .append("custVisitAgainTime", getCustVisitAgainTime())
+            .append("crmVisitCustomerList", getCrmVisitCustomerList())
             .toString();
     }
 }

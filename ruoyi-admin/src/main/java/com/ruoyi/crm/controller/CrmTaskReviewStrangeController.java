@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.crm.domain.CrmTaskReviewStrangeVisit;
-import com.ruoyi.crm.service.ICrmTaskReviewStrangeVisitService;
+import com.ruoyi.crm.domain.CrmTaskReviewStrange;
+import com.ruoyi.crm.service.ICrmTaskReviewStrangeService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -22,49 +22,49 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 陌生拜访Controller
  * 
- * @author ggw
- * @date 2022-07-07
+ * @author 高国文
+ * @date 2022-07-08
  */
 @Controller
-@RequestMapping("/strangevisit/strangevisit")
-public class CrmTaskReviewStrangeVisitController extends BaseController
+@RequestMapping("/crm/orgstrangevisit")
+public class CrmTaskReviewStrangeController extends BaseController
 {
-    private final String prefix = "strangevisit/strangevisit";
+    private final String prefix = "crm/orgstrangevisit";
 
     @Autowired
-    private ICrmTaskReviewStrangeVisitService crmTaskReviewStrangeVisitService;
+    private ICrmTaskReviewStrangeService crmTaskReviewStrangeService;
 
-    @RequiresPermissions("strangevisit:strangevisit:view")
+    @RequiresPermissions("crm:orgstrangevisit:view")
     @GetMapping()
-    public String strangevisit()
+    public String orgstrangevisit()
     {
-        return prefix + "/strangevisit";
+        return prefix + "/orgstrangevisit";
     }
 
     /**
      * 查询陌生拜访列表
      */
-    @RequiresPermissions("strangevisit:strangevisit:list")
+    @RequiresPermissions("crm:orgstrangevisit:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(CrmTaskReviewStrangeVisit crmTaskReviewStrangeVisit)
+    public TableDataInfo list(CrmTaskReviewStrange crmTaskReviewStrange)
     {
         startPage();
-        List<CrmTaskReviewStrangeVisit> list = crmTaskReviewStrangeVisitService.selectCrmTaskReviewStrangeVisitList(crmTaskReviewStrangeVisit);
+        List<CrmTaskReviewStrange> list = crmTaskReviewStrangeService.selectCrmTaskReviewStrangeList(crmTaskReviewStrange);
         return getDataTable(list);
     }
 
     /**
      * 导出陌生拜访列表
      */
-    @RequiresPermissions("strangevisit:strangevisit:export")
+    @RequiresPermissions("crm:orgstrangevisit:export")
     @Log(title = "陌生拜访", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(CrmTaskReviewStrangeVisit crmTaskReviewStrangeVisit)
+    public AjaxResult export(CrmTaskReviewStrange crmTaskReviewStrange)
     {
-        List<CrmTaskReviewStrangeVisit> list = crmTaskReviewStrangeVisitService.selectCrmTaskReviewStrangeVisitList(crmTaskReviewStrangeVisit);
-        ExcelUtil<CrmTaskReviewStrangeVisit> util = new ExcelUtil<CrmTaskReviewStrangeVisit>(CrmTaskReviewStrangeVisit.class);
+        List<CrmTaskReviewStrange> list = crmTaskReviewStrangeService.selectCrmTaskReviewStrangeList(crmTaskReviewStrange);
+        ExcelUtil<CrmTaskReviewStrange> util = new ExcelUtil<CrmTaskReviewStrange>(CrmTaskReviewStrange.class);
         return util.exportExcel(list, "陌生拜访数据");
     }
 
@@ -80,48 +80,48 @@ public class CrmTaskReviewStrangeVisitController extends BaseController
     /**
      * 新增保存陌生拜访
      */
-    @RequiresPermissions("strangevisit:strangevisit:add")
+    @RequiresPermissions("crm:orgstrangevisit:add")
     @Log(title = "陌生拜访", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(CrmTaskReviewStrangeVisit crmTaskReviewStrangeVisit)
+    public AjaxResult addSave(CrmTaskReviewStrange crmTaskReviewStrange)
     {
-        return toAjax(crmTaskReviewStrangeVisitService.insertCrmTaskReviewStrangeVisit(crmTaskReviewStrangeVisit));
+        return toAjax(crmTaskReviewStrangeService.insertCrmTaskReviewStrange(crmTaskReviewStrange));
     }
 
     /**
      * 修改陌生拜访
      */
-    @RequiresPermissions("strangevisit:strangevisit:edit")
+    @RequiresPermissions("crm:orgstrangevisit:edit")
     @GetMapping("/edit/{orgId}")
     public String edit(@PathVariable("orgId") Long orgId, ModelMap mmap)
     {
-        CrmTaskReviewStrangeVisit crmTaskReviewStrangeVisit = crmTaskReviewStrangeVisitService.selectCrmTaskReviewStrangeVisitByOrgId(orgId);
-        mmap.put("crmTaskReviewStrangeVisit", crmTaskReviewStrangeVisit);
+        CrmTaskReviewStrange crmTaskReviewStrange = crmTaskReviewStrangeService.selectCrmTaskReviewStrangeByOrgId(orgId);
+        mmap.put("crmTaskReviewStrange", crmTaskReviewStrange);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存陌生拜访
      */
-    @RequiresPermissions("strangevisit:strangevisit:edit")
+    @RequiresPermissions("crm:orgstrangevisit:edit")
     @Log(title = "陌生拜访", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(CrmTaskReviewStrangeVisit crmTaskReviewStrangeVisit)
+    public AjaxResult editSave(CrmTaskReviewStrange crmTaskReviewStrange)
     {
-        return toAjax(crmTaskReviewStrangeVisitService.updateCrmTaskReviewStrangeVisit(crmTaskReviewStrangeVisit));
+        return toAjax(crmTaskReviewStrangeService.updateCrmTaskReviewStrange(crmTaskReviewStrange));
     }
 
     /**
      * 删除陌生拜访
      */
-    @RequiresPermissions("strangevisit:strangevisit:remove")
+    @RequiresPermissions("crm:orgstrangevisit:remove")
     @Log(title = "陌生拜访", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(crmTaskReviewStrangeVisitService.deleteCrmTaskReviewStrangeVisitByOrgIds(ids));
+        return toAjax(crmTaskReviewStrangeService.deleteCrmTaskReviewStrangeByOrgIds(ids));
     }
 }

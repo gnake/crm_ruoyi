@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.crm.mapper.CrmTaskReviewIntentionMapper">
+<mapper namespace="com.ruoyi.crm.mapper.CrmTaskCustomerMapper">
     
-    <resultMap type="CrmTaskReviewIntention" id="CrmTaskReviewIntentionResult">
+    <resultMap type="CrmTaskCustomer" id="CrmTaskCustomerResult">
         <result property="custId"    column="CUST_ID"    />
         <result property="custName"    column="CUST_NAME"    />
         <result property="custIndustry"    column="CUST_INDUSTRY"    />
@@ -28,22 +28,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="custVisitAgainTime"    column="CUST_VISIT_AGAIN_TIME"    />
     </resultMap>
 
-    <sql id="selectCrmTaskReviewIntentionVo">
+    <resultMap id="CrmTaskCustomerCrmVisitCustomerResult" type="CrmTaskCustomer" extends="CrmTaskCustomerResult">
+        <collection property="crmVisitCustomerList" notNullColumn="sub_VISIT_ID" javaType="java.util.List" resultMap="CrmVisitCustomerResult" />
+    </resultMap>
+
+    <resultMap type="CrmVisitCustomer" id="CrmVisitCustomerResult">
+        <result property="visitId"    column="sub_VISIT_ID"    />
+        <result property="visitType"    column="sub_VISIT_TYPE"    />
+        <result property="visitCustId"    column="sub_VISIT_CUST_ID"    />
+        <result property="visitReceptionName"    column="sub_VISIT_RECEPTION_NAME"    />
+        <result property="visitReceptionSex"    column="sub_VISIT_RECEPTION_SEX"    />
+        <result property="visitReceptionJob"    column="sub_VISIT_RECEPTION_JOB"    />
+        <result property="visitReceptionPhone"    column="sub_VISIT_RECEPTION_PHONE"    />
+        <result property="visitUserId"    column="sub_VISIT_USER_ID"    />
+        <result property="visitPeerName"    column="sub_VISIT_PEER_NAME"    />
+        <result property="visitDate"    column="sub_VISIT_DATE"    />
+        <result property="visitContent"    column="sub_VISIT_CONTENT"    />
+        <result property="visitCustFocus"    column="sub_VISIT_CUST_FOCUS"    />
+        <result property="visitEffect"    column="sub_VISIT_EFFECT"    />
+        <result property="visitImprovement"    column="sub_VISIT_IMPROVEMENT"    />
+        <result property="visitCost"    column="sub_VISIT_COST"    />
+        <result property="visitCostExplain"    column="sub_VISIT_COST_EXPLAIN"    />
+        <result property="visitState"    column="sub_VISIT_STATE"    />
+        <result property="visitFillId"    column="sub_VISIT_FILL_ID"    />
+        <result property="visitFillTime"    column="sub_VISIT_FILL_TIME"    />
+        <result property="visitConfirmId"    column="sub_VISIT_CONFIRM_ID"    />
+        <result property="visitConfirmTime"    column="sub_VISIT_CONFIRM_TIME"    />
+    </resultMap>
+
+    <sql id="selectCrmTaskCustomerVo">
         select CUST_ID, CUST_NAME, CUST_INDUSTRY, CUST_PROVINCE, CUST_CITY, CUST_ADDRESS, CUST_SCALE, CUST_NATURE, CUST_INTRODUCE, CUST_STATE, CUST_CREATE_ID, CUST_CREATE_TIME, CUST_SUBMIT_ID, CUST_SUBMIT_TIME, CUST_CONFIRM_ID, CUST_CONFIRM_TIME, CUST_PROGRESS_STATE, CUST_LEVEL, CUST_COMPANY_WEB, ORG_ID, CUST_VISIT_AGAIN_TIME from CRM_CUSTOMER_INFO
     </sql>
 
-    <select id="selectCrmTaskReviewIntentionList" parameterType="CrmTaskReviewIntention" resultMap="CrmTaskReviewIntentionResult">
-        <include refid="selectCrmTaskReviewIntentionVo"/>
+    <select id="selectCrmTaskCustomerList" parameterType="CrmTaskCustomer" resultMap="CrmTaskCustomerResult">
+        <include refid="selectCrmTaskCustomerVo"/>
         <where>  
+            <if test="custId != null "> and CUST_ID = #{custId}</if>
+            <if test="custName != null  and custName != ''"> and CUST_NAME like concat('%', #{custName}, '%')</if>
+            <if test="custIndustry != null  and custIndustry != ''"> and CUST_INDUSTRY = #{custIndustry}</if>
+            <if test="custScale != null  and custScale != ''"> and CUST_SCALE = #{custScale}</if>
+            <if test="custNature != null  and custNature != ''"> and CUST_NATURE = #{custNature}</if>
+            <if test="custState != null  and custState != ''"> and CUST_STATE = #{custState}</if>
+            <if test="custProgressState != null  and custProgressState != ''"> and CUST_PROGRESS_STATE = #{custProgressState}</if>
         </where>
     </select>
     
-    <select id="selectCrmTaskReviewIntentionByCustId" parameterType="Long" resultMap="CrmTaskReviewIntentionResult">
-        <include refid="selectCrmTaskReviewIntentionVo"/>
-        where CUST_ID = #{custId}
+    <select id="selectCrmTaskCustomerByCustId" parameterType="Long" resultMap="CrmTaskCustomerCrmVisitCustomerResult">
+        select a.CUST_ID, a.CUST_NAME, a.CUST_INDUSTRY, a.CUST_PROVINCE, a.CUST_CITY, a.CUST_ADDRESS, a.CUST_SCALE, a.CUST_NATURE, a.CUST_INTRODUCE, a.CUST_STATE, a.CUST_CREATE_ID, a.CUST_CREATE_TIME, a.CUST_SUBMIT_ID, a.CUST_SUBMIT_TIME, a.CUST_CONFIRM_ID, a.CUST_CONFIRM_TIME, a.CUST_PROGRESS_STATE, a.CUST_LEVEL, a.CUST_COMPANY_WEB, a.ORG_ID, a.CUST_VISIT_AGAIN_TIME,
+ b.VISIT_ID as sub_VISIT_ID, b.VISIT_TYPE as sub_VISIT_TYPE, b.VISIT_CUST_ID as sub_VISIT_CUST_ID, b.VISIT_RECEPTION_NAME as sub_VISIT_RECEPTION_NAME, b.VISIT_RECEPTION_SEX as sub_VISIT_RECEPTION_SEX, b.VISIT_RECEPTION_JOB as sub_VISIT_RECEPTION_JOB, b.VISIT_RECEPTION_PHONE as sub_VISIT_RECEPTION_PHONE, b.VISIT_USER_ID as sub_VISIT_USER_ID, b.VISIT_PEER_NAME as sub_VISIT_PEER_NAME, b.VISIT_DATE as sub_VISIT_DATE, b.VISIT_CONTENT as sub_VISIT_CONTENT, b.VISIT_CUST_FOCUS as sub_VISIT_CUST_FOCUS, b.VISIT_EFFECT as sub_VISIT_EFFECT, b.VISIT_IMPROVEMENT as sub_VISIT_IMPROVEMENT, b.VISIT_COST as sub_VISIT_COST, b.VISIT_COST_EXPLAIN as sub_VISIT_COST_EXPLAIN, b.VISIT_STATE as sub_VISIT_STATE, b.VISIT_FILL_ID as sub_VISIT_FILL_ID, b.VISIT_FILL_TIME as sub_VISIT_FILL_TIME, b.VISIT_CONFIRM_ID as sub_VISIT_CONFIRM_ID, b.VISIT_CONFIRM_TIME as sub_VISIT_CONFIRM_TIME
+        from CRM_CUSTOMER_INFO a
+        left join CRM_VISIT b on b.VISIT_CUST_ID = a.CUST_ID
+        where a.CUST_ID = #{custId}
     </select>
         
-    <insert id="insertCrmTaskReviewIntention" parameterType="CrmTaskReviewIntention">
+    <insert id="insertCrmTaskCustomer" parameterType="CrmTaskCustomer">
         insert into CRM_CUSTOMER_INFO
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="custId != null">CUST_ID,</if>
@@ -93,7 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCrmTaskReviewIntention" parameterType="CrmTaskReviewIntention">
+    <update id="updateCrmTaskCustomer" parameterType="CrmTaskCustomer">
         update CRM_CUSTOMER_INFO
         <trim prefix="SET" suffixOverrides=",">
             <if test="custName != null">CUST_NAME = #{custName},</if>
@@ -120,15 +158,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where CUST_ID = #{custId}
     </update>
 
-    <delete id="deleteCrmTaskReviewIntentionByCustId" parameterType="Long">
+    <delete id="deleteCrmTaskCustomerByCustId" parameterType="Long">
         delete from CRM_CUSTOMER_INFO where CUST_ID = #{custId}
     </delete>
 
-    <delete id="deleteCrmTaskReviewIntentionByCustIds" parameterType="String">
+    <delete id="deleteCrmTaskCustomerByCustIds" parameterType="String">
         delete from CRM_CUSTOMER_INFO where CUST_ID in 
         <foreach item="custId" collection="array" open="(" separator="," close=")">
             #{custId}
         </foreach>
     </delete>
+    
+    <delete id="deleteCrmVisitCustomerByVisitCustIds" parameterType="String">
+        delete from CRM_VISIT where VISIT_CUST_ID in 
+        <foreach item="visitCustId" collection="array" open="(" separator="," close=")">
+            #{visitCustId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteCrmVisitCustomerByVisitCustId" parameterType="Long">
+        delete from CRM_VISIT where VISIT_CUST_ID = #{visitCustId}
+    </delete>
+
+    <insert id="batchCrmVisitCustomer">
+        insert into CRM_VISIT( VISIT_ID, VISIT_TYPE, VISIT_CUST_ID, VISIT_RECEPTION_NAME, VISIT_RECEPTION_SEX, VISIT_RECEPTION_JOB, VISIT_RECEPTION_PHONE, VISIT_USER_ID, VISIT_PEER_NAME, VISIT_DATE, VISIT_CONTENT, VISIT_CUST_FOCUS, VISIT_EFFECT, VISIT_IMPROVEMENT, VISIT_COST, VISIT_COST_EXPLAIN, VISIT_STATE, VISIT_FILL_ID, VISIT_FILL_TIME, VISIT_CONFIRM_ID, VISIT_CONFIRM_TIME) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.visitId}, #{item.visitType}, #{item.visitCustId}, #{item.visitReceptionName}, #{item.visitReceptionSex}, #{item.visitReceptionJob}, #{item.visitReceptionPhone}, #{item.visitUserId}, #{item.visitPeerName}, #{item.visitDate}, #{item.visitContent}, #{item.visitCustFocus}, #{item.visitEffect}, #{item.visitImprovement}, #{item.visitCost}, #{item.visitCostExplain}, #{item.visitState}, #{item.visitFillId}, #{item.visitFillTime}, #{item.visitConfirmId}, #{item.visitConfirmTime})
+        </foreach>
+    </insert>
 
 </mapper>

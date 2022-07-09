@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.crm.mapper.CrmOrderEntryMapper">
+    
+    <resultMap type="CrmOrderEntry" id="CrmOrderEntryResult">
+        <result property="entryId"    column="ENTRY_ID"    />
+        <result property="orderId"    column="ORDER_ID"    />
+        <result property="entryOrderProduct"    column="ENTRY_ORDER_PRODUCT"    />
+        <result property="entryProductModel"    column="ENTRY_PRODUCT_MODEL"    />
+        <result property="entryNumber"    column="ENTRY_NUMBER"    />
+        <result property="entryUnitPrice"    column="ENTRY_UNIT_PRICE"    />
+        <result property="entryDiscount"    column="ENTRY_DISCOUNT"    />
+        <result property="entryRealPrice"    column="ENTRY_REAL_PRICE"    />
+    </resultMap>
+
+    <resultMap id="CrmOrderEntryCrmOrderInfoResult" type="CrmOrderEntry" extends="CrmOrderEntryResult">
+        <collection property="crmOrderInfoList" notNullColumn="sub_ORDER_ID" javaType="java.util.List" resultMap="CrmOrderInfoResult" />
+    </resultMap>
+
+    <resultMap type="CrmOrderInfo" id="CrmOrderInfoResult">
+        <result property="orderId"    column="sub_ORDER_ID"    />
+        <result property="oppId"    column="sub_OPP_ID"    />
+        <result property="orderChief"    column="sub_ORDER_CHIEF"    />
+        <result property="orderDeliveryCost"    column="sub_ORDER_DELIVERY_COST"    />
+        <result property="orderCost"    column="sub_ORDER_COST"    />
+        <result property="orderDes"    column="sub_ORDER_DES"    />
+        <result property="orderState"    column="sub_ORDER_STATE"    />
+        <result property="orderCreater"    column="sub_ORDER_CREATER"    />
+        <result property="orderCreateTime"    column="sub_ORDER_CREATE_TIME"    />
+        <result property="orderConfirmPerson"    column="sub_ORDER_CONFIRM_PERSON"    />
+        <result property="orderConfirmTime"    column="sub_ORDER_CONFIRM_TIME"    />
+        <result property="clueSalesman"    column="sub_CLUE_SALESMAN"    />
+    </resultMap>
+
+    <sql id="selectCrmOrderEntryVo">
+        select ENTRY_ID, ORDER_ID, ENTRY_ORDER_PRODUCT, ENTRY_PRODUCT_MODEL, ENTRY_NUMBER, ENTRY_UNIT_PRICE, ENTRY_DISCOUNT, ENTRY_REAL_PRICE from CRM_ORDER_ENTRY
+    </sql>
+
+    <select id="selectCrmOrderEntryList" parameterType="CrmOrderEntry" resultMap="CrmOrderEntryResult">
+        <include refid="selectCrmOrderEntryVo"/>
+        <where>  
+            <if test="entryOrderProduct != null  and entryOrderProduct != ''"> and ENTRY_ORDER_PRODUCT = #{entryOrderProduct}</if>
+            <if test="entryProductModel != null  and entryProductModel != ''"> and ENTRY_PRODUCT_MODEL = #{entryProductModel}</if>
+            <if test="entryNumber != null "> and ENTRY_NUMBER = #{entryNumber}</if>
+            <if test="entryUnitPrice != null "> and ENTRY_UNIT_PRICE = #{entryUnitPrice}</if>
+            <if test="entryDiscount != null "> and ENTRY_DISCOUNT = #{entryDiscount}</if>
+            <if test="entryRealPrice != null "> and ENTRY_REAL_PRICE = #{entryRealPrice}</if>
+        </where>
+    </select>
+    
+    <select id="selectCrmOrderEntryByEntryId" parameterType="Long" resultMap="CrmOrderEntryCrmOrderInfoResult">
+        select a.ENTRY_ID, a.ORDER_ID, a.ENTRY_ORDER_PRODUCT, a.ENTRY_PRODUCT_MODEL, a.ENTRY_NUMBER, a.ENTRY_UNIT_PRICE, a.ENTRY_DISCOUNT, a.ENTRY_REAL_PRICE,
+ b.ORDER_ID as sub_ORDER_ID, b.OPP_ID as sub_OPP_ID, b.ORDER_CHIEF as sub_ORDER_CHIEF, b.ORDER_DELIVERY_COST as sub_ORDER_DELIVERY_COST, b.ORDER_COST as sub_ORDER_COST, b.ORDER_DES as sub_ORDER_DES, b.ORDER_STATE as sub_ORDER_STATE, b.ORDER_CREATER as sub_ORDER_CREATER, b.ORDER_CREATE_TIME as sub_ORDER_CREATE_TIME, b.ORDER_CONFIRM_PERSON as sub_ORDER_CONFIRM_PERSON, b.ORDER_CONFIRM_TIME as sub_ORDER_CONFIRM_TIME, b.CLUE_SALESMAN as sub_CLUE_SALESMAN
+        from CRM_ORDER_ENTRY a
+        left join CRM_ORDER_INFO b on b.ORDER_ID = a.ENTRY_ID
+        where a.ENTRY_ID = #{entryId}
+    </select>
+        
+    <insert id="insertCrmOrderEntry" parameterType="CrmOrderEntry" useGeneratedKeys="true" keyProperty="entryId">
+        insert into CRM_ORDER_ENTRY
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">ORDER_ID,</if>
+            <if test="entryOrderProduct != null">ENTRY_ORDER_PRODUCT,</if>
+            <if test="entryProductModel != null">ENTRY_PRODUCT_MODEL,</if>
+            <if test="entryNumber != null">ENTRY_NUMBER,</if>
+            <if test="entryUnitPrice != null">ENTRY_UNIT_PRICE,</if>
+            <if test="entryDiscount != null">ENTRY_DISCOUNT,</if>
+            <if test="entryRealPrice != null">ENTRY_REAL_PRICE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="entryOrderProduct != null">#{entryOrderProduct},</if>
+            <if test="entryProductModel != null">#{entryProductModel},</if>
+            <if test="entryNumber != null">#{entryNumber},</if>
+            <if test="entryUnitPrice != null">#{entryUnitPrice},</if>
+            <if test="entryDiscount != null">#{entryDiscount},</if>
+            <if test="entryRealPrice != null">#{entryRealPrice},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCrmOrderEntry" parameterType="CrmOrderEntry">
+        update CRM_ORDER_ENTRY
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">ORDER_ID = #{orderId},</if>
+            <if test="entryOrderProduct != null">ENTRY_ORDER_PRODUCT = #{entryOrderProduct},</if>
+            <if test="entryProductModel != null">ENTRY_PRODUCT_MODEL = #{entryProductModel},</if>
+            <if test="entryNumber != null">ENTRY_NUMBER = #{entryNumber},</if>
+            <if test="entryUnitPrice != null">ENTRY_UNIT_PRICE = #{entryUnitPrice},</if>
+            <if test="entryDiscount != null">ENTRY_DISCOUNT = #{entryDiscount},</if>
+            <if test="entryRealPrice != null">ENTRY_REAL_PRICE = #{entryRealPrice},</if>
+        </trim>
+        where ENTRY_ID = #{entryId}
+    </update>
+
+    <delete id="deleteCrmOrderEntryByEntryId" parameterType="Long">
+        delete from CRM_ORDER_ENTRY where ENTRY_ID = #{entryId}
+    </delete>
+
+    <delete id="deleteCrmOrderEntryByEntryIds" parameterType="String">
+        delete from CRM_ORDER_ENTRY where ENTRY_ID in 
+        <foreach item="entryId" collection="array" open="(" separator="," close=")">
+            #{entryId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteCrmOrderInfoByOrderIds" parameterType="String">
+        delete from CRM_ORDER_INFO where ORDER_ID in 
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteCrmOrderInfoByOrderId" parameterType="Long">
+        delete from CRM_ORDER_INFO where ORDER_ID = #{orderId}
+    </delete>
+
+    <insert id="batchCrmOrderInfo">
+        insert into CRM_ORDER_INFO( ORDER_ID, OPP_ID, ORDER_CHIEF, ORDER_DELIVERY_COST, ORDER_COST, ORDER_DES, ORDER_STATE, ORDER_CREATER, ORDER_CREATE_TIME, ORDER_CONFIRM_PERSON, ORDER_CONFIRM_TIME, CLUE_SALESMAN) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.orderId}, #{item.oppId}, #{item.orderChief}, #{item.orderDeliveryCost}, #{item.orderCost}, #{item.orderDes}, #{item.orderState}, #{item.orderCreater}, #{item.orderCreateTime}, #{item.orderConfirmPerson}, #{item.orderConfirmTime}, #{item.clueSalesman})
+        </foreach>
+    </insert>
+
+</mapper>

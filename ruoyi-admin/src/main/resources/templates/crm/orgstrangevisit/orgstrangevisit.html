@@ -11,6 +11,35 @@
                     <div class="select-list">
                         <ul>
                             <li>
+                                <label>状态：</label>
+                                <select name="orgState" th:with="type=${@dict.getType('orgstate')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>标签：</label>
+                                <select name="orgLabels" th:with="type=${@dict.getType('orglabel')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>更新时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择更新时间" name="orgUpdateTime"/>
+                            </li>
+                            <li>
+                                <label>跟进人员：</label>
+                                <input type="text" name="orgSalesman"/>
+                            </li>
+                            <li>
+                                <label>分类：</label>
+                                <select name="orgClassify" th:with="type=${@dict.getType('orginfo')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             </li>
@@ -20,16 +49,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="strangevisit:strangevisit:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:orgstrangevisit:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="strangevisit:strangevisit:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:orgstrangevisit:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="strangevisit:strangevisit:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:orgstrangevisit:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="strangevisit:strangevisit:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:orgstrangevisit:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -40,12 +69,12 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('strangevisit:strangevisit:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('strangevisit:strangevisit:remove')}]];
+        var editFlag = [[${@permission.hasPermi('crm:orgstrangevisit:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('crm:orgstrangevisit:remove')}]];
         var orgStateDatas = [[${@dict.getType('orgstate')}]];
         var orgLabelsDatas = [[${@dict.getType('orglabel')}]];
         var orgClassifyDatas = [[${@dict.getType('orginfo')}]];
-        var prefix = ctx + "strangevisit/strangevisit";
+        var prefix = ctx + "crm/orgstrangevisit";
 
         $(function() {
             var options = {
@@ -64,8 +93,8 @@
                     visible: false
                 },
                 {
-                    field: 'orgLinkmanName',
-                    title: '联系人'
+                    field: 'orgIntroduction',
+                    title: '简要介绍'
                 },
                 {
                     field: 'orgState',
