@@ -11,22 +11,23 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">拜访序列：</label>
                 <div class="col-sm-8">
-                    <input name="visitId" class="form-control" type="text" placeholder="拜访序列不能为空">
+                    <input name="visitId" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">客户ID：</label>
                 <div class="col-sm-8">
-                    <input name="visitCustId" class="form-control" type="text" placeholder="客户的ID不能为空">
+                    <input name="visitCustId" class="form-control" type="text"
+                    >
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">接待人姓名：</label>
                 <div class="col-sm-8">
                     <input name="visitReceptionName" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">接待人性别：</label>
                 <div class="col-sm-8">
                     <select name="visitReceptionSex" class="form-control m-b" th:with="type=${@dict.getType('sys_name_sex')}">
@@ -34,13 +35,13 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">拜访人员ID：</label>
                 <div class="col-sm-8">
-                    <input name="visitUserId" class="form-control" type="text" placeholder="拜访人员ID不能为空">
+                    <input name="visitUserId" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">拜访日期：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
@@ -49,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">沟通效果：</label>
                 <div class="col-sm-8">
                     <select name="visitEffect" class="form-control m-b" th:with="type=${@dict.getType('sys_visit_effect')}">
@@ -71,12 +72,39 @@
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: summernote-js" />
     <script th:inline="javascript">
         var prefix = ctx + "crm/CrmVisitCustomer"
         var custStateDatas = [[${@dict.getType('sys_cust_precedence')}]];
         var custLevelDatas = [[${@dict.getType('sys_cust_level')}]];
         $("#form-CrmVisitCustomer-add").validate({
-            focusCleanup: true
+            focusCleanup: true,
+            rules:{
+                visitId:{
+                    required:true,
+                    digits: {
+                        message: '该值只能包含数字。'
+                    }
+                },
+                visitCustId:{
+                    required:true,
+                    digits: {
+                        message: '该值只能包含数字。'
+                    }
+                },
+                visitUserId:{
+                    required:true,
+                    digits: {
+                        message: '该值只能包含数字。'
+                    }
+                },
+                visitDate:{
+                    required:true
+                },
+                visitReceptionName:{
+                    required:true
+                }
+            }
         });
 
         function submitHandler() {
@@ -90,50 +118,6 @@
             minView: "month",
             autoclose: true
         });
-
-        $(function () {
-            $('form').bootstrapValidator({
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
-                    //user名称必须与name名称相同（区分大小写）
-                    visitId: {
-                        message: '请输入拜访序列',
-                        validators: {
-                            notEmpty: {
-                                message: '拜访序列不能为空'
-                            }
-                        }
-                    },
-                    visitReceptionName: {
-                        validators: {
-                            notEmpty: {
-                                message: '接待人姓名不能为空'
-                            },
-                            notNumeric:{
-                                message:'不能是数值'
-                            }
-                        }
-                    },
-                    visitReceptionSex: {
-                        validators: {
-                            notEmpty: {
-                                message: '接待人性别不能为空'
-                            }
-                        }
-                    }
-                }
-            });
-        });
-
-
-
-
-
 
         $(function() {
             var options = {
