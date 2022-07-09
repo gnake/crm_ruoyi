@@ -159,90 +159,6 @@
             }
         });
 
-            // 1.创建三维数组
-            var provinces=[];
-            provinces["甘肃省"]=["兰州市","天水市","庆阳市"];
-            provinces["江苏省"]=["南京市","无锡市","苏州市"];
-            provinces["浙江省"]=["杭州市","宁波市"];
-            provinces["安徽省"]=["合肥市","马鞍山市"];
-
-            var citys=[];
-            citys["兰州市"]=["安宁区","西固区","城关区","七里河区","新区"];
-            citys["天水市"]=["麦积区","秦州区","甘谷县","武山县","秦安县","清水县","张家川回族自治县"];
-            citys["庆阳市"]=["庆城县","华池县","宁县","镇原县","合水县","正宁县","环县"];
-            citys["南京市"]=["玄武区","雨花台区","鼓楼区","秦淮区","六合区"];
-            citys["无锡市"]=["滨湖区","惠山区","梁溪区"];
-            citys["苏州市"]=["姑苏区","吴江区"];
-            citys["杭州市"]=["西湖区","临安区","上城区"];
-            citys["宁波市"]=["江北区","江东区"];
-            citys["合肥市"]=["蜀山区","瑶海区"];
-            citys["马鞍山市"]=["花山区","雨山区"];
-
-            // 2.获取元素
-            var oprovince = document.getElementById('province');
-            var ocity = document.getElementById('city');
-            var oarea = document.getElementById('area');
-
-            for (province in provinces) {
-            oprovince.add(new Option(province, province))//省份下拉菜单
-            }
-            oprovince.onchange = function () {//省份下拉菜单内容改变时 执行的命令
-            var selectvalue = oprovince.value;//获取省份下拉菜单的值
-            ocity.innerHTML = '<option value="">请选择城市......</option>';
-            oarea.innerHTML = ' <option value="">请选择市区......</option>';
-            for (provincename in provinces) {//遍历省份的名称
-            if (provincename == selectvalue) {
-            for (cityname in provinces[provincename]) {//遍历城市名称
-            ocity.add(new Option(provinces[provincename][cityname], provinces[provincename][cityname]));
-            }
-            }
-            }
-            }
-            ocity.onchange = function () {
-            oarea.innerHTML = ' <option value="">请选择市区......</option>';
-            var cityValue = ocity.value;
-            for (i in citys) {//i是area数组的索引值（城市名称）
-            if (i == cityValue) {
-            for (j in citys[i]) {
-            oarea.add(new Option(citys[i][j], citys[i][j]));
-            }
-            }
-            }
-            }
-
-            // 3.向省份菜单添加选项
-            for(province in provinces){
-            oPro.add(new Option(province,province))
-            }
-
-            // 4.根据省份选择城市
-            oPro.onchange=function(){
-            var sel_val=oPro.value;//获取选择的省份
-            oCity.innerHTML = '<option value="">请选择城市......</option>';
-            oArea.innerHTML = ' <option value="">请选择市区......</option>';
-            for(province in provinces){
-            if(province == sel_val){
-            for(cityname in provinces[province]){
-            oCity.add(new Option(provinces[province][cityname],provinces[province][cityname]))
-            }
-            }
-            oCity.add(new Option())
-            }
-            }
-            oCity.onchange=function(){
-            var sel_val2=oCity.value;//获取选择的省份
-
-            for(city in citys){
-            if(province == sel_val){
-            for(areaname in provinces[province]){
-                oArea.add(new Option(provinces[province][cityname],provinces[province][cityname]))
-            }
-            }
-            oCity.add(new Option())
-            }
-            }
-
-
         function submitHandler() {
             if ($.validate.form()) {
                 $.operate.save(prefix + "/add", $('#form-CustomerIntetion-add').serialize());
@@ -290,6 +206,89 @@
                 }
             });
         });
+
+        // 1.创建三维数组
+        var provinces=[];
+        provinces["甘肃省"]=["兰州市","天水市","庆阳市"];
+        provinces["江苏省"]=["南京市","无锡市","苏州市"];
+        provinces["浙江省"]=["杭州市","宁波市"];
+        provinces["安徽省"]=["合肥市","马鞍山市"];
+
+        var citys=[];
+        citys["兰州市"]=["安宁区","西固区","城关区","七里河区","新区"];
+        citys["天水市"]=["麦积区","秦州区","甘谷县","武山县","秦安县","清水县","张家川回族自治县"];
+        citys["庆阳市"]=["庆城县","华池县","宁县","镇原县","合水县","正宁县","环县"];
+        citys["南京市"]=["玄武区","雨花台区","鼓楼区","秦淮区","六合区"];
+        citys["无锡市"]=["滨湖区","惠山区","梁溪区"];
+        citys["苏州市"]=["姑苏区","吴江区"];
+        citys["杭州市"]=["西湖区","临安区","上城区"];
+        citys["宁波市"]=["江北区","江东区"];
+        citys["合肥市"]=["蜀山区","瑶海区"];
+        citys["马鞍山市"]=["花山区","雨山区"];
+
+        // 2.获取元素
+        var oprovince = document.getElementById('province');
+        var ocity = document.getElementById('city');
+        var oarea = document.getElementById('area');
+
+        for (province in provinces) {
+            oprovince.add(new Option(province, province))//省份下拉菜单
+        }
+        oprovince.onchange = function () {//省份下拉菜单内容改变时 执行的命令
+            var selectvalue = oprovince.value;//获取省份下拉菜单的值
+            ocity.innerHTML = '<option value="">请选择城市......</option>';
+            oarea.innerHTML = ' <option value="">请选择市区......</option>';
+            for (provincename in provinces) {//遍历省份的名称
+                if (provincename == selectvalue) {
+                    for (cityname in provinces[provincename]) {//遍历城市名称
+                        ocity.add(new Option(provinces[provincename][cityname], provinces[provincename][cityname]));
+                    }
+                }
+            }
+        }
+        ocity.onchange = function () {
+            oarea.innerHTML = ' <option value="">请选择市区......</option>';
+            var cityValue = ocity.value;
+            for (i in citys) {//i是area数组的索引值（城市名称）
+                if (i == cityValue) {
+                    for (j in citys[i]) {
+                        oarea.add(new Option(citys[i][j], citys[i][j]));
+                    }
+                }
+            }
+        }
+
+        // 3.向省份菜单添加选项
+        for(province in provinces){
+            oPro.add(new Option(province,province))
+        }
+
+        // 4.根据省份选择城市
+        oPro.onchange=function(){
+            var sel_val=oPro.value;//获取选择的省份
+            oCity.innerHTML = '<option value="">请选择城市......</option>';
+            oArea.innerHTML = ' <option value="">请选择市区......</option>';
+            for(province in provinces){
+                if(province == sel_val){
+                    for(cityname in provinces[province]){
+                        oCity.add(new Option(provinces[province][cityname],provinces[province][cityname]))
+                    }
+                }
+                oCity.add(new Option())
+            }
+        }
+        oCity.onchange=function(){
+            var sel_val2=oCity.value;//获取选择的省份
+
+            for(city in citys){
+                if(province == sel_val){
+                    for(areaname in provinces[province]){
+                        oArea.add(new Option(provinces[province][cityname],provinces[province][cityname]))
+                    }
+                }
+                oCity.add(new Option())
+            }
+        }
     </script>
 </body>
 </html>

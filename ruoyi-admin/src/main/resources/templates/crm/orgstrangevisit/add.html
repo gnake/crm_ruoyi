@@ -73,21 +73,19 @@
                     <input name="orgCreater" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">创建时间：</label>
                 <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="orgCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <div class="select-time">
+                        <input id="startTime" name="orgCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required="required">
                     </div>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">更新时间：</label>
                 <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="orgUpdateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <div class="select-time">
+                        <input id="endTime" name="orgUpdateTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required="required">
                     </div>
                 </div>
             </div>
@@ -97,16 +95,7 @@
                     <input name="orgClassification" class="form-control" type="text">
                 </div>
             </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">计划拜访时间：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="orgVisitAgainTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label">来源渠道：</label>
                 <div class="col-sm-8">
                     <input name="orgSources" class="form-control" type="text">
@@ -162,30 +151,29 @@
             }
         });
 
-
         function submitHandler() {
             if ($.validate.form()) {
                 $.operate.save(prefix + "/add", $('#form-orgstrangevisit-add').serialize());
             }
         }
 
-        $("input[name='orgCreateTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='orgUpdateTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='orgVisitAgainTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+        // $("input[name='orgCreateTime']").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     minView: "month",
+        //     autoclose: true
+        // });
+        //
+        // $("input[name='orgUpdateTime']").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     minView: "month",
+        //     autoclose: true
+        // });
+        //
+        // $("input[name='orgVisitAgainTime']").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     minView: "month",
+        //     autoclose: true
+        // });
 
         $(function() {
             $('.summernote').summernote({
