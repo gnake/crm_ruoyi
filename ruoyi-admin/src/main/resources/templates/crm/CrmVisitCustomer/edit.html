@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改我的客户')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-CrmVisitCustomer-edit" th:object="${crmVisitCustomer}">
+            <h4 class="form-header h4">我的客户信息</h4>
+            <input name="visitId" th:field="*{visitId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户ID：</label>
+                <div class="col-sm-8">
+                    <input name="visitCustId" th:field="*{visitCustId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">接待人姓名：</label>
+                <div class="col-sm-8">
+                    <input name="visitReceptionName" th:field="*{visitReceptionName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">接待人性别：</label>
+                <div class="col-sm-8">
+                    <select name="visitReceptionSex" class="form-control m-b" th:with="type=${@dict.getType('sys_name_sex')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{visitReceptionSex}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">拜访人员ID：</label>
+                <div class="col-sm-8">
+                    <input name="visitUserId" th:field="*{visitUserId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">拜访日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="visitDate" th:value="${#dates.format(crmVisitCustomer.visitDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">沟通效果：</label>
+                <div class="col-sm-8">
+                    <select name="visitEffect" class="form-control m-b" th:with="type=${@dict.getType('sys_visit_effect')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{visitEffect}"></option>
+                    </select>
+                </div>
+            </div>
+            <h4 class="form-header h4">意向跟进信息</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-white btn-sm" onclick="addRow()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delRow()"><i class="fa fa-minus"> 删除</i></button>
+                    <div class="col-sm-12 select-table table-striped">
+                        <table id="bootstrap-table"></table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "crm/CrmVisitCustomer";
+        var custStateDatas = [[${@dict.getType('sys_cust_precedence')}]];
+        var custLevelDatas = [[${@dict.getType('sys_cust_level')}]];
+        $("#form-CrmVisitCustomer-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-CrmVisitCustomer-edit').serialize());
+            }
+        }
+
+        $("input[name='visitDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+
+        $(function() {
+            var options = {
+                data: [[${crmVisitCustomer.myCustomerList}]],
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                sidePagination: "client",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'index',
+                    align: 'center',
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                    	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
+                    	return columnIndex + $.table.serialNumber(index);
+                    }
+                },
+                {
+                    field: 'custName',
+                    align: 'center',
+                    title: '客户名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'custAddress',
+                    align: 'center',
+                    title: '地址',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custAddress' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+
+                {
+                    field: 'custIntroduce',
+                    align: 'center',
+                    title: '简要介绍',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custIntroduce' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+
+                {
+                    field: 'custState',
+                    align: 'center',
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("myCustomerList[%s].custState", index);
+                        return $.common.dictToSelect(custStateDatas, value, name);
+                    }
+                },
+
+                {
+                    field: 'custLevel',
+                    align: 'center',
+                    title: '级别',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("myCustomerList[%s].custLevel", index);
+                        return $.common.dictToSelect(custLevelDatas, value, name);
+                    }
+                },
+                {
+                    field: 'custCompanyWeb',
+                    align: 'center',
+                    title: '公司网站',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custCompanyWeb' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var value = $.common.isNotEmpty(row.index) ? row.index : $.table.serialNumber(index);
+                        return '<a class="btn btn-danger btn-xs" href="javascript:void(0)" onclick="sub.delRowByIndex(\'' + value + '\')"><i class="fa fa-remove"></i>删除</a>';
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        $(function () {
+            $('form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    //user名称必须与name名称相同（区分大小写）
+                    visitId: {
+                        message: '请输入拜访序列',
+                        validators: {
+                            notEmpty: {
+                                message: '拜访序列不能为空'
+                            }
+                        }
+                    },
+                    visitReceptionName: {
+                        validators: {
+                            notEmpty: {
+                                message: '接待人姓名不能为空'
+                            },
+                            notNumeric:{
+                                message:'不能是数值'
+                            }
+                        }
+                    },
+                    visitReceptionSex: {
+                        validators: {
+                            notEmpty: {
+                                message: '接待人性别不能为空'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        function addRow() {
+            var count = $("#" + table.options.id).bootstrapTable('getData').length;
+            var row = {
+                index: $.table.serialNumber(count),
+                custName: "",
+                custAddress: "",
+                custIntroduce: "",
+                custState: "",
+                custLevel: "",
+                custCompanyWeb: "",
+            }
+            sub.addRow(row);
+        }
+    </script>
+</body>
+</html>

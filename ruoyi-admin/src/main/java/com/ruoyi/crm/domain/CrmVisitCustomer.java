@@ -1,6 +1,7 @@
 package com.ruoyi.crm.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,26 +13,29 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 我的客户对象 CRM_VISIT
  * 
  * @author 童楷涵
- * @date 2022-07-08
+ * @date 2022-07-09
  */
 public class CrmVisitCustomer extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 主键 */
-    @Excel(name = "主键")
+    /** 拜访序列 */
+    @Excel(name = "拜访序列")
     private Long visitId;
 
     /** 拜访类型 */
     private String visitType;
 
     /** 客户ID */
+    @Excel(name = "客户ID")
     private Long visitCustId;
 
     /** 接待人姓名 */
+    @Excel(name = "接待人姓名")
     private String visitReceptionName;
 
     /** 接待人性别 */
+    @Excel(name = "接待人性别")
     private String visitReceptionSex;
 
     /** 接待人职位 */
@@ -40,8 +44,8 @@ public class CrmVisitCustomer extends BaseEntity
     /** 接待人电话 */
     private String visitReceptionPhone;
 
-    /** 拜访人员 */
-    @Excel(name = "拜访人员")
+    /** 拜访人员ID */
+    @Excel(name = "拜访人员ID")
     private Long visitUserId;
 
     /** 同行人员 */
@@ -85,6 +89,9 @@ public class CrmVisitCustomer extends BaseEntity
 
     /** 确认时间 */
     private Date visitConfirmTime;
+
+    /** 意向跟进信息 */
+    private List<MyCustomer> myCustomerList;
 
     public void setVisitId(Long visitId) 
     {
@@ -276,6 +283,16 @@ public class CrmVisitCustomer extends BaseEntity
         return visitConfirmTime;
     }
 
+    public List<MyCustomer> getMyCustomerList()
+    {
+        return myCustomerList;
+    }
+
+    public void setMyCustomerList(List<MyCustomer> myCustomerList)
+    {
+        this.myCustomerList = myCustomerList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -300,6 +317,7 @@ public class CrmVisitCustomer extends BaseEntity
             .append("visitFillTime", getVisitFillTime())
             .append("visitConfirmId", getVisitConfirmId())
             .append("visitConfirmTime", getVisitConfirmTime())
+            .append("myCustomerList", getMyCustomerList())
             .toString();
     }
 }

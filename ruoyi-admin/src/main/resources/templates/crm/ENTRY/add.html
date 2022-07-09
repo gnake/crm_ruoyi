@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增工作总结')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-ENTRY-add">
+            <h4 class="form-header h4">工作总结信息</h4>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">订单标识：</label>
+                <div class="col-sm-8">
+                    <input name="orderId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预订产品：</label>
+                <div class="col-sm-8">
+                    <input name="entryOrderProduct" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品型号：</label>
+                <div class="col-sm-8">
+                    <input name="entryProductModel" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数量：</label>
+                <div class="col-sm-8">
+                    <input name="entryNumber" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">单价：</label>
+                <div class="col-sm-8">
+                    <input name="entryUnitPrice" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">折扣：</label>
+                <div class="col-sm-8">
+                    <input name="entryDiscount" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实际价格：</label>
+                <div class="col-sm-8">
+                    <input name="entryRealPrice" class="form-control" type="text">
+                </div>
+            </div>
+            <h4 class="form-header h4">订单管理信息</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-white btn-sm" onclick="addRow()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delRow()"><i class="fa fa-minus"> 删除</i></button>
+                    <div class="col-sm-12 select-table table-striped">
+                        <table id="bootstrap-table"></table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "crm/ENTRY"
+        $("#form-ENTRY-add").validate({
+            focusCleanup: true,
+            rules: {
+                orderId: {
+                    required: true
+                },
+                entryOrderProduct: {
+                    required: true
+                },
+                entryProductModel: {
+                    required: true
+                },
+                entryNumber: {
+                    required: true,
+                    number: true
+                },
+                entryUnitPrice: {
+                    required: true,
+                    number: true
+                },
+                entryDiscount: {
+                    required: true,
+                    number: true
+                },
+                entryRealPrice: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                orderId: {
+                    required: "请输入订单标识"
+                },
+                entryOrderProduct: {
+                    required: "请输入预订产品"
+                },
+                entryProductModel: {
+                    required: "请输入产品型号"
+                }
+            }
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-ENTRY-add').serialize());
+            }
+        }
+
+        $(function() {
+            var options = {
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                sidePagination: "client",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'index',
+                    align: 'center',
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                    	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
+                    	return columnIndex + $.table.serialNumber(index);
+                    }
+                },
+                {
+                    field: 'oppId',
+                    align: 'center',
+                    title: '商机名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].oppId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderChief',
+                    align: 'center',
+                    title: '负责人',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderChief' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderDeliveryCost',
+                    align: 'center',
+                    title: '交付费用',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderDeliveryCost' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderCost',
+                    align: 'center',
+                    title: '订单费用',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderCost' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderDes',
+                    align: 'center',
+                    title: '订单说明',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderDes' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderState',
+                    align: 'center',
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderState' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderCreater',
+                    align: 'center',
+                    title: '创建人',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderCreater' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderCreateTime',
+                    align: 'center',
+                    title: '创建时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderCreateTime' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderConfirmPerson',
+                    align: 'center',
+                    title: '确认人',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderConfirmPerson' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orderConfirmTime',
+                    align: 'center',
+                    title: '确认时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].orderConfirmTime' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'clueSalesman',
+                    align: 'center',
+                    title: '销售人员',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmOrderInfoList[%s].clueSalesman' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var value = $.common.isNotEmpty(row.index) ? row.index : $.table.serialNumber(index);
+                        return '<a class="btn btn-danger btn-xs" href="javascript:void(0)" onclick="sub.delRowByIndex(\'' + value + '\')"><i class="fa fa-remove"></i>删除</a>';
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+
+        function addRow() {
+            var count = $("#" + table.options.id).bootstrapTable('getData').length;
+            var row = {
+                index: $.table.serialNumber(count),
+                oppId: "",
+                orderChief: "",
+                orderDeliveryCost: "",
+                orderCost: "",
+                orderDes: "",
+                orderState: "",
+                orderCreater: "",
+                orderCreateTime: "",
+                orderConfirmPerson: "",
+                orderConfirmTime: "",
+                clueSalesman: "",
+            }
+            sub.addRow(row);
+        }
+    </script>
+</body>
+</html>

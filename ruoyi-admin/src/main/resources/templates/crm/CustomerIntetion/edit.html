@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改意向跟进')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <th:block th:include="include :: summernote-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-CustomerIntetion-edit" th:object="${customer_Intention}">
+            <input name="custId" th:field="*{custId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户名称：</label>
+                <div class="col-sm-8">
+                    <input name="custName" th:field="*{custName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">行业：</label>
+                <div class="col-sm-8">
+                    <input name="custIndustry" th:field="*{custIndustry}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">规模：</label>
+                <div class="col-sm-8">
+                    <input name="custScale" th:field="*{custScale}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">性质：</label>
+                <div class="col-sm-8">
+                    <input name="custNature" th:field="*{custNature}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">简要介绍：</label>
+                <div class="col-sm-8">
+                    <input type="hidden" class="form-control" th:field="*{custIntroduce}">
+                    <div class="summernote" id="custIntroduce"></div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+                    <select name="custState" class="form-control m-b" th:with="type=${@dict.getType('sys_cust_precedence')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{custState}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人：</label>
+                <div class="col-sm-8">
+                    <input name="custCreateId" th:field="*{custCreateId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="custCreateTime" th:value="${#dates.format(customer_Intention.custCreateTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">进展状态：</label>
+                <div class="col-sm-8">
+                    <input name="custProgressState" th:field="*{custProgressState}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: summernote-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "crm/CustomerIntetion";
+        $("#form-CustomerIntetion-edit").validate({
+            focusCleanup: true,
+            // rules: {
+            //     custName: {
+            //         required: true,
+            //         minLength: 2
+            //     },
+            //     custIndustry: {
+            //         required: true
+            //     },
+            //     custScale: {
+            //         required: true
+            //     },
+            //     custNature: {
+            //         required: true
+            //     },
+            //     custIntroduce: {
+            //         required: true
+            //     },
+            //     custState: {
+            //         required: true
+            //     },
+            //     custCreateId: {
+            //         required: true
+            //     },
+            //     custCreateTime: {
+            //         required: true
+            //     },
+            //     custProgressState: {
+            //         required: true
+            //     }
+            // },
+            // messages: {
+            //     custName: {
+            //         required: "请输入客户名称",
+            //     },
+            //     custIndustry: {
+            //         required: "请输入行业",
+            //     },
+            //     custScale: {
+            //         required: "请输入规模",
+            //     },
+            //     custNature: {
+            //         required: "请输入性质",
+            //     },
+            //     custState: {
+            //         required: "请选择状态",
+            //     },
+            //     custCreateId: {
+            //         required: "请输入创建人",
+            //     },
+            //     custCreateTime: {
+            //         required: "请选择创建时间",
+            //     },
+            //     custProgressState: {
+            //         required: "请输入进展状态"
+            //     }
+            // }
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-CustomerIntetion-edit').serialize());
+            }
+        }
+
+        $("input[name='custCreateTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $(function() {
+            $('.summernote').each(function(i) {
+                $('#' + this.id).summernote({
+                    lang: 'zh-CN',
+                    dialogsInBody: true,
+                    callbacks: {
+                        onChange: function(contents, $edittable) {
+                            $("input[name='" + this.id + "']").val(contents);
+                        },
+                        onImageUpload: function(files) {
+                            var obj = this;
+                            var data = new FormData();
+                            data.append("file", files[0]);
+                            $.ajax({
+                                type: "post",
+                                url: ctx + "common/upload",
+                                data: data,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                dataType: 'json',
+                                success: function(result) {
+                                    if (result.code == web_status.SUCCESS) {
+                                        $('#' + obj.id).summernote('insertImage', result.url);
+                                    } else {
+                                        $.modal.alertError(result.msg);
+                                    }
+                                },
+                                error: function(error) {
+                                    $.modal.alertWarning("图片上传失败。");
+                                }
+                            });
+                        }
+                    }
+                });
+                var content = $("input[name='" + this.id + "']").val();
+                $('#' + this.id).summernote('code', content);
+            })
+        });
+    </script>
+</body>
+</html>
