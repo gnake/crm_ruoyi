@@ -36,6 +36,7 @@
             focusCleanup: true
         });
 
+
         function submitHandler() {
             if ($.validate.form()) {
                 $.operate.save(prefix + "/edit", $('#form-taskcycle-edit').serialize());
