@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 任务周期对象 TASK_CYCLE
  * 
  * @author swj
- * @date 2022-07-07
+ * @date 2022-07-10
  */
 public class TaskCycle extends BaseEntity
 {
