@@ -9,9 +9,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 潜在客户对象 CRM_ORG_INFO
- * 
- * @author swj
- * @date 2022-07-08
+ *
+ * @author zxl
+ * @date 2022-07-07
  */
 public class OrgCustomerInfo extends BaseEntity
 {
@@ -22,6 +22,7 @@ public class OrgCustomerInfo extends BaseEntity
     private Long orgId;
 
     /** 组织名称 */
+    @Excel(name = "组织名称")
     private String orgName;
 
     /** 组织性质 */
@@ -31,6 +32,7 @@ public class OrgCustomerInfo extends BaseEntity
     private String orgIntroduction;
 
     /** 联系人 */
+    @Excel(name = "联系人")
     private String orgLinkmanName;
 
     /** 邮箱 */
