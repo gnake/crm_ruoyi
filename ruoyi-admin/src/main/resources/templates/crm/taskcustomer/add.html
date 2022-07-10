@@ -8,7 +8,7 @@
         <form class="form-horizontal m" id="form-taskcustomer-add">
             <h4 class="form-header h4">意向跟进信息</h4>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客户管理(CUSTOMER_INFO) 关联：</label>
+                <label class="col-sm-3 control-label">客户管理：</label>
                 <div class="col-sm-8">
                     <input name="custId" class="form-control" type="text">
                 </div>
@@ -87,33 +87,6 @@
                     }
                 },
                 {
-                    field: 'custProvince',
-                    align: 'center',
-                    title: '省份',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custProvince' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custCity',
-                    align: 'center',
-                    title: '城市',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custCity' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custAddress',
-                    align: 'center',
-                    title: '地址',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custAddress' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
                     field: 'custScale',
                     align: 'center',
                     title: '规模',
@@ -131,15 +104,7 @@
                         return html;
                     }
                 },
-                {
-                    field: 'custIntroduce',
-                    align: 'center',
-                    title: '简要介绍',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custIntroduce' value='%s'>", index, value);
-                        return html;
-                    }
-                },
+
                 {
                     field: 'custState',
                     align: 'center',
@@ -149,105 +114,7 @@
                         return $.common.dictToSelect(custStateDatas, value, name);
                     }
                 },
-                {
-                    field: 'custCreateId',
-                    align: 'center',
-                    title: '创建人',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custCreateId' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custCreateTime',
-                    align: 'center',
-                    title: '创建时间',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custCreateTime' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custSubmitId',
-                    align: 'center',
-                    title: '提交人',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custSubmitId' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custSubmitTime',
-                    align: 'center',
-                    title: '提交时间',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custSubmitTime' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custConfirmId',
-                    align: 'center',
-                    title: '确认人',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custConfirmId' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custConfirmTime',
-                    align: 'center',
-                    title: '确认时间',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custConfirmTime' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custProgressState',
-                    align: 'center',
-                    title: '进展状态',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custProgressState' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custLevel',
-                    align: 'center',
-                    title: '级别',
-                    formatter: function(value, row, index) {
-                        var name = $.common.sprintf("myCustomerList[%s].custLevel", index);
-                        return $.common.dictToSelect(custLevelDatas, value, name);
-                    }
-                },
-                {
-                    field: 'custCompanyWeb',
-                    align: 'center',
-                    title: '公司网站',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custCompanyWeb' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'orgId',
-                    align: 'center',
-                    title: '潜在客户',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].orgId' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
-                    field: 'custVisitAgainTime',
-                    align: 'center',
-                    title: '计划拜访时间',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custVisitAgainTime' value='%s'>", index, value);
-                        return html;
-                    }
-                },
+
                 {
                     title: '操作',
                     align: 'center',
@@ -266,24 +133,10 @@
                 index: $.table.serialNumber(count),
                 custName: "",
                 custIndustry: "",
-                custProvince: "",
-                custCity: "",
-                custAddress: "",
                 custScale: "",
                 custNature: "",
-                custIntroduce: "",
                 custState: "",
-                custCreateId: "",
-                custCreateTime: "",
-                custSubmitId: "",
-                custSubmitTime: "",
-                custConfirmId: "",
-                custConfirmTime: "",
-                custProgressState: "",
-                custLevel: "",
-                custCompanyWeb: "",
-                orgId: "",
-                custVisitAgainTime: "",
+
             }
             sub.addRow(row);
         }
