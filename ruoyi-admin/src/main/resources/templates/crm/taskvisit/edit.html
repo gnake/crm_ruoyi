@@ -100,65 +100,6 @@
                     	return columnIndex + $.table.serialNumber(index);
                     }
                 },
-                {
-                    field: 'orgName',
-                    align: 'center',
-                    title: '组织名称',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgName' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'orgType',
-                    align: 'center',
-                    title: '组织性质',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgType' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'orgIntroduction',
-                    align: 'center',
-                    title: '简要介绍',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgIntroduction' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'orgLinkmanName',
-                    align: 'center',
-                    title: '联系人',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgLinkmanName' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'orgEmail',
-                    align: 'center',
-                    title: '邮箱',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgEmail' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'orgContactWay',
-                    align: 'center',
-                    title: '联系方式',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgContactWay' value='%s'>", index, value);
-                        return html;
-                    }
-                },
 
                 {
                     field: 'orgState',
@@ -178,25 +119,8 @@
                         return $.common.dictToSelect(orgLabelsDatas, value, name);
                     }
                 },
-                {
-                    field: 'orgAddress',
-                    align: 'center',
-                    title: '地址',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgAddress' value='%s'>", index, value);
-                        return html;
-                    }
-                },
 
-                {
-                    field: 'orgWebsite',
-                    align: 'center',
-                    title: '公司网站',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgWebsite' value='%s'>", index, value);
-                        return html;
-                    }
-                },
+
 
                 {
                     field: 'orgCreater',
@@ -228,55 +152,19 @@
                     }
                 },
 
-                {
-                    field: 'orgClassification',
-                    align: 'center',
-                    title: '公司分类',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgClassification' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'orgVisitAgainTime',
-                    align: 'center',
-                    title: '计划拜访时间',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgVisitAgainTime' value='%s'>", index, value);
-                        return html;
-                    }
-                },
 
                 {
                     field: 'custId',
                     align: 'center',
-                    title: '客户管理(CRM_CUSTOMER_INFO)',
+                    title: '客户管理',
                     formatter: function(value, row, index) {
                         var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].custId' value='%s'>", index, value);
                         return html;
                     }
                 },
 
-                {
-                    field: 'orgSources',
-                    align: 'center',
-                    title: '来源渠道',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgSources' value='%s'>", index, value);
-                        return html;
-                    }
-                },
 
-                {
-                    field: 'orgSalesman',
-                    align: 'center',
-                    title: '跟进人员',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgSalesman' value='%s'>", index, value);
-                        return html;
-                    }
-                },
+
 
                 {
                     field: 'orgClassify',
@@ -303,24 +191,12 @@
             var count = $("#" + table.options.id).bootstrapTable('getData').length;
             var row = {
                 index: $.table.serialNumber(count),
-                orgName: "",
-                orgType: "",
-                orgIntroduction: "",
-                orgLinkmanName: "",
-                orgEmail: "",
-                orgContactWay: "",
                 orgState: "",
                 orgLabels: "",
-                orgAddress: "",
-                orgWebsite: "",
                 orgCreater: "",
                 orgCreateTime: "",
                 orgUpdateTime: "",
-                orgClassification: "",
-                orgVisitAgainTime: "",
                 custId: "",
-                orgSources: "",
-                orgSalesman: "",
                 orgClassify: "",
             }
             sub.addRow(row);
