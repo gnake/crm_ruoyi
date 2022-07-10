@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('意向跟进列表')" />
+    <th:block th:include="include :: header('工作总结列表')" />
     <th:block th:include="include :: layout-latest-css" />
     <th:block th:include="include :: ztree-css" />
 </head>
@@ -33,15 +33,8 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>客户管理(CUSTOMER_INFO) 关联：</label>
-                                <input type="text" name="custId"/>
-                            </li>
-                            <li>
-                                <label>跟进状态：</label>
-                                <select name="taskFollowState" th:with="type=${@dict.getType('crm_taskfollow')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
+                                <label>任务计划：</label>
+                                <input type="text" name="taskReviewId"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -53,16 +46,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:taskcustomer:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:mytaskreview:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:taskcustomer:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:mytaskreview:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:taskcustomer:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:mytaskreview:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:taskcustomer:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:mytaskreview:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -76,10 +69,10 @@
 <th:block th:include="include :: layout-latest-js" />
 <th:block th:include="include :: ztree-js" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('crm:taskcustomer:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('crm:taskcustomer:remove')}]];
+        var editFlag = [[${@permission.hasPermi('crm:mytaskreview:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('crm:mytaskreview:remove')}]];
         var taskFollowStateDatas = [[${@dict.getType('crm_taskfollow')}]];
-        var prefix = ctx + "crm/taskcustomer";
+        var prefix = ctx + "crm/mytaskreview";
 
         $(function() {
             var panehHidden = false;
@@ -106,7 +99,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "意向跟进",
+                modalName: "工作总结",
                 columns: [{
                     checkbox: true
                 },
@@ -116,15 +109,8 @@
                     visible: false
                 },
                 {
-                    field: 'custId',
-                    title: '客户管理(CUSTOMER_INFO) 关联'
-                },
-                {
-                    field: 'taskFollowState',
-                    title: '跟进状态',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(taskFollowStateDatas, value);
-                    }
+                    field: 'taskReviewId',
+                    title: '任务计划'
                 },
                 {
                     title: '操作',
