@@ -10,8 +10,8 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 意向跟进对象 CRM_CUSTOMER_INFO
  * 
- * @author 童楷涵
- * @date 2022-07-09
+ * @author swj
+ * @date 2022-07-10
  */
 public class MyCustomer extends BaseEntity
 {
@@ -26,6 +26,7 @@ public class MyCustomer extends BaseEntity
     private String custName;
 
     /** 行业 */
+    @Excel(name = "行业")
     private String custIndustry;
 
     /** 省份 */
@@ -38,13 +39,14 @@ public class MyCustomer extends BaseEntity
     private String custAddress;
 
     /** 规模 */
+    @Excel(name = "规模")
     private String custScale;
 
     /** 性质 */
+    @Excel(name = "性质")
     private String custNature;
 
     /** 简要介绍 */
-    @Excel(name = "简要介绍")
     private String custIntroduce;
 
     /** 状态 */
