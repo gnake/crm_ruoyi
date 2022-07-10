@@ -78,62 +78,62 @@
         var prefix = ctx + "crm/CustomerIntetion";
         $("#form-CustomerIntetion-edit").validate({
             focusCleanup: true,
-            // rules: {
-            //     custName: {
-            //         required: true,
-            //         minLength: 2
-            //     },
-            //     custIndustry: {
-            //         required: true
-            //     },
-            //     custScale: {
-            //         required: true
-            //     },
-            //     custNature: {
-            //         required: true
-            //     },
-            //     custIntroduce: {
-            //         required: true
-            //     },
-            //     custState: {
-            //         required: true
-            //     },
-            //     custCreateId: {
-            //         required: true
-            //     },
-            //     custCreateTime: {
-            //         required: true
-            //     },
-            //     custProgressState: {
-            //         required: true
-            //     }
-            // },
-            // messages: {
-            //     custName: {
-            //         required: "请输入客户名称",
-            //     },
-            //     custIndustry: {
-            //         required: "请输入行业",
-            //     },
-            //     custScale: {
-            //         required: "请输入规模",
-            //     },
-            //     custNature: {
-            //         required: "请输入性质",
-            //     },
-            //     custState: {
-            //         required: "请选择状态",
-            //     },
-            //     custCreateId: {
-            //         required: "请输入创建人",
-            //     },
-            //     custCreateTime: {
-            //         required: "请选择创建时间",
-            //     },
-            //     custProgressState: {
-            //         required: "请输入进展状态"
-            //     }
-            // }
+            rules: {
+            custName: {
+                required: true,
+                // minLength: 2
+            },
+            custIndustry: {
+                required: true
+            },
+            custScale: {
+                required: true
+            },
+            custNature: {
+                required: true
+            },
+            custIntroduce: {
+                required: true
+            },
+            custState: {
+                required: true
+            },
+            custCreateId: {
+                required: true
+            },
+            custCreateTime: {
+                required: true
+            },
+            custProgressState: {
+                required: true
+            }
+        },
+        messages: {
+            custName: {
+                required: "请输入客户名称",
+            },
+            custIndustry: {
+                required: "请输入行业",
+            },
+            custScale: {
+                required: "请输入规模",
+            },
+            custNature: {
+                required: "请输入性质",
+            },
+            custState: {
+                required: "请选择状态",
+            },
+            custCreateId: {
+                required: "请输入创建人",
+            },
+            custCreateTime: {
+                required: "请选择创建时间",
+            },
+            custProgressState: {
+                required: "请输入进展状态"
+            }
+        }
         });
 
         function submitHandler() {
