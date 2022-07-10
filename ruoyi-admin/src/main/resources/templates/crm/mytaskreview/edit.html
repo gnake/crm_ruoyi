@@ -9,7 +9,7 @@
             <h4 class="form-header h4">工作总结信息</h4>
             <input name="taskId" th:field="*{taskId}" type="hidden">
             <div class="form-group">    
-                <label class="col-sm-3 control-label">任务计划&总结(TASK_REVIEW) 关联：</label>
+                <label class="col-sm-3 control-label">任务计划：</label>
                 <div class="col-sm-8">
                     <input name="taskReviewId" th:field="*{taskReviewId}" class="form-control" type="text">
                 </div>
@@ -100,65 +100,6 @@
                     }
                 },
 
-                {
-                    field: 'taskReviewVisitsTotal',
-                    align: 'center',
-                    title: '拜访总数',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskReviewList[%s].taskReviewVisitsTotal' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'taskReviewStrange',
-                    align: 'center',
-                    title: '陌生拜访记录',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskReviewList[%s].taskReviewStrange' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'taskReviewReturnvisit',
-                    align: 'center',
-                    title: '回访拜访记录',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskReviewList[%s].taskReviewReturnvisit' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'taskReviewNewIntencust',
-                    align: 'center',
-                    title: '新增意向客户',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskReviewList[%s].taskReviewNewIntencust' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'taskReviewReturnvisitHist',
-                    align: 'center',
-                    title: '回访历史客户',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskReviewList[%s].taskReviewReturnvisitHist' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'taskReviewLoss',
-                    align: 'center',
-                    title: '流失客户',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskReviewList[%s].taskReviewLoss' value='%s'>", index, value);
-                        return html;
-                    }
-                },
 
                 {
                     title: '操作',
@@ -180,12 +121,6 @@
                 saleId: "",
                 taskReviewState: "",
                 taskReviewDesc: "",
-                taskReviewVisitsTotal: "",
-                taskReviewStrange: "",
-                taskReviewReturnvisit: "",
-                taskReviewNewIntencust: "",
-                taskReviewReturnvisitHist: "",
-                taskReviewLoss: "",
             }
             sub.addRow(row);
         }
