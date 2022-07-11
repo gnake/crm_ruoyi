@@ -17,7 +17,14 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">行业：</label>
                 <div class="col-sm-8">
-                    <input name="custIndustry" class="form-control" type="text">
+                    <select name="custIndustry" class="form-control" type="text">
+                        <option value="请选择">请选择</option>
+                        <option value="能源">能源</option>
+                        <option value="化工">化工</option>
+                        <option value="媒体通信">媒体通信</option>
+                        <option value="金融">金融</option>
+                        <option value="互联网">互联网</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -74,7 +81,12 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">创建人：</label>
                 <div class="col-sm-8">
-                    <input name="custCreateId" class="form-control" type="text">
+                    <select name="custCreateId" class="form-control" type="text">
+                        <option value="-1">请选择</option>
+                        <option value="1">赵晓二</option>
+                        <option value="2">孙小三</option>
+                        <option value="3">赵小四</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
@@ -89,7 +101,12 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">进展状态：</label>
                 <div class="col-sm-8">
-                    <input name="custProgressState" class="form-control" type="text">
+                    <select name="custProgressState" class="form-control" type="text">
+                        <option value="请选择">请选择</option>
+                        <option value="跟进中">跟进中</option>
+                        <option value="有意向">有意向</option>
+                        <option value="无意向">无意向</option>
+                    </select>
                 </div>
             </div>
         </form>
@@ -212,7 +229,6 @@
         provinces["甘肃省"]=["兰州市","天水市","庆阳市"];
         provinces["江苏省"]=["南京市","无锡市","苏州市"];
         provinces["浙江省"]=["杭州市","宁波市"];
-        provinces["安徽省"]=["合肥市","马鞍山市"];
 
         var citys=[];
         citys["兰州市"]=["安宁区","西固区","城关区","七里河区","新区"];
@@ -223,8 +239,6 @@
         citys["苏州市"]=["姑苏区","吴江区"];
         citys["杭州市"]=["西湖区","临安区","上城区"];
         citys["宁波市"]=["江北区","江东区"];
-        citys["合肥市"]=["蜀山区","瑶海区"];
-        citys["马鞍山市"]=["花山区","雨山区"];
 
         // 2.获取元素
         var oprovince = document.getElementById('province');

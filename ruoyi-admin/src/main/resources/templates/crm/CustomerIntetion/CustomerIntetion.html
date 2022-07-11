@@ -16,7 +16,14 @@
                             </li>
                             <li>
                                 <label>行业：</label>
-                                <input type="text" name="custIndustry"/>
+                                <select type="text" name="custIndustry">
+                                    <option value="">所有</option>
+                                    <option value="能源">能源</option>
+                                    <option value="化工">化工</option>
+                                    <option value="媒体通信">媒体通信</option>
+                                    <option value="金融">金融</option>
+                                    <option value="互联网">互联网</option>
+                                </select>
                             </li>
                             <li>
                                 <label>规模：</label>
@@ -35,7 +42,12 @@
                             </li>
                             <li>
                                 <label>进展状态：</label>
-                                <input type="text" name="custProgressState"/>
+                                <select type="text" name="custProgressState">
+                                    <option value="">所有</option>
+                                    <option value="跟进中">跟进中</option>
+                                    <option value="有意向">有意向</option>
+                                    <option value="无意向">无意向</option>
+                                </select>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
