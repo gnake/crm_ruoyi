@@ -1,5 +1,6 @@
 package com.ruoyi.crm.domain;
 
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -11,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author swj
  * @date 2022-07-10
  */
-public class TaskReview extends BaseEntity
+public class TasksReview extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -51,6 +52,9 @@ public class TaskReview extends BaseEntity
 
     /** 流失客户 */
     private Long taskReviewLoss;
+
+    /** 任务周期信息 */
+    private List<TaskCycle> taskCycleList;
 
     public void setTaskReviewId(Long taskReviewId) 
     {
@@ -152,6 +156,16 @@ public class TaskReview extends BaseEntity
         return taskReviewLoss;
     }
 
+    public List<TaskCycle> getTaskCycleList()
+    {
+        return taskCycleList;
+    }
+
+    public void setTaskCycleList(List<TaskCycle> taskCycleList)
+    {
+        this.taskCycleList = taskCycleList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -166,6 +180,7 @@ public class TaskReview extends BaseEntity
             .append("taskReviewNewIntencust", getTaskReviewNewIntencust())
             .append("taskReviewReturnvisitHist", getTaskReviewReturnvisitHist())
             .append("taskReviewLoss", getTaskReviewLoss())
+            .append("taskCycleList", getTaskCycleList())
             .toString();
     }
 }

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增陌生拜访')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-taskvisit-add">
+            <h4 class="form-header h4">陌生拜访信息</h4>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">潜在客户(ORG_INFO) 关联：</label>
+                <div class="col-sm-8">
+                    <input name="orgId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">任务计划&总结(TASK_REVIEW) 关联：</label>
+                <div class="col-sm-8">
+                    <input name="taskReviewId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">跟进状态：</label>
+                <div class="col-sm-8">
+                    <select name="taskFollowState" class="form-control m-b" th:with="type=${@dict.getType('crm_taskfollow')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建任务时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="taskCreateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户状态：</label>
+                <div class="col-sm-8">
+                    <input name="taskCustState" class="form-control" type="text">
+                </div>
+            </div>
+            <h4 class="form-header h4">陌生拜访信息</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-white btn-sm" onclick="addRow()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delRow()"><i class="fa fa-minus"> 删除</i></button>
+                    <div class="col-sm-12 select-table table-striped">
+                        <table id="bootstrap-table"></table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "crm/taskvisit"
+        var orgStateDatas = [[${@dict.getType('orgstate')}]];
+        var orgLabelsDatas = [[${@dict.getType('orglabel')}]];
+        var orgClassifyDatas = [[${@dict.getType('orginfo')}]];
+        $("#form-taskvisit-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-taskvisit-add').serialize());
+            }
+        }
+
+        $("input[name='taskCreateTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $(function() {
+            var options = {
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                sidePagination: "client",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'index',
+                    align: 'center',
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                    	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
+                    	return columnIndex + $.table.serialNumber(index);
+                    }
+                },
+
+                {
+                    field: 'orgState',
+                    align: 'center',
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("crmTaskReviewStrangeList[%s].orgState", index);
+                        return $.common.dictToSelect(orgStateDatas, value, name);
+                    }
+                },
+                {
+                    field: 'orgLabels',
+                    align: 'center',
+                    title: '标签',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("crmTaskReviewStrangeList[%s].orgLabels", index);
+                        return $.common.dictToSelect(orgLabelsDatas, value, name);
+                    }
+                },
+                {
+                    field: 'orgCreater',
+                    align: 'center',
+                    title: '创建人',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgCreater' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orgCreateTime',
+                    align: 'center',
+                    title: '创建时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgCreateTime' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orgUpdateTime',
+                    align: 'center',
+                    title: '更新时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].orgUpdateTime' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'custId',
+                    align: 'center',
+                    title: '客户管理',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='crmTaskReviewStrangeList[%s].custId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'orgClassify',
+                    align: 'center',
+                    title: '分类',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("crmTaskReviewStrangeList[%s].orgClassify", index);
+                        return $.common.dictToSelect(orgClassifyDatas, value, name);
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var value = $.common.isNotEmpty(row.index) ? row.index : $.table.serialNumber(index);
+                        return '<a class="btn btn-danger btn-xs" href="javascript:void(0)" onclick="sub.delRowByIndex(\'' + value + '\')"><i class="fa fa-remove"></i>删除</a>';
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+
+        function addRow() {
+            var count = $("#" + table.options.id).bootstrapTable('getData').length;
+            var row = {
+                index: $.table.serialNumber(count),
+                orgState: "",
+                orgLabels: "",
+                orgCreater: "",
+                orgCreateTime: "",
+                orgUpdateTime: "",
+                custId: "",
+                orgClassify: "",
+            }
+            sub.addRow(row);
+        }
+    </script>
+</body>
+</html>

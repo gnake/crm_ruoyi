@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.crm.domain.CrmTaskCustomer;
-import com.ruoyi.crm.service.ICrmTaskCustomerService;
+import com.ruoyi.crm.domain.TaskCustomer;
+import com.ruoyi.crm.service.ITaskCustomerService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -23,48 +23,48 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 意向跟进Controller
  * 
  * @author swj
- * @date 2022-07-08
+ * @date 2022-07-10
  */
 @Controller
-@RequestMapping("/crm/mytaskcustomer")
-public class CrmTaskCustomerController extends BaseController
+@RequestMapping("/crm/taskcustomer")
+public class TaskCustomerController extends BaseController
 {
-    private final String prefix = "crm/mytaskcustomer";
+    private final String prefix = "crm/taskcustomer";
 
     @Autowired
-    private ICrmTaskCustomerService crmTaskCustomerService;
+    private ITaskCustomerService taskCustomerService;
 
-    @RequiresPermissions("crm:mytaskcustomer:view")
+    @RequiresPermissions("crm:taskcustomer:view")
     @GetMapping()
-    public String mytaskcustomer()
+    public String taskcustomer()
     {
-        return prefix + "/mytaskcustomer";
+        return prefix + "/taskcustomer";
     }
 
     /**
      * 查询意向跟进列表
      */
-    @RequiresPermissions("crm:mytaskcustomer:list")
+    @RequiresPermissions("crm:taskcustomer:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(CrmTaskCustomer crmTaskCustomer)
+    public TableDataInfo list(TaskCustomer taskCustomer)
     {
         startPage();
-        List<CrmTaskCustomer> list = crmTaskCustomerService.selectCrmTaskCustomerList(crmTaskCustomer);
+        List<TaskCustomer> list = taskCustomerService.selectTaskCustomerList(taskCustomer);
         return getDataTable(list);
     }
 
     /**
      * 导出意向跟进列表
      */
-    @RequiresPermissions("crm:mytaskcustomer:export")
+    @RequiresPermissions("crm:taskcustomer:export")
     @Log(title = "意向跟进", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(CrmTaskCustomer crmTaskCustomer)
+    public AjaxResult export(TaskCustomer taskCustomer)
     {
-        List<CrmTaskCustomer> list = crmTaskCustomerService.selectCrmTaskCustomerList(crmTaskCustomer);
-        ExcelUtil<CrmTaskCustomer> util = new ExcelUtil<CrmTaskCustomer>(CrmTaskCustomer.class);
+        List<TaskCustomer> list = taskCustomerService.selectTaskCustomerList(taskCustomer);
+        ExcelUtil<TaskCustomer> util = new ExcelUtil<TaskCustomer>(TaskCustomer.class);
         return util.exportExcel(list, "意向跟进数据");
     }
 
@@ -80,48 +80,48 @@ public class CrmTaskCustomerController extends BaseController
     /**
      * 新增保存意向跟进
      */
-    @RequiresPermissions("crm:mytaskcustomer:add")
+    @RequiresPermissions("crm:taskcustomer:add")
     @Log(title = "意向跟进", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(CrmTaskCustomer crmTaskCustomer)
+    public AjaxResult addSave(TaskCustomer taskCustomer)
     {
-        return toAjax(crmTaskCustomerService.insertCrmTaskCustomer(crmTaskCustomer));
+        return toAjax(taskCustomerService.insertTaskCustomer(taskCustomer));
     }
 
     /**
      * 修改意向跟进
      */
-    @RequiresPermissions("crm:mytaskcustomer:edit")
-    @GetMapping("/edit/{custId}")
-    public String edit(@PathVariable("custId") Long custId, ModelMap mmap)
+    @RequiresPermissions("crm:taskcustomer:edit")
+    @GetMapping("/edit/{taskId}")
+    public String edit(@PathVariable("taskId") Long taskId, ModelMap mmap)
     {
-        CrmTaskCustomer crmTaskCustomer = crmTaskCustomerService.selectCrmTaskCustomerByCustId(custId);
-        mmap.put("crmTaskCustomer", crmTaskCustomer);
+        TaskCustomer taskCustomer = taskCustomerService.selectTaskCustomerByTaskId(taskId);
+        mmap.put("taskCustomer", taskCustomer);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存意向跟进
      */
-    @RequiresPermissions("crm:mytaskcustomer:edit")
+    @RequiresPermissions("crm:taskcustomer:edit")
     @Log(title = "意向跟进", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(CrmTaskCustomer crmTaskCustomer)
+    public AjaxResult editSave(TaskCustomer taskCustomer)
     {
-        return toAjax(crmTaskCustomerService.updateCrmTaskCustomer(crmTaskCustomer));
+        return toAjax(taskCustomerService.updateTaskCustomer(taskCustomer));
     }
 
     /**
      * 删除意向跟进
      */
-    @RequiresPermissions("crm:mytaskcustomer:remove")
+    @RequiresPermissions("crm:taskcustomer:remove")
     @Log(title = "意向跟进", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(crmTaskCustomerService.deleteCrmTaskCustomerByCustIds(ids));
+        return toAjax(taskCustomerService.deleteTaskCustomerByTaskIds(ids));
     }
 }

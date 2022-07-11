@@ -6,9 +6,15 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-REVIEW-edit" th:object="${taskReview}">
+        <form class="form-horizontal m" id="form-mytasksreview-edit" th:object="${tasksReview}">
             <h4 class="form-header h4">工作总结信息</h4>
             <input name="taskReviewId" th:field="*{taskReviewId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">任务周期：</label>
+                <div class="col-sm-8">
+                    <input name="tcId" th:field="*{tcId}" class="form-control" type="text">
+                </div>
+            </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">销售人员：</label>
                 <div class="col-sm-8">
@@ -18,7 +24,9 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">总结状态：</label>
                 <div class="col-sm-8">
-                    <input name="taskReviewState" th:field="*{taskReviewState}" class="form-control" type="text">
+                    <select name="taskReviewState" class="form-control m-b" th:with="type=${@dict.getType('crm_review')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{taskReviewState}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
@@ -28,30 +36,19 @@
                     <div class="summernote" id="taskReviewDesc"></div>
                 </div>
             </div>
-
-            <h4 class="form-header h4">任务周期信息</h4>
-            <div class="row">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-white btn-sm" onclick="addRow()"><i class="fa fa-plus"> 增加</i></button>
-                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delRow()"><i class="fa fa-minus"> 删除</i></button>
-                    <div class="col-sm-12 select-table table-striped">
-                        <table id="bootstrap-table"></table>
-                    </div>
-                </div>
-            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: summernote-js" />
     <script th:inline="javascript">
-        var prefix = ctx + "crm/REVIEW";
-        $("#form-REVIEW-edit").validate({
+        var prefix = ctx + "crm/mytasksreview";
+        $("#form-mytasksreview-edit").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-REVIEW-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-mytasksreview-edit').serialize());
             }
         }
 
@@ -95,58 +92,6 @@
             })
         });
 
-        $(function() {
-            var options = {
-                data: [[${taskReview.taskCycleList}]],
-                pagination: false,
-                showSearch: false,
-                showRefresh: false,
-                showToggle: false,
-                showColumns: false,
-                sidePagination: "client",
-                columns: [{
-                    checkbox: true
-                },
-                {
-                    field: 'index',
-                    align: 'center',
-                    title: "序号",
-                    formatter: function (value, row, index) {
-                    	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
-                    	return columnIndex + $.table.serialNumber(index);
-                    }
-                },
-                {
-                    field: 'tcBegin',
-                    align: 'center',
-                    title: '起始日期',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskCycleList[%s].tcBegin' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    field: 'tcEnd',
-                    align: 'center',
-                    title: '结束日期',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='taskCycleList[%s].tcEnd' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-
-                {
-                    title: '操作',
-                    align: 'center',
-                    formatter: function(value, row, index) {
-                        var value = $.common.isNotEmpty(row.index) ? row.index : $.table.serialNumber(index);
-                        return '<a class="btn btn-danger btn-xs" href="javascript:void(0)" onclick="sub.delRowByIndex(\'' + value + '\')"><i class="fa fa-remove"></i>删除</a>';
-                    }
-                }]
-            };
-            $.table.init(options);
-        });
 
         function addRow() {
             var count = $("#" + table.options.id).bootstrapTable('getData').length;

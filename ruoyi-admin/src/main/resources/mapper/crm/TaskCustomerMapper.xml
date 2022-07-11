@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.crm.mapper.TaskCustomerMapper">
+    
+    <resultMap type="TaskCustomer" id="TaskCustomerResult">
+        <result property="taskId"    column="TASK_ID"    />
+        <result property="orgId"    column="ORG_ID"    />
+        <result property="custId"    column="CUST_ID"    />
+        <result property="taskReviewId"    column="TASK_REVIEW_ID"    />
+        <result property="saleId"    column="SALE_ID"    />
+        <result property="taskFollowState"    column="TASK_FOLLOW_STATE"    />
+        <result property="taskClass"    column="TASK_CLASS"    />
+        <result property="taskCreateTime"    column="TASK_CREATE_TIME"    />
+        <result property="taskFinishTime"    column="TASK_FINISH_TIME"    />
+        <result property="taskCustState"    column="TASK_CUST_STATE"    />
+    </resultMap>
+
+    <resultMap id="TaskCustomerMyCustomerResult" type="TaskCustomer" extends="TaskCustomerResult">
+        <collection property="myCustomerList" notNullColumn="sub_CUST_ID" javaType="java.util.List" resultMap="MyCustomerResult" />
+    </resultMap>
+
+    <resultMap type="MyCustomer" id="MyCustomerResult">
+        <result property="custId"    column="sub_CUST_ID"    />
+        <result property="custName"    column="sub_CUST_NAME"    />
+        <result property="custIndustry"    column="sub_CUST_INDUSTRY"    />
+        <result property="custProvince"    column="sub_CUST_PROVINCE"    />
+        <result property="custCity"    column="sub_CUST_CITY"    />
+        <result property="custAddress"    column="sub_CUST_ADDRESS"    />
+        <result property="custScale"    column="sub_CUST_SCALE"    />
+        <result property="custNature"    column="sub_CUST_NATURE"    />
+        <result property="custIntroduce"    column="sub_CUST_INTRODUCE"    />
+        <result property="custState"    column="sub_CUST_STATE"    />
+        <result property="custCreateId"    column="sub_CUST_CREATE_ID"    />
+        <result property="custCreateTime"    column="sub_CUST_CREATE_TIME"    />
+        <result property="custSubmitId"    column="sub_CUST_SUBMIT_ID"    />
+        <result property="custSubmitTime"    column="sub_CUST_SUBMIT_TIME"    />
+        <result property="custConfirmId"    column="sub_CUST_CONFIRM_ID"    />
+        <result property="custConfirmTime"    column="sub_CUST_CONFIRM_TIME"    />
+        <result property="custProgressState"    column="sub_CUST_PROGRESS_STATE"    />
+        <result property="custLevel"    column="sub_CUST_LEVEL"    />
+        <result property="custCompanyWeb"    column="sub_CUST_COMPANY_WEB"    />
+        <result property="orgId"    column="sub_ORG_ID"    />
+        <result property="custVisitAgainTime"    column="sub_CUST_VISIT_AGAIN_TIME"    />
+    </resultMap>
+
+    <sql id="selectTaskCustomerVo">
+        select TASK_ID, ORG_ID, CUST_ID, TASK_REVIEW_ID, SALE_ID, TASK_FOLLOW_STATE, TASK_CLASS, TASK_CREATE_TIME, TASK_FINISH_TIME, TASK_CUST_STATE from MY_TASKS
+    </sql>
+
+    <select id="selectTaskCustomerList" parameterType="TaskCustomer" resultMap="TaskCustomerResult">
+        <include refid="selectTaskCustomerVo"/>
+        <where>  
+            <if test="custId != null "> and CUST_ID = #{custId}</if>
+            <if test="taskFollowState != null  and taskFollowState != ''"> and TASK_FOLLOW_STATE = #{taskFollowState}</if>
+        </where>
+    </select>
+    
+    <select id="selectTaskCustomerByTaskId" parameterType="Long" resultMap="TaskCustomerMyCustomerResult">
+        select a.TASK_ID, a.ORG_ID, a.CUST_ID, a.TASK_REVIEW_ID, a.SALE_ID, a.TASK_FOLLOW_STATE, a.TASK_CLASS, a.TASK_CREATE_TIME, a.TASK_FINISH_TIME, a.TASK_CUST_STATE,
+ b.CUST_ID as sub_CUST_ID, b.CUST_NAME as sub_CUST_NAME, b.CUST_INDUSTRY as sub_CUST_INDUSTRY, b.CUST_PROVINCE as sub_CUST_PROVINCE, b.CUST_CITY as sub_CUST_CITY, b.CUST_ADDRESS as sub_CUST_ADDRESS, b.CUST_SCALE as sub_CUST_SCALE, b.CUST_NATURE as sub_CUST_NATURE, b.CUST_INTRODUCE as sub_CUST_INTRODUCE, b.CUST_STATE as sub_CUST_STATE, b.CUST_CREATE_ID as sub_CUST_CREATE_ID, b.CUST_CREATE_TIME as sub_CUST_CREATE_TIME, b.CUST_SUBMIT_ID as sub_CUST_SUBMIT_ID, b.CUST_SUBMIT_TIME as sub_CUST_SUBMIT_TIME, b.CUST_CONFIRM_ID as sub_CUST_CONFIRM_ID, b.CUST_CONFIRM_TIME as sub_CUST_CONFIRM_TIME, b.CUST_PROGRESS_STATE as sub_CUST_PROGRESS_STATE, b.CUST_LEVEL as sub_CUST_LEVEL, b.CUST_COMPANY_WEB as sub_CUST_COMPANY_WEB, b.ORG_ID as sub_ORG_ID, b.CUST_VISIT_AGAIN_TIME as sub_CUST_VISIT_AGAIN_TIME
+        from MY_TASKS a
+        left join CRM_CUSTOMER_INFO b on b.CUST_ID = a.TASK_ID
+        where a.TASK_ID = #{taskId}
+    </select>
+        
+    <insert id="insertTaskCustomer" parameterType="TaskCustomer" useGeneratedKeys="true" keyProperty="taskId">
+        insert into MY_TASKS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgId != null">ORG_ID,</if>
+            <if test="custId != null">CUST_ID,</if>
+            <if test="taskReviewId != null">TASK_REVIEW_ID,</if>
+            <if test="saleId != null">SALE_ID,</if>
+            <if test="taskFollowState != null">TASK_FOLLOW_STATE,</if>
+            <if test="taskClass != null">TASK_CLASS,</if>
+            <if test="taskCreateTime != null">TASK_CREATE_TIME,</if>
+            <if test="taskFinishTime != null">TASK_FINISH_TIME,</if>
+            <if test="taskCustState != null">TASK_CUST_STATE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgId != null">#{orgId},</if>
+            <if test="custId != null">#{custId},</if>
+            <if test="taskReviewId != null">#{taskReviewId},</if>
+            <if test="saleId != null">#{saleId},</if>
+            <if test="taskFollowState != null">#{taskFollowState},</if>
+            <if test="taskClass != null">#{taskClass},</if>
+            <if test="taskCreateTime != null">#{taskCreateTime},</if>
+            <if test="taskFinishTime != null">#{taskFinishTime},</if>
+            <if test="taskCustState != null">#{taskCustState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTaskCustomer" parameterType="TaskCustomer">
+        update MY_TASKS
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgId != null">ORG_ID = #{orgId},</if>
+            <if test="custId != null">CUST_ID = #{custId},</if>
+            <if test="taskReviewId != null">TASK_REVIEW_ID = #{taskReviewId},</if>
+            <if test="saleId != null">SALE_ID = #{saleId},</if>
+            <if test="taskFollowState != null">TASK_FOLLOW_STATE = #{taskFollowState},</if>
+            <if test="taskClass != null">TASK_CLASS = #{taskClass},</if>
+            <if test="taskCreateTime != null">TASK_CREATE_TIME = #{taskCreateTime},</if>
+            <if test="taskFinishTime != null">TASK_FINISH_TIME = #{taskFinishTime},</if>
+            <if test="taskCustState != null">TASK_CUST_STATE = #{taskCustState},</if>
+        </trim>
+        where TASK_ID = #{taskId}
+    </update>
+
+    <delete id="deleteTaskCustomerByTaskId" parameterType="Long">
+        delete from MY_TASKS where TASK_ID = #{taskId}
+    </delete>
+
+    <delete id="deleteTaskCustomerByTaskIds" parameterType="String">
+        delete from MY_TASKS where TASK_ID in 
+        <foreach item="taskId" collection="array" open="(" separator="," close=")">
+            #{taskId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteMyCustomerByCustIds" parameterType="String">
+        delete from CRM_CUSTOMER_INFO where CUST_ID in 
+        <foreach item="custId" collection="array" open="(" separator="," close=")">
+            #{custId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteMyCustomerByCustId" parameterType="Long">
+        delete from CRM_CUSTOMER_INFO where CUST_ID = #{custId}
+    </delete>
+
+    <insert id="batchMyCustomer">
+        insert into CRM_CUSTOMER_INFO( CUST_ID, CUST_NAME, CUST_INDUSTRY, CUST_PROVINCE, CUST_CITY, CUST_ADDRESS, CUST_SCALE, CUST_NATURE, CUST_INTRODUCE, CUST_STATE, CUST_CREATE_ID, CUST_CREATE_TIME, CUST_SUBMIT_ID, CUST_SUBMIT_TIME, CUST_CONFIRM_ID, CUST_CONFIRM_TIME, CUST_PROGRESS_STATE, CUST_LEVEL, CUST_COMPANY_WEB, ORG_ID, CUST_VISIT_AGAIN_TIME) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.custId}, #{item.custName}, #{item.custIndustry}, #{item.custProvince}, #{item.custCity}, #{item.custAddress}, #{item.custScale}, #{item.custNature}, #{item.custIntroduce}, #{item.custState}, #{item.custCreateId}, #{item.custCreateTime}, #{item.custSubmitId}, #{item.custSubmitTime}, #{item.custConfirmId}, #{item.custConfirmTime}, #{item.custProgressState}, #{item.custLevel}, #{item.custCompanyWeb}, #{item.orgId}, #{item.custVisitAgainTime})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.crm.mapper.TaskReviewMapper">
+<mapper namespace="com.ruoyi.crm.mapper.TasksReviewMapper">
     
-    <resultMap type="TaskReview" id="TaskReviewResult">
+    <resultMap type="TasksReview" id="TasksReviewResult">
         <result property="taskReviewId"    column="TASK_REVIEW_ID"    />
         <result property="tcId"    column="TC_ID"    />
         <result property="saleId"    column="SALE_ID"    />
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="taskReviewLoss"    column="TASK_REVIEW_LOSS"    />
     </resultMap>
 
-    <resultMap id="TaskReviewTaskCycleResult" type="TaskReview" extends="TaskReviewResult">
+    <resultMap id="TasksReviewTaskCycleResult" type="TasksReview" extends="TasksReviewResult">
         <collection property="taskCycleList" notNullColumn="sub_TC_ID" javaType="java.util.List" resultMap="TaskCycleResult" />
     </resultMap>
 
@@ -28,27 +28,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="tcEnd"    column="sub_TC_END"    />
     </resultMap>
 
-    <sql id="selectTaskReviewVo">
+    <sql id="selectTasksReviewVo">
         select TASK_REVIEW_ID, TC_ID, SALE_ID, TASK_REVIEW_STATE, TASK_REVIEW_DESC, TASK_REVIEW_VISITS_TOTAL, TASK_REVIEW_STRANGE, TASK_REVIEW_RETURNVISIT, TASK_REVIEW_NEW_INTENCUST, TASK_REVIEW_RETURNVISIT_HIST, TASK_REVIEW_LOSS from TASK_REVIEW
     </sql>
 
-    <select id="selectTaskReviewList" parameterType="TaskReview" resultMap="TaskReviewResult">
-        <include refid="selectTaskReviewVo"/>
+    <select id="selectTasksReviewList" parameterType="TasksReview" resultMap="TasksReviewResult">
+        <include refid="selectTasksReviewVo"/>
         <where>  
             <if test="tcId != null "> and TC_ID = #{tcId}</if>
             <if test="saleId != null  and saleId != ''"> and SALE_ID = #{saleId}</if>
             <if test="taskReviewState != null  and taskReviewState != ''"> and TASK_REVIEW_STATE = #{taskReviewState}</if>
             <if test="taskReviewDesc != null  and taskReviewDesc != ''"> and TASK_REVIEW_DESC = #{taskReviewDesc}</if>
-            <if test="taskReviewVisitsTotal != null "> and TASK_REVIEW_VISITS_TOTAL = #{taskReviewVisitsTotal}</if>
-            <if test="taskReviewStrange != null "> and TASK_REVIEW_STRANGE = #{taskReviewStrange}</if>
-            <if test="taskReviewReturnvisit != null "> and TASK_REVIEW_RETURNVISIT = #{taskReviewReturnvisit}</if>
-            <if test="taskReviewNewIntencust != null "> and TASK_REVIEW_NEW_INTENCUST = #{taskReviewNewIntencust}</if>
-            <if test="taskReviewReturnvisitHist != null "> and TASK_REVIEW_RETURNVISIT_HIST = #{taskReviewReturnvisitHist}</if>
-            <if test="taskReviewLoss != null "> and TASK_REVIEW_LOSS = #{taskReviewLoss}</if>
         </where>
     </select>
     
-    <select id="selectTaskReviewByTaskReviewId" parameterType="Long" resultMap="TaskReviewTaskCycleResult">
+    <select id="selectTasksReviewByTaskReviewId" parameterType="Long" resultMap="TasksReviewTaskCycleResult">
         select a.TASK_REVIEW_ID, a.TC_ID, a.SALE_ID, a.TASK_REVIEW_STATE, a.TASK_REVIEW_DESC, a.TASK_REVIEW_VISITS_TOTAL, a.TASK_REVIEW_STRANGE, a.TASK_REVIEW_RETURNVISIT, a.TASK_REVIEW_NEW_INTENCUST, a.TASK_REVIEW_RETURNVISIT_HIST, a.TASK_REVIEW_LOSS,
  b.TC_ID as sub_TC_ID, b.TC_BEGIN as sub_TC_BEGIN, b.TC_END as sub_TC_END
         from TASK_REVIEW a
@@ -56,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where a.TASK_REVIEW_ID = #{taskReviewId}
     </select>
         
-    <insert id="insertTaskReview" parameterType="TaskReview" useGeneratedKeys="true" keyProperty="taskReviewId">
+    <insert id="insertTasksReview" parameterType="TasksReview" useGeneratedKeys="true" keyProperty="taskReviewId">
         insert into TASK_REVIEW
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tcId != null">TC_ID,</if>
@@ -84,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateTaskReview" parameterType="TaskReview">
+    <update id="updateTasksReview" parameterType="TasksReview">
         update TASK_REVIEW
         <trim prefix="SET" suffixOverrides=",">
             <if test="tcId != null">TC_ID = #{tcId},</if>
@@ -101,11 +95,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where TASK_REVIEW_ID = #{taskReviewId}
     </update>
 
-    <delete id="deleteTaskReviewByTaskReviewId" parameterType="Long">
+    <delete id="deleteTasksReviewByTaskReviewId" parameterType="Long">
         delete from TASK_REVIEW where TASK_REVIEW_ID = #{taskReviewId}
     </delete>
 
-    <delete id="deleteTaskReviewByTaskReviewIds" parameterType="String">
+    <delete id="deleteTasksReviewByTaskReviewIds" parameterType="String">
         delete from TASK_REVIEW where TASK_REVIEW_ID in 
         <foreach item="taskReviewId" collection="array" open="(" separator="," close=")">
             #{taskReviewId}

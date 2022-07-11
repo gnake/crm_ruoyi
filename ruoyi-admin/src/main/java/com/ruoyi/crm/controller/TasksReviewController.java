@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.crm.domain.TaskReview;
-import com.ruoyi.crm.service.ITaskReviewService;
+import com.ruoyi.crm.domain.TasksReview;
+import com.ruoyi.crm.service.ITasksReviewService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -23,48 +23,48 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 工作总结Controller
  * 
  * @author swj
- * @date 2022-07-08
+ * @date 2022-07-10
  */
 @Controller
-@RequestMapping("/crm/REVIEW")
-public class TaskReviewController extends BaseController
+@RequestMapping("/crm/mytasksreview")
+public class TasksReviewController extends BaseController
 {
-    private final String prefix = "crm/REVIEW";
+    private final String prefix = "crm/mytasksreview";
 
     @Autowired
-    private ITaskReviewService taskReviewService;
+    private ITasksReviewService tasksReviewService;
 
-    @RequiresPermissions("crm:REVIEW:view")
+    @RequiresPermissions("crm:mytasksreview:view")
     @GetMapping()
-    public String REVIEW()
+    public String mytasksreview()
     {
-        return prefix + "/REVIEW";
+        return prefix + "/mytasksreview";
     }
 
     /**
      * 查询工作总结列表
      */
-    @RequiresPermissions("crm:REVIEW:list")
+    @RequiresPermissions("crm:mytasksreview:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(TaskReview taskReview)
+    public TableDataInfo list(TasksReview tasksReview)
     {
         startPage();
-        List<TaskReview> list = taskReviewService.selectTaskReviewList(taskReview);
+        List<TasksReview> list = tasksReviewService.selectTasksReviewList(tasksReview);
         return getDataTable(list);
     }
 
     /**
      * 导出工作总结列表
      */
-    @RequiresPermissions("crm:REVIEW:export")
+    @RequiresPermissions("crm:mytasksreview:export")
     @Log(title = "工作总结", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(TaskReview taskReview)
+    public AjaxResult export(TasksReview tasksReview)
     {
-        List<TaskReview> list = taskReviewService.selectTaskReviewList(taskReview);
-        ExcelUtil<TaskReview> util = new ExcelUtil<TaskReview>(TaskReview.class);
+        List<TasksReview> list = tasksReviewService.selectTasksReviewList(tasksReview);
+        ExcelUtil<TasksReview> util = new ExcelUtil<TasksReview>(TasksReview.class);
         return util.exportExcel(list, "工作总结数据");
     }
 
@@ -80,48 +80,48 @@ public class TaskReviewController extends BaseController
     /**
      * 新增保存工作总结
      */
-    @RequiresPermissions("crm:REVIEW:add")
+    @RequiresPermissions("crm:mytasksreview:add")
     @Log(title = "工作总结", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(TaskReview taskReview)
+    public AjaxResult addSave(TasksReview tasksReview)
     {
-        return toAjax(taskReviewService.insertTaskReview(taskReview));
+        return toAjax(tasksReviewService.insertTasksReview(tasksReview));
     }
 
     /**
      * 修改工作总结
      */
-    @RequiresPermissions("crm:REVIEW:edit")
+    @RequiresPermissions("crm:mytasksreview:edit")
     @GetMapping("/edit/{taskReviewId}")
     public String edit(@PathVariable("taskReviewId") Long taskReviewId, ModelMap mmap)
     {
-        TaskReview taskReview = taskReviewService.selectTaskReviewByTaskReviewId(taskReviewId);
-        mmap.put("taskReview", taskReview);
+        TasksReview tasksReview = tasksReviewService.selectTasksReviewByTaskReviewId(taskReviewId);
+        mmap.put("tasksReview", tasksReview);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存工作总结
      */
-    @RequiresPermissions("crm:REVIEW:edit")
+    @RequiresPermissions("crm:mytasksreview:edit")
     @Log(title = "工作总结", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(TaskReview taskReview)
+    public AjaxResult editSave(TasksReview tasksReview)
     {
-        return toAjax(taskReviewService.updateTaskReview(taskReview));
+        return toAjax(tasksReviewService.updateTasksReview(tasksReview));
     }
 
     /**
      * 删除工作总结
      */
-    @RequiresPermissions("crm:REVIEW:remove")
+    @RequiresPermissions("crm:mytasksreview:remove")
     @Log(title = "工作总结", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(taskReviewService.deleteTaskReviewByTaskReviewIds(ids));
+        return toAjax(tasksReviewService.deleteTasksReviewByTaskReviewIds(ids));
     }
 }

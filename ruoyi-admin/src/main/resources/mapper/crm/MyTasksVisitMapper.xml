@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.crm.mapper.MyTasksVisitMapper">
+    
+    <resultMap type="MyTasksVisit" id="MyTasksVisitResult">
+        <result property="taskId"    column="TASK_ID"    />
+        <result property="orgId"    column="ORG_ID"    />
+        <result property="custId"    column="CUST_ID"    />
+        <result property="taskReviewId"    column="TASK_REVIEW_ID"    />
+        <result property="saleId"    column="SALE_ID"    />
+        <result property="taskFollowState"    column="TASK_FOLLOW_STATE"    />
+        <result property="taskClass"    column="TASK_CLASS"    />
+        <result property="taskCreateTime"    column="TASK_CREATE_TIME"    />
+        <result property="taskFinishTime"    column="TASK_FINISH_TIME"    />
+        <result property="taskCustState"    column="TASK_CUST_STATE"    />
+    </resultMap>
+
+    <resultMap id="MyTasksVisitCrmTaskReviewStrangeResult" type="MyTasksVisit" extends="MyTasksVisitResult">
+        <collection property="crmTaskReviewStrangeList" notNullColumn="sub_ORG_ID" javaType="java.util.List" resultMap="CrmTaskReviewStrangeResult" />
+    </resultMap>
+
+    <resultMap type="CrmTaskReviewStrange" id="CrmTaskReviewStrangeResult">
+        <result property="orgId"    column="sub_ORG_ID"    />
+        <result property="orgName"    column="sub_ORG_NAME"    />
+        <result property="orgType"    column="sub_ORG_TYPE"    />
+        <result property="orgIntroduction"    column="sub_ORG_INTRODUCTION"    />
+        <result property="orgLinkmanName"    column="sub_ORG_LINKMAN_NAME"    />
+        <result property="orgEmail"    column="sub_ORG_EMAIL"    />
+        <result property="orgContactWay"    column="sub_ORG_CONTACT_WAY"    />
+        <result property="orgState"    column="sub_ORG_STATE"    />
+        <result property="orgLabels"    column="sub_ORG_LABELS"    />
+        <result property="orgAddress"    column="sub_ORG_ADDRESS"    />
+        <result property="orgWebsite"    column="sub_ORG_WEBSITE"    />
+        <result property="orgCreater"    column="sub_ORG_CREATER"    />
+        <result property="orgCreateTime"    column="sub_ORG_CREATE_TIME"    />
+        <result property="orgUpdateTime"    column="sub_ORG_UPDATE_TIME"    />
+        <result property="orgClassification"    column="sub_ORG_CLASSIFICATION"    />
+        <result property="orgVisitAgainTime"    column="sub_ORG_VISIT_AGAIN_TIME"    />
+        <result property="custId"    column="sub_CUST_ID"    />
+        <result property="orgSources"    column="sub_ORG_SOURCES"    />
+        <result property="orgSalesman"    column="sub_ORG_SALESMAN"    />
+        <result property="orgClassify"    column="sub_ORG_CLASSIFY"    />
+    </resultMap>
+
+    <sql id="selectMyTasksVisitVo">
+        select TASK_ID, ORG_ID, CUST_ID, TASK_REVIEW_ID, SALE_ID, TASK_FOLLOW_STATE, TASK_CLASS, TASK_CREATE_TIME, TASK_FINISH_TIME, TASK_CUST_STATE from MY_TASKS
+    </sql>
+
+    <select id="selectMyTasksVisitList" parameterType="MyTasksVisit" resultMap="MyTasksVisitResult">
+        <include refid="selectMyTasksVisitVo"/>
+        <where>  
+            <if test="orgId != null "> and ORG_ID = #{orgId}</if>
+            <if test="taskReviewId != null "> and TASK_REVIEW_ID = #{taskReviewId}</if>
+            <if test="taskFollowState != null  and taskFollowState != ''"> and TASK_FOLLOW_STATE = #{taskFollowState}</if>
+            <if test="taskCreateTime != null "> and TASK_CREATE_TIME = #{taskCreateTime}</if>
+            <if test="taskCustState != null  and taskCustState != ''"> and TASK_CUST_STATE = #{taskCustState}</if>
+        </where>
+    </select>
+    
+    <select id="selectMyTasksVisitByTaskId" parameterType="Long" resultMap="MyTasksVisitCrmTaskReviewStrangeResult">
+        select a.TASK_ID, a.ORG_ID, a.CUST_ID, a.TASK_REVIEW_ID, a.SALE_ID, a.TASK_FOLLOW_STATE, a.TASK_CLASS, a.TASK_CREATE_TIME, a.TASK_FINISH_TIME, a.TASK_CUST_STATE,
+ b.ORG_ID as sub_ORG_ID, b.ORG_NAME as sub_ORG_NAME, b.ORG_TYPE as sub_ORG_TYPE, b.ORG_INTRODUCTION as sub_ORG_INTRODUCTION, b.ORG_LINKMAN_NAME as sub_ORG_LINKMAN_NAME, b.ORG_EMAIL as sub_ORG_EMAIL, b.ORG_CONTACT_WAY as sub_ORG_CONTACT_WAY, b.ORG_STATE as sub_ORG_STATE, b.ORG_LABELS as sub_ORG_LABELS, b.ORG_ADDRESS as sub_ORG_ADDRESS, b.ORG_WEBSITE as sub_ORG_WEBSITE, b.ORG_CREATER as sub_ORG_CREATER, b.ORG_CREATE_TIME as sub_ORG_CREATE_TIME, b.ORG_UPDATE_TIME as sub_ORG_UPDATE_TIME, b.ORG_CLASSIFICATION as sub_ORG_CLASSIFICATION, b.ORG_VISIT_AGAIN_TIME as sub_ORG_VISIT_AGAIN_TIME, b.CUST_ID as sub_CUST_ID, b.ORG_SOURCES as sub_ORG_SOURCES, b.ORG_SALESMAN as sub_ORG_SALESMAN, b.ORG_CLASSIFY as sub_ORG_CLASSIFY
+        from MY_TASKS a
+        left join CRM_ORG_INFO b on b.ORG_ID = a.TASK_ID
+        where a.TASK_ID = #{taskId}
+    </select>
+        
+    <insert id="insertMyTasksVisit" parameterType="MyTasksVisit" useGeneratedKeys="true" keyProperty="taskId">
+        insert into MY_TASKS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orgId != null">ORG_ID,</if>
+            <if test="custId != null">CUST_ID,</if>
+            <if test="taskReviewId != null">TASK_REVIEW_ID,</if>
+            <if test="saleId != null">SALE_ID,</if>
+            <if test="taskFollowState != null">TASK_FOLLOW_STATE,</if>
+            <if test="taskClass != null">TASK_CLASS,</if>
+            <if test="taskCreateTime != null">TASK_CREATE_TIME,</if>
+            <if test="taskFinishTime != null">TASK_FINISH_TIME,</if>
+            <if test="taskCustState != null">TASK_CUST_STATE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orgId != null">#{orgId},</if>
+            <if test="custId != null">#{custId},</if>
+            <if test="taskReviewId != null">#{taskReviewId},</if>
+            <if test="saleId != null">#{saleId},</if>
+            <if test="taskFollowState != null">#{taskFollowState},</if>
+            <if test="taskClass != null">#{taskClass},</if>
+            <if test="taskCreateTime != null">#{taskCreateTime},</if>
+            <if test="taskFinishTime != null">#{taskFinishTime},</if>
+            <if test="taskCustState != null">#{taskCustState},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMyTasksVisit" parameterType="MyTasksVisit">
+        update MY_TASKS
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgId != null">ORG_ID = #{orgId},</if>
+            <if test="custId != null">CUST_ID = #{custId},</if>
+            <if test="taskReviewId != null">TASK_REVIEW_ID = #{taskReviewId},</if>
+            <if test="saleId != null">SALE_ID = #{saleId},</if>
+            <if test="taskFollowState != null">TASK_FOLLOW_STATE = #{taskFollowState},</if>
+            <if test="taskClass != null">TASK_CLASS = #{taskClass},</if>
+            <if test="taskCreateTime != null">TASK_CREATE_TIME = #{taskCreateTime},</if>
+            <if test="taskFinishTime != null">TASK_FINISH_TIME = #{taskFinishTime},</if>
+            <if test="taskCustState != null">TASK_CUST_STATE = #{taskCustState},</if>
+        </trim>
+        where TASK_ID = #{taskId}
+    </update>
+
+    <delete id="deleteMyTasksVisitByTaskId" parameterType="Long">
+        delete from MY_TASKS where TASK_ID = #{taskId}
+    </delete>
+
+    <delete id="deleteMyTasksVisitByTaskIds" parameterType="String">
+        delete from MY_TASKS where TASK_ID in 
+        <foreach item="taskId" collection="array" open="(" separator="," close=")">
+            #{taskId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteCrmTaskReviewStrangeByOrgIds" parameterType="String">
+        delete from CRM_ORG_INFO where ORG_ID in 
+        <foreach item="orgId" collection="array" open="(" separator="," close=")">
+            #{orgId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteCrmTaskReviewStrangeByOrgId" parameterType="Long">
+        delete from CRM_ORG_INFO where ORG_ID = #{orgId}
+    </delete>
+
+    <insert id="batchCrmTaskReviewStrange">
+        insert into CRM_ORG_INFO( ORG_ID, ORG_NAME, ORG_TYPE, ORG_INTRODUCTION, ORG_LINKMAN_NAME, ORG_EMAIL, ORG_CONTACT_WAY, ORG_STATE, ORG_LABELS, ORG_ADDRESS, ORG_WEBSITE, ORG_CREATER, ORG_CREATE_TIME, ORG_UPDATE_TIME, ORG_CLASSIFICATION, ORG_VISIT_AGAIN_TIME, CUST_ID, ORG_SOURCES, ORG_SALESMAN, ORG_CLASSIFY) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.orgId}, #{item.orgName}, #{item.orgType}, #{item.orgIntroduction}, #{item.orgLinkmanName}, #{item.orgEmail}, #{item.orgContactWay}, #{item.orgState}, #{item.orgLabels}, #{item.orgAddress}, #{item.orgWebsite}, #{item.orgCreater}, #{item.orgCreateTime}, #{item.orgUpdateTime}, #{item.orgClassification}, #{item.orgVisitAgainTime}, #{item.custId}, #{item.orgSources}, #{item.orgSalesman}, #{item.orgClassify})
+        </foreach>
+    </insert>
+
+</mapper>

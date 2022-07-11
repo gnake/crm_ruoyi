@@ -134,6 +134,11 @@
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
+        var prefix = ctx + "crm/customerinfo"
+        $("#form-customerinfo-add").validate({
+            focusCleanup: true
+        });
+
         var provinceArr = ['上海','江苏','河北'];
         var cityArr = [
             ['上海市'],
@@ -157,11 +162,18 @@
             createOption(city,cityArr[province.value]);
         };
 
+        //修改省份province的onchange事件
+        province.onchange = function() {
+            city.options.length = 0;
+            createOption(city, cityArr[province.value]);
+            if (province.value >= 0) {
+                city.onchange();		//自动添加城市对应区域下拉菜单
+            } else {
+                country.options.length = 0;		//清空country下的原有option
+            }
+        };
 
-        var prefix = ctx + "crm/customerinfo"
-        $("#form-customerinfo-add").validate({
-            focusCleanup: true
-        });
+
 
         function submitHandler() {
             if ($.validate.form()) {
@@ -169,29 +181,97 @@
             }
         }
 
+
+
         $("input[name='custCreateTime']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        }).change(function (){
+            let startDate = $("input[name='custCreateTime']").val();
+            let endDate = $("input[name='custSubmitTime']").val(null);
+            if(endDate != null){
+                if(startDate >= endDate){
+                    $("input[name='custCreateTime']").val(null);
+                    alert("提交时间应大于创建时间");}
+            }
         });
+
+
+
+        // $("input[name='custSubmitTime']").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     minView: "month",
+        //     autoclose: true
+        // }).change(function (){
+        //     let startDate = $("input[name='custSubmitTime']").val();
+        //     let endDate = $("input[name='custConfirmTime']").val(null);
+        //     if(endDate != null){
+        //         if(startDate >= endDate){
+        //             $("input[name='custSubmitTime']").val(null);
+        //             alert("结束时间应大于开始时间");}
+        //     }
+        // });
 
         $("input[name='custSubmitTime']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        }).change(function (){
+            let startDate = $("input[name='custCreateTime']").val();
+            let endDate = $("input[name='custSubmitTime']").val();
+            if(startDate >= endDate){
+                $("input[name='custSubmitTime']").val(null);
+                alert("提交时间应大于创建时间");}
         });
+
+
+
+        // $("input[name='custConfirmTime']").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     minView: "month",
+        //     autoclose: true
+        // }).change(function (){
+        //     let startDate = $("input[name='custConfirmTime']").val();
+        //     let endDate = $("input[name='custVisitAgainTime']").val(null);
+        //     if(endDate != null){
+        //         if(startDate >= endDate){
+        //             $("input[name='custConfirmTime']").val(null);
+        //             alert("结束时间应大于开始时间");}
+        //     }
+        // });
 
         $("input[name='custConfirmTime']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        }).change(function (){
+            let startDate = $("input[name='custSubmitTime']").val();
+            let endDate = $("input[name='custConfirmTime']").val();
+            if(startDate >= endDate){
+                $("input[name='custConfirmTime']").val(null);
+                alert("确认时间应大于提交时间");}
         });
 
         $("input[name='custVisitAgainTime']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
+        }).change(function (){
+            let startDate = $("input[name='custConfirmTime']").val();
+            let endDate = $("input[name='custVisitAgainTime']").val();
+            if(startDate >= endDate){
+                $("input[name='custVisitAgainTime']").val(null);
+                alert("确认时间应大于提交时间");}
         });
+
+
+
+        // $("input[name='custVisitAgainTime']").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     minView: "month",
+        //     autoclose: true
+        // });
     </script>
 </body>
 </html>

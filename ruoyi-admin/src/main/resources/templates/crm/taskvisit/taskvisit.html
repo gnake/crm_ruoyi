@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('意向跟进列表')" />
+    <th:block th:include="include :: header('陌生拜访列表')" />
     <th:block th:include="include :: layout-latest-css" />
     <th:block th:include="include :: ztree-css" />
 </head>
@@ -10,7 +10,7 @@
     <div class="box box-main">
         <div class="box-header">
             <div class="box-title">
-                <i class="fa icon-grid"></i> 组织机构
+                <i class="fa icon-grid"></i> 周期列表
             </div>
             <div class="box-tools pull-right">
                 <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
@@ -33,35 +33,27 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>主键：</label>
-                                <input type="text" name="custId"/>
+                                <label>潜在客户：</label>
+                                <input type="text" name="orgId"/>
                             </li>
                             <li>
-                                <label>客户名称：</label>
-                                <input type="text" name="custName"/>
+                                <label>任务计划：</label>
+                                <input type="text" name="taskReviewId"/>
                             </li>
                             <li>
-                                <label>行业：</label>
-                                <input type="text" name="custIndustry"/>
-                            </li>
-                            <li>
-                                <label>规模：</label>
-                                <input type="text" name="custScale"/>
-                            </li>
-                            <li>
-                                <label>性质：</label>
-                                <input type="text" name="custNature"/>
-                            </li>
-                            <li>
-                                <label>状态：</label>
-                                <select name="custState" th:with="type=${@dict.getType('sys_cust_precedence')}">
+                                <label>跟进状态：</label>
+                                <select name="taskFollowState" th:with="type=${@dict.getType('crm_taskfollow')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
                             <li>
-                                <label>进展状态：</label>
-                                <input type="text" name="custProgressState"/>
+                                <label>创建任务时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择创建任务时间" name="taskCreateTime"/>
+                            </li>
+                            <li>
+                                <label>客户状态：</label>
+                                <input type="text" name="taskCustState"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -73,14 +65,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:mytaskcustomer:edit">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:taskvisit:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:taskvisit:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:mytaskcustomer:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:taskvisit:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:mytaskcustomer:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:taskvisit:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -90,15 +84,14 @@
         </div>
     </div>
 </div>
-<th:block th:include="include :: footer" />
+    <th:block th:include="include :: footer" />
 <th:block th:include="include :: layout-latest-js" />
 <th:block th:include="include :: ztree-js" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('crm:mytaskcustomer:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('crm:mytaskcustomer:remove')}]];
-        var custStateDatas = [[${@dict.getType('sys_cust_precedence')}]];
-        var custLevelDatas = [[${@dict.getType('sys_cust_level')}]];
-        var prefix = ctx + "crm/mytaskcustomer";
+        var editFlag = [[${@permission.hasPermi('crm:taskvisit:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('crm:taskvisit:remove')}]];
+        var taskFollowStateDatas = [[${@dict.getType('crm_taskfollow')}]];
+        var prefix = ctx + "crm/taskvisit";
 
         $(function() {
             var panehHidden = false;
@@ -125,49 +118,45 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "意向跟进",
+                modalName: "陌生拜访",
                 columns: [{
                     checkbox: true
                 },
                 {
-                    field: 'custId',
-                    title: '主键',
+                    field: 'taskId',
+                    title: '',
                     visible: false
                 },
                 {
-                    field: 'custName',
-                    title: '客户名称'
+                    field: 'orgId',
+                    title: '潜在客户'
                 },
                 {
-                    field: 'custIndustry',
-                    title: '行业'
+                    field: 'taskReviewId',
+                    title: '任务计划'
                 },
                 {
-                    field: 'custScale',
-                    title: '规模'
-                },
-                {
-                    field: 'custNature',
-                    title: '性质'
-                },
-                {
-                    field: 'custState',
-                    title: '状态',
+                    field: 'taskFollowState',
+                    title: '跟进状态',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(custStateDatas, value);
+                       return $.table.selectDictLabel(taskFollowStateDatas, value);
                     }
                 },
                 {
-                    field: 'custProgressState',
-                    title: '进展状态'
+                    field: 'taskCreateTime',
+                    title: '创建任务时间'
+                },
+                {
+                    field: 'taskCustState',
+                    title: '客户状态'
                 },
                 {
                     title: '操作',
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.custId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.custId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.taskId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.taskId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]

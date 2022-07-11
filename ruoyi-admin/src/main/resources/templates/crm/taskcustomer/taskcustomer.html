@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('工作总结列表')" />
+    <th:block th:include="include :: header('意向跟进列表')" />
     <th:block th:include="include :: layout-latest-css" />
     <th:block th:include="include :: ztree-css" />
 </head>
@@ -24,6 +24,7 @@
         </div>
     </div>
 </div>
+
 <div class="ui-layout-center">
      <div class="container-div">
         <div class="row">
@@ -32,18 +33,16 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>任务周期：</label>
-                                <input type="text" name="tcId"/>
+                                <label>客户管理：</label>
+                                <input type="text" name="custId"/>
                             </li>
                             <li>
-                                <label>销售人员：</label>
-                                <input type="text" name="saleId"/>
+                                <label>跟进状态：</label>
+                                <select name="taskFollowState" th:with="type=${@dict.getType('crm_taskfollow')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
-                            <li>
-                                <label>总结状态：</label>
-                                <input type="text" name="taskReviewState"/>
-                            </li>
-
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -54,14 +53,18 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:REVIEW:edit">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="crm:taskcustomer:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="crm:taskcustomer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:REVIEW:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="crm:taskcustomer:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="crm:taskcustomer:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -70,12 +73,13 @@
     </div>
 </div>
     <th:block th:include="include :: footer" />
-    <th:block th:include="include :: layout-latest-js" />
-    <th:block th:include="include :: ztree-js" />
+<th:block th:include="include :: layout-latest-js" />
+<th:block th:include="include :: ztree-js" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('crm:REVIEW:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('crm:REVIEW:remove')}]];
-        var prefix = ctx + "crm/REVIEW";
+        var editFlag = [[${@permission.hasPermi('crm:taskcustomer:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('crm:taskcustomer:remove')}]];
+        var taskFollowStateDatas = [[${@dict.getType('crm_taskfollow')}]];
+        var prefix = ctx + "crm/taskcustomer";
 
         $(function() {
             var panehHidden = false;
@@ -94,6 +98,7 @@
             queryUserList();
             queryDeptTree();
         });
+
         $(function() {
             var options = {
                 url: prefix + "/list",
@@ -101,37 +106,33 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "工作总结",
+                modalName: "意向跟进",
                 columns: [{
                     checkbox: true
                 },
                 {
-                    field: 'taskReviewId',
+                    field: 'taskId',
                     title: '',
                     visible: false
                 },
                 {
-                    field: 'tcId',
-                    title: '任务周期'
+                    field: 'custId',
+                    title: '客户管理'
                 },
                 {
-                    field: 'saleId',
-                    title: '销售人员'
-                },
-                {
-                    field: 'taskReviewState',
-                    title: '总结状态'
-                },
-                {
-                    field: 'taskReviewDesc',
-                    title: '总结说明'
+                    field: 'taskFollowState',
+                    title: '跟进状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(taskFollowStateDatas, value);
+                    }
                 },
                 {
                     title: '操作',
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.taskReviewId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.taskId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.taskId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]
