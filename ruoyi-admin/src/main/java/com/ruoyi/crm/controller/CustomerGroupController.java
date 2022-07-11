@@ -22,8 +22,6 @@ import com.ruoyi.crm.domain.CustomerGroup;
 import com.ruoyi.crm.service.ICustomerGroupService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 客户分组Controller
