@@ -23,28 +23,28 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 客户信息Controller
  * 
  * @author 李泽楷
- * @date 2022-07-07
+ * @date 2022-07-11
  */
 @Controller
-@RequestMapping("/crm/customerinfo")
+@RequestMapping("/crm/CustomerInfo")
 public class CustomerInfoController extends BaseController
 {
-    private final String prefix = "crm/customerinfo";
+    private final String prefix = "crm/CustomerInfo";
 
     @Autowired
     private ICustomerInfoService customerInfoService;
 
-    @RequiresPermissions("crm:customerinfo:view")
+    @RequiresPermissions("crm:CustomerInfo:view")
     @GetMapping()
-    public String customerinfo()
+    public String CustomerInfo()
     {
-        return prefix + "/customerinfo";
+        return prefix + "/CustomerInfo";
     }
 
     /**
      * 查询客户信息列表
      */
-    @RequiresPermissions("crm:customerinfo:list")
+    @RequiresPermissions("crm:CustomerInfo:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(CustomerInfo customerInfo)
@@ -57,7 +57,7 @@ public class CustomerInfoController extends BaseController
     /**
      * 导出客户信息列表
      */
-    @RequiresPermissions("crm:customerinfo:export")
+    @RequiresPermissions("crm:CustomerInfo:export")
     @Log(title = "客户信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
@@ -80,7 +80,7 @@ public class CustomerInfoController extends BaseController
     /**
      * 新增保存客户信息
      */
-    @RequiresPermissions("crm:customerinfo:add")
+    @RequiresPermissions("crm:CustomerInfo:add")
     @Log(title = "客户信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -92,9 +92,9 @@ public class CustomerInfoController extends BaseController
     /**
      * 修改客户信息
      */
-    @RequiresPermissions("crm:customerinfo:edit")
+    @RequiresPermissions("crm:CustomerInfo:edit")
     @GetMapping("/edit/{custId}")
-    public String edit(@PathVariable("custId") Long custId, ModelMap mmap)
+    public String edit(@PathVariable("custId") String custId, ModelMap mmap)
     {
         CustomerInfo customerInfo = customerInfoService.selectCustomerInfoByCustId(custId);
         mmap.put("customerInfo", customerInfo);
@@ -104,7 +104,7 @@ public class CustomerInfoController extends BaseController
     /**
      * 修改保存客户信息
      */
-    @RequiresPermissions("crm:customerinfo:edit")
+    @RequiresPermissions("crm:CustomerInfo:edit")
     @Log(title = "客户信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -116,7 +116,7 @@ public class CustomerInfoController extends BaseController
     /**
      * 删除客户信息
      */
-    @RequiresPermissions("crm:customerinfo:remove")
+    @RequiresPermissions("crm:CustomerInfo:remove")
     @Log(title = "客户信息", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

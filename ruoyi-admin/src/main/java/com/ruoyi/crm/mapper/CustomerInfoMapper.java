@@ -7,7 +7,7 @@ import com.ruoyi.crm.domain.CustomerInfo;
  * 客户信息Mapper接口
  * 
  * @author 李泽楷
- * @date 2022-07-07
+ * @date 2022-07-11
  */
 public interface CustomerInfoMapper 
 {
@@ -17,7 +17,7 @@ public interface CustomerInfoMapper
      * @param custId 客户信息主键
      * @return 客户信息
      */
-        CustomerInfo selectCustomerInfoByCustId(Long custId);
+        CustomerInfo selectCustomerInfoByCustId(String custId);
 
     /**
      * 查询客户信息列表
@@ -49,7 +49,7 @@ public interface CustomerInfoMapper
      * @param custId 客户信息主键
      * @return 结果
      */
-    int deleteCustomerInfoByCustId(Long custId);
+    int deleteCustomerInfoByCustId(String custId);
 
     /**
      * 批量删除客户信息

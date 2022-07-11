@@ -12,7 +12,7 @@ import com.ruoyi.common.core.text.Convert;
  * 客户信息Service业务层处理
  * 
  * @author 李泽楷
- * @date 2022-07-07
+ * @date 2022-07-11
  */
 @Service
 public class CustomerInfoServiceImpl implements ICustomerInfoService 
@@ -27,7 +27,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService
      * @return 客户信息
      */
     @Override
-    public CustomerInfo selectCustomerInfoByCustId(Long custId)
+    public CustomerInfo selectCustomerInfoByCustId(String custId)
     {
         return customerInfoMapper.selectCustomerInfoByCustId(custId);
     }
@@ -87,7 +87,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService
      * @return 结果
      */
     @Override
-    public int deleteCustomerInfoByCustId(Long custId)
+    public int deleteCustomerInfoByCustId(String custId)
     {
         return customerInfoMapper.deleteCustomerInfoByCustId(custId);
     }

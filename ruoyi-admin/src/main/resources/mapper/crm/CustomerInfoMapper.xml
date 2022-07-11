@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectCustomerInfoByCustId" parameterType="Long" resultMap="CustomerInfoResult">
+    <select id="selectCustomerInfoByCustId" parameterType="String" resultMap="CustomerInfoResult">
         <include refid="selectCustomerInfoVo"/>
         where CUST_ID = #{custId}
     </select>
@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where CUST_ID = #{custId}
     </update>
 
-    <delete id="deleteCustomerInfoByCustId" parameterType="Long">
+    <delete id="deleteCustomerInfoByCustId" parameterType="String">
         delete from CRM_CUSTOMER_INFO where CUST_ID = #{custId}
     </delete>
 

@@ -12,14 +12,14 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 客户信息对象 CRM_CUSTOMER_INFO
  * 
  * @author 李泽楷
- * @date 2022-07-07
+ * @date 2022-07-11
  */
 public class CustomerInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private Long custId;
+    private String custId;
 
     /** 客户名称 */
     @Excel(name = "客户名称")
@@ -55,19 +55,19 @@ public class CustomerInfo extends BaseEntity
     @Excel(name = "状态")
     private String custState;
 
-    /** 创建人 */
+    /** 创建人ID */
     private Long custCreateId;
 
     /** 创建时间 */
     private Date custCreateTime;
 
-    /** 提交人 */
+    /** 提交人ID */
     private Long custSubmitId;
 
     /** 提交时间 */
     private Date custSubmitTime;
 
-    /** 确认人 */
+    /** 确认人ID */
     private Long custConfirmId;
 
     /** 确认时间 */
@@ -88,12 +88,12 @@ public class CustomerInfo extends BaseEntity
     /** 计划拜访时间 */
     private Date custVisitAgainTime;
 
-    public void setCustId(Long custId) 
+    public void setCustId(String custId) 
     {
         this.custId = custId;
     }
 
-    public Long getCustId() 
+    public String getCustId() 
     {
         return custId;
     }
