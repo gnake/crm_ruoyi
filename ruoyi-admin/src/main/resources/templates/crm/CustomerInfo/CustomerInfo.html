@@ -42,7 +42,10 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('crm:CustomerInfo:edit')}]];
         var removeFlag = [[${@permission.hasPermi('crm:CustomerInfo:remove')}]];
+        var custScaleDatas = [[${@dict.getType('sys_cust_size')}]];
+        var custNatureDatas = [[${@dict.getType('sys_cust_kind')}]];
         var custStateDatas = [[${@dict.getType('sys_cust_state')}]];
+        var custProgressStateDatas = [[${@dict.getType('sys_cust_mind')}]];
         var custLevelDatas = [[${@dict.getType('sys_cust_level')}]];
         var prefix = ctx + "crm/CustomerInfo";
 
@@ -80,11 +83,17 @@
                 },
                 {
                     field: 'custScale',
-                    title: '规模'
+                    title: '规模',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(custScaleDatas, value);
+                    }
                 },
                 {
                     field: 'custNature',
-                    title: '性质'
+                    title: '性质',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(custNatureDatas, value);
+                    }
                 },
                 {
                     field: 'custState',
