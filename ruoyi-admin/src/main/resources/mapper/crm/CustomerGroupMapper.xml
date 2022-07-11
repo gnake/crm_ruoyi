@@ -9,6 +9,7 @@
         <result property="parentId" column="parent_id"/>
         <result property="ancestors" column="ancestors"/>
         <result property="groupName" column="group_name"/>
+        <result property="parentName" column="parent_name"/>
         <result property="orderNum" column="order_num"/>
         <result property="leader" column="leader"/>
         <result property="phone" column="phone"/>
@@ -144,7 +145,7 @@
     </update>
 
     <delete id="deleteGroupById" parameterType="Long">
-		update crm_customer_group set del_flag = '2' where group_id = #{groupId}
+		delete from crm_customer_group where group_id = #{groupId}
 	</delete>
 
     <update id="updateGroupStatusNormal" parameterType="Long">
