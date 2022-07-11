@@ -157,15 +157,6 @@
                     }
                 },
                 {
-                    field: 'custCompanyWeb',
-                    align: 'center',
-                    title: '公司网站',
-                    formatter: function(value, row, index) {
-                        var html = $.common.sprintf("<input class='form-control' type='text' name='myCustomerList[%s].custCompanyWeb' value='%s'>", index, value);
-                        return html;
-                    }
-                },
-                {
                     title: '操作',
                     align: 'center',
                     formatter: function(value, row, index) {
@@ -223,7 +214,6 @@
                 custIntroduce: "",
                 custState: "",
                 custLevel: "",
-                custCompanyWeb: "",
             }
             sub.addRow(row);
         }
